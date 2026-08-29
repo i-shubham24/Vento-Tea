@@ -3,6 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Minus, Plus, Trash2, Tag } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import CartProgressBar from '../components/CartProgressBar';
 
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal, cartCount } = useCart();
@@ -33,6 +34,8 @@ export default function CartPage() {
         <h1 className="text-3xl font-serif text-vento-forest mb-8">
           Your cart <span className="text-xl text-gray-500 font-sans">({cartCount} items)</span>
         </h1>
+
+        <CartProgressBar />
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
@@ -121,6 +124,7 @@ export default function CartPage() {
               <div className="space-y-3 text-sm mb-6 border-b border-gray-100 pb-6">
                 <div className="flex justify-between text-gray-600">
                   <span>Total MRP</span>
+                  <span>Total MRP</span>
                   <span>₹{totalMRP}</span>
                 </div>
                 <div className="flex justify-between text-green-600">
@@ -151,11 +155,11 @@ export default function CartPage() {
 
               {/* Checkout Action */}
               {user ? (
-                <Link to="/checkout" className="block text-center w-full bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-bold py-4 rounded-full transition-colors shadow-md">
+                <Link to="/checkout" className="block text-center w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Checkout Now
                 </Link>
               ) : (
-                <button onClick={openAuth} className="w-full bg-vento-forest hover:bg-vento-forest-light text-white font-bold py-4 rounded-full transition-colors shadow-md">
+                <button onClick={openAuth} className="w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Login to checkout
                 </button>
               )}

@@ -74,7 +74,7 @@ export default function ProductDetails() {
             <h1 className="text-3xl md:text-4xl font-sans font-semibold text-vento-forest mb-2">{product.name}</h1>
             <p className="text-gray-500 mb-4">{product.description}</p>
 
-            <div className="flex items-end gap-3 mb-8">
+            <div className="flex items-end gap-3 mb-8 mt-8">
               <div className="text-3xl font-bold text-vento-forest">
                 ₹{selectedWeight.priceInr}
               </div>

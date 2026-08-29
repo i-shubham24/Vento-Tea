@@ -15,6 +15,8 @@ import FarmerPromise from '../components/FarmerPromise';
 import FAQ from '../components/FAQ';
 import DeliveryBanner from '../components/DeliveryBanner';
 import ScrollReveal from '../components/ScrollReveal';
+import WhyVento from '../components/WhyVento';
+import WholesaleBanner from '../components/WholesaleBanner';
 
 export default function Home() {
   const localBusinessSchema = {
@@ -63,6 +65,10 @@ export default function Home() {
       </ScrollReveal>
 
       <ScrollReveal>
+        <WholesaleBanner />
+      </ScrollReveal>
+
+      <ScrollReveal>
         <SupplyChainTimeline />
       </ScrollReveal>
 
@@ -76,6 +82,10 @@ export default function Home() {
 
       <ScrollReveal>
         <OurStorySection />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <WhyVento />
       </ScrollReveal>
 
       <ScrollReveal>

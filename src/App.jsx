@@ -22,8 +22,11 @@ import ProductDetails from './pages/ProductDetails';
 import Reviews from './pages/Reviews';
 import TrackOrder from './pages/TrackOrder';
 import Policies from './pages/Policies';
+import WholesalePage from './pages/WholesalePage';
 
 import IntroCurtain from './components/IntroCurtain';
+import FloatingLeaves from './components/FloatingLeaves';
+import TeaMatchmaker from './components/TeaMatchmaker';
 import ClickLeaves from './components/ClickLeaves';
 import WishlistSidebar from './components/WishlistSidebar';
 import PromoPopup from './components/PromoPopup';
@@ -41,6 +44,8 @@ function App() {
               <ScrollToTop />
               <ScrollProgress />
               <IntroCurtain />
+              <FloatingLeaves />
+              <TeaMatchmaker />
               <div className="min-h-screen flex flex-col font-sans relative">
                 <ClickLeaves />
                 <PromoPopup />
@@ -54,6 +59,7 @@ function App() {
                     <Route path="/about" element={<About />} />
                     <Route path="/blogs" element={<Blogs />} />
                     <Route path="/contact" element={<Contact />} />
+                    <Route path="/wholesale" element={<WholesalePage />} />
                     <Route path="/cart" element={<CartPage />} />
                     <Route path="/checkout" element={<Checkout />} />
                     <Route path="/reviews" element={<Reviews />} />

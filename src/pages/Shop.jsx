@@ -6,6 +6,7 @@ import TeaProductCard from '../components/TeaProductCard';
 import { Stagger, StaggerItem } from '../components/Stagger';
 import { mockProducts } from '../data/mockData';
 import { ChevronDown } from 'lucide-react';
+import NewsletterBanner from '../components/NewsletterBanner';
 
 export default function Shop() {
   const [searchParams] = useSearchParams();
@@ -29,17 +30,22 @@ export default function Shop() {
       result = result.filter(p => p.category === selectedCategory);
     }
 
-    // Sort
+    // Filter & Sort based on dropdown option
     if (sortOption === 'Price: Low to High') {
       result.sort((a, b) => a.priceInr - b.priceInr);
     } else if (sortOption === 'Price: High to Low') {
       result.sort((a, b) => b.priceInr - a.priceInr);
     } else if (sortOption === 'Best Sellers') {
-      // Mock best sellers by giving a slight boost to products with higher discount or specific ID (since we don't have sales data)
-      result.sort((a, b) => (b.discount || 0) - (a.discount || 0) || a.id.localeCompare(b.id));
+      // Filter strictly to items with the 'Best Seller' badge, or top 2 highest rated/discounted
+      result = result.filter(p => p.badges?.includes('Best Seller') || p.discount > 30).slice(0, 3);
+      result.sort((a, b) => (b.discount || 0) - (a.discount || 0));
     } else if (sortOption === 'New Arrivals') {
-      // Mock new arrivals by reverse ID or just default order since they are mock data
-      result.sort((a, b) => b.id.localeCompare(a.id));
+      // Filter to just the 2 most recent/newest items (mocked by taking the last 2 in array or specific badges)
+      result = result.reverse().slice(0, 2);
+    } else if (sortOption === 'Sale') {
+      // Filter strictly to items that actually have a discount, show highest discount first
+      result = result.filter(p => p.discount && p.discount > 0);
+      result.sort((a, b) => b.discount - a.discount);
     }
 
     return result;
@@ -98,6 +104,7 @@ export default function Shop() {
                   >
                     <option>New Arrivals</option>
                     <option>Best Sellers</option>
+                    <option>Sale</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
                   </select>
@@ -123,6 +130,7 @@ export default function Shop() {
 
         </div>
       </div>
+      <NewsletterBanner />
     </div>
   );
 }

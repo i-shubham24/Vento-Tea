@@ -169,7 +169,7 @@ export default function GamifiedCart() {
                   <span className="text-lg text-gray-600">Subtotal</span>
                   <span className="text-2xl font-bold text-vento-forest">₹{subtotal}</span>
                 </div>
-                <button onClick={handleCheckout} className="w-full bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-bold text-lg py-4 rounded-full transition-colors shadow-lg">
+                <button onClick={handleCheckout} className="w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold text-lg py-4 rounded-full transition-all duration-300 shadow-lg">
                   View Cart
                 </button>
               </div>
@@ -190,15 +190,15 @@ function Milestone({ percent, unlocked, icon, label }) {
     >
       <motion.div
         initial={false}
-        animate={{ scale: unlocked ? 1.1 : 1 }}
+        animate={{ scale: unlocked ?1.1 : 1 }}
         transition={{ type: 'spring', stiffness: 400, damping: 15 }}
         className={`w-4 h-4 rounded-full flex items-center justify-center border-2 shadow-sm ${
-          unlocked ? 'bg-vento-gold border-vento-gold text-vento-forest' : 'bg-white border-gray-300 text-gray-400'
+          unlocked ?'bg-vento-gold border-vento-gold text-vento-forest' : 'bg-white border-gray-300 text-gray-400'
         }`}
       >
-        {unlocked ? <Check size={10} strokeWidth={3} /> : icon}
+        {unlocked ?<Check size={10} strokeWidth={3} /> : icon}
       </motion.div>
-      <span className={`absolute top-5 left-1/2 -translate-x-1/2 text-[9px] font-semibold uppercase tracking-wide ${unlocked ? 'text-vento-gold-dark' : 'text-gray-400'}`}>
+      <span className={`absolute top-5 left-1/2 -translate-x-1/2 text-[9px] font-semibold uppercase tracking-wide ${unlocked ?'text-vento-gold-dark' : 'text-gray-400'}`}>
         {label}
       </span>
     </div>

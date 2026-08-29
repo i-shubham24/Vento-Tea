@@ -2,12 +2,15 @@ import SEO from '../components/SEO';
 import OurStorySection from '../components/OurStorySection';
 import FarmerPromise from '../components/FarmerPromise';
 import ProcessSection from '../components/ProcessSection';
+import GardenMap from '../components/GardenMap';
 import ScrollReveal from '../components/ScrollReveal';
 import PageBanner from '../components/PageBanner';
+import HeritageTimeline from '../components/HeritageTimeline';
+import NewsletterBanner from '../components/NewsletterBanner';
 
 export default function About() {
   return (
-    <div className="pb-20 bg-vento-cream">
+    <div className="pb-0 bg-vento-cream">
       <SEO title="Our Story" description="Learn about the heritage of Vento Tea and our commitment to local farmers." keywords="about vento tea, tea estate history" />
       <PageBanner
         eyebrow="Since the first flush"
@@ -20,6 +23,12 @@ export default function About() {
         <OurStorySection />
       </ScrollReveal>
 
+      <HeritageTimeline />
+
+      <ScrollReveal>
+        <GardenMap />
+      </ScrollReveal>
+
       <ScrollReveal>
         <ProcessSection />
       </ScrollReveal>
@@ -27,6 +36,8 @@ export default function About() {
       <ScrollReveal>
         <FarmerPromise />
       </ScrollReveal>
+
+      <NewsletterBanner />
     </div>
   );
 }
