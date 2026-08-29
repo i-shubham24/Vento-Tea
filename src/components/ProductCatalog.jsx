@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import TeaProductCard from './TeaProductCard';
 import { mockProducts } from '../data/mockData';
 import { Stagger, StaggerItem } from './Stagger';
@@ -23,6 +24,14 @@ export default function ProductCatalog({ limit }) {
           </StaggerItem>
         ))}
       </Stagger>
+
+      {limit && (
+        <div className="text-center mt-12 pb-12">
+          <Link to="/shop" className="inline-block border-2 border-vento-forest text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-semibold py-3 px-8 rounded-full transition-colors">
+            View All Teas
+          </Link>
+        </div>
+      )}
     </section>
   );
 }

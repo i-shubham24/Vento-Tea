@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SplitReveal from './SplitReveal';
 
 export default function OurStorySection() {
@@ -18,9 +19,9 @@ export default function OurStorySection() {
         <p className="text-gray-600 mb-8 text-lg leading-relaxed">
           From the everyday kadak cup to whole gold long leaf, every Vento pack is sealed at origin and built on the same promise: the kadak, honest flavour India grew up on.
         </p>
-        <button className="bg-vento-forest text-vento-cream hover:bg-vento-forest-light font-semibold py-3 px-8 rounded-full transition-colors">
+        <Link to="/about" className="inline-block bg-vento-forest text-vento-cream hover:bg-vento-forest-light font-semibold py-3 px-8 rounded-full transition-colors">
           Discover Our Heritage
-        </button>
+        </Link>
       </div>
     </section>
   );

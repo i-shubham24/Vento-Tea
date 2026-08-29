@@ -12,7 +12,7 @@ export default function Shop() {
   const initialSearch = searchParams.get('search') || '';
   
   const [selectedCategory, setSelectedCategory] = useState('All products');
-  const [sortOption, setSortOption] = useState('Newest');
+  const [sortOption, setSortOption] = useState('New Arrivals');
   
   const categories = ['All products', 'Everyday Chai', 'Whole Leaf', 'Masala Chai', 'Gift Boxes'];
 
@@ -34,6 +34,12 @@ export default function Shop() {
       result.sort((a, b) => a.priceInr - b.priceInr);
     } else if (sortOption === 'Price: High to Low') {
       result.sort((a, b) => b.priceInr - a.priceInr);
+    } else if (sortOption === 'Best Sellers') {
+      // Mock best sellers by giving a slight boost to products with higher discount or specific ID (since we don't have sales data)
+      result.sort((a, b) => (b.discount || 0) - (a.discount || 0) || a.id.localeCompare(b.id));
+    } else if (sortOption === 'New Arrivals') {
+      // Mock new arrivals by reverse ID or just default order since they are mock data
+      result.sort((a, b) => b.id.localeCompare(a.id));
     }
 
     return result;
@@ -90,7 +96,8 @@ export default function Shop() {
                     onChange={(e) => setSortOption(e.target.value)}
                     className="appearance-none bg-white border border-gray-200 text-vento-forest py-2 pl-4 pr-10 rounded-lg outline-none focus:border-vento-gold cursor-pointer font-medium"
                   >
-                    <option>Newest</option>
+                    <option>New Arrivals</option>
+                    <option>Best Sellers</option>
                     <option>Price: Low to High</option>
                     <option>Price: High to Low</option>
                   </select>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { Zap } from 'lucide-react';
 
 export default function DeliveryBanner() {
@@ -12,9 +13,9 @@ export default function DeliveryBanner() {
         <p className="text-lg md:text-xl font-medium">
           Order now for Next-Day Delivery in metro cities. Freshness guaranteed.
         </p>
-        <button className="mt-6 bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-bold py-3 px-8 rounded-full transition-colors">
+        <Link to="/shop" className="inline-block mt-6 bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-bold py-3 px-8 rounded-full transition-colors">
           Shop Now
-        </button>
+        </Link>
       </div>
     </section>
   );

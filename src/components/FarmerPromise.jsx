@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 export default function FarmerPromise() {
   return (
     <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
@@ -35,9 +37,9 @@ export default function FarmerPromise() {
             <p className="pl-5 text-sm text-gray-500">Every purchase sustains tea-growing families and preserves generations of expertise.</p>
           </li>
         </ul>
-        <button className="border-2 border-vento-forest text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-semibold py-3 px-8 rounded-full transition-colors">
+        <Link to="/about" className="inline-block border-2 border-vento-forest text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-semibold py-3 px-8 rounded-full transition-colors">
           Read Our Story
-        </button>
+        </Link>
       </div>
     </section>
   );

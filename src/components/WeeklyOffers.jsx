@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function WeeklyOffers() {
   const [timeLeft, setTimeLeft] = useState({ hours: 48, minutes: 23, seconds: 59 });
@@ -54,9 +55,9 @@ export default function WeeklyOffers() {
               <span className="text-xs uppercase tracking-widest text-gray-400 mt-1">Secs</span>
             </div>
           </div>
-          <button className="w-full mt-6 bg-vento-gold hover:bg-white text-vento-forest font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
+          <Link to="/shop" className="w-full mt-6 text-center block bg-vento-gold hover:bg-white text-vento-forest font-bold py-3 px-8 rounded-full transition-colors shadow-lg">
             Claim Offer
-          </button>
+          </Link>
         </div>
       </div>
     </section>

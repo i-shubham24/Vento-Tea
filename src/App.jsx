@@ -23,6 +23,7 @@ import Reviews from './pages/Reviews';
 import TrackOrder from './pages/TrackOrder';
 import Policies from './pages/Policies';
 
+import IntroCurtain from './components/IntroCurtain';
 import ClickLeaves from './components/ClickLeaves';
 import WishlistSidebar from './components/WishlistSidebar';
 import PromoPopup from './components/PromoPopup';
@@ -39,6 +40,7 @@ function App() {
               <MotionConfig reducedMotion="user">
               <ScrollToTop />
               <ScrollProgress />
+              <IntroCurtain />
               <div className="min-h-screen flex flex-col font-sans relative">
                 <ClickLeaves />
                 <PromoPopup />
