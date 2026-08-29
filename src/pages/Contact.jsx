@@ -2,7 +2,7 @@ import { Mail, Phone, MapPin } from 'lucide-react';
 
 export default function Contact() {
   return (
-    <div className="pt-8 pb-20 bg-vento-cream min-h-[80vh]">
+    <div className="pt-32 pb-20 bg-vento-cream min-h-[80vh]">
       <div className="max-w-7xl mx-auto px-4">
         
         <div className="text-center mb-16 mt-8">

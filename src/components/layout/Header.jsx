@@ -3,18 +3,30 @@ import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { ShoppingBag, User, Heart, Search } from 'lucide-react';
-import AnnouncementBar from './AnnouncementBar';
+import { useState, useEffect } from 'react';
 
 export default function Header() {
   const { cartCount, setIsOpen } = useCart();
   const { user, openAuth } = useAuth();
   const { wishlist, setIsWishlistOpen } = useWishlist();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   return (
     <>
-      <AnnouncementBar />
-      <div className="w-full flex justify-center sticky top-4 z-40 mb-4">
-        <header className="w-[95%] max-w-7xl bg-vento-cream/95 backdrop-blur-md border border-vento-gold/30 shadow-xl rounded-full">
+      <div className="w-full flex justify-center fixed top-4 z-50 transition-all duration-300">
+        <header className={`w-[95%] max-w-7xl backdrop-blur-md rounded-full transition-all duration-300 border ${
+          isScrolled 
+            ? 'bg-white/95 border-gray-200 shadow-xl' 
+            : 'bg-white/60 border-white/50 shadow-md hover:bg-white/80'
+        }`}>
           <div className="px-6 md:px-8 h-16 md:h-20 flex items-center justify-between">
           
           {/* Logo */}
@@ -27,6 +39,7 @@ export default function Header() {
             <Link to="/" className="text-vento-forest hover:text-vento-gold-dark font-medium transition-colors">Home</Link>
             <Link to="/shop" className="text-vento-forest hover:text-vento-gold-dark font-medium transition-colors">Shop</Link>
             <Link to="/about" className="text-vento-forest hover:text-vento-gold-dark font-medium transition-colors">Our Story</Link>
+            <Link to="/blogs" className="text-vento-forest hover:text-vento-gold-dark font-medium transition-colors">Blogs</Link>
             <Link to="/contact" className="text-vento-forest hover:text-vento-gold-dark font-medium transition-colors">Contact</Link>
           </nav>
 

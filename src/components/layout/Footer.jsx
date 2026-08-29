@@ -3,7 +3,7 @@ import { MapPin, Mail, Phone } from 'lucide-react';
 
 export default function Footer() {
   return (
-    <footer className="bg-vento-forest text-vento-cream pt-16 pb-8 px-4">
+    <footer className="bg-vento-forest text-vento-cream pt-16 pb-0 px-4 overflow-hidden">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
         
         <div className="col-span-1 md:col-span-1">
@@ -52,9 +52,21 @@ export default function Footer() {
         </div>
       </div>
       
-      <div className="max-w-7xl mx-auto text-center text-xs text-gray-500 pt-8 border-t border-vento-forest-light">
+      <div className="max-w-7xl mx-auto text-center text-xs text-gray-500 pt-8 border-t border-vento-forest-light relative z-10">
         <p>&copy; {new Date().getFullYear()} Vento Tea. All rights reserved. (Demo)</p>
         <p className="mt-2 font-medium">Crafted by <span className="text-vento-gold">Humble Solutions</span></p>
+      </div>
+
+      {/* Huge Faded Brand Marquee */}
+      <div className="w-full mt-4 pointer-events-none select-none relative z-0 -mb-2 md:-mb-8">
+        <div className="animate-marquee flex whitespace-nowrap font-serif font-black text-[15vw] leading-none text-green-500/20 tracking-tighter">
+          <span className="mx-8">VENTO TEA</span>
+          <span className="mx-8">VENTO TEA</span>
+          <span className="mx-8">VENTO TEA</span>
+          <span className="mx-8">VENTO TEA</span>
+          <span className="mx-8">VENTO TEA</span>
+          <span className="mx-8">VENTO TEA</span>
+        </div>
       </div>
     </footer>
   );
