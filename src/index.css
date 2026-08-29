@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vento-forest: #0A2A1B;
+  --color-vento-forest-light: #1a3c34;
+  --color-vento-cream: #F9F7F2;
+  --color-vento-cream-dark: #F5EFE6;
+  --color-vento-gold: #C5A059;
+  --color-vento-gold-dark: #D4AF37;
+  --color-vento-amber: #b45309;
+  
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Montserrat", sans-serif;
+}
+
+@layer base {
+  body {
+    @apply font-sans bg-vento-cream text-vento-forest;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Custom utility for the gold rule / leaf flourish */
+.gold-rule-flourish {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem 0;
+}
+.gold-rule-flourish::before,
+.gold-rule-flourish::after {
+  content: "";
+  height: 1px;
+  background-color: var(--color-vento-gold);
+  flex-grow: 1;
+  max-width: 100px;
+}
+.gold-rule-flourish::before {
+  margin-right: 1rem;
+}
+.gold-rule-flourish::after {
+  margin-left: 1rem;
+}
+
+/* Animations */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+  display: flex;
+  width: max-content;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
