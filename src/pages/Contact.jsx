@@ -6,7 +6,8 @@ export default function Contact() {
   return (
     <div className="pb-20 bg-vento-cream min-h-[80vh]">
       <SEO title="Contact Us" description="Get in touch with the Vento Tea team for support and wholesale inquiries." keywords="contact vento tea, customer support" />
-      <PageBanner 
+      <PageBanner
+        eyebrow="We're here to help"
         title="Get in Touch"
         subtitle="Whether you have a question about our blends, your order, or just want to say hello, we're here for you."
         imagePath="/brand/media_1787991645100.jpg"

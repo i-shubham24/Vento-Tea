@@ -16,7 +16,7 @@ export default function Footer() {
 
         {/* About */}
         <div>
-          <h4 className="font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">About</h4>
+          <h4 className="font-sans font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">About</h4>
           <ul className="space-y-4 text-[13px] text-vento-cream/80">
             <li><Link to="/about" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">About Us</Link></li>
             <li><Link to="/contact" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">Contact Us</Link></li>
@@ -27,7 +27,7 @@ export default function Footer() {
 
         {/* Your Account */}
         <div>
-          <h4 className="font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Your Account</h4>
+          <h4 className="font-sans font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Your Account</h4>
           <ul className="space-y-4 text-[13px] text-vento-cream/80">
             <li><Link to="/account" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">My Account</Link></li>
             <li><Link to="/track-order" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">Track Order</Link></li>
@@ -37,7 +37,7 @@ export default function Footer() {
 
         {/* Policies */}
         <div>
-          <h4 className="font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Policies</h4>
+          <h4 className="font-sans font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Policies</h4>
           <ul className="space-y-4 text-[13px] text-vento-cream/80">
             <li><Link to="/return-policy" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">Return Policy</Link></li>
             <li><Link to="/refund-policy" className="hover:text-vento-gold hover:underline decoration-vento-gold underline-offset-4 transition-all">Refund Policy</Link></li>
@@ -48,7 +48,7 @@ export default function Footer() {
 
         {/* Let's Connect */}
         <div>
-          <h4 className="font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Let's Connect</h4>
+          <h4 className="font-sans font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Let's Connect</h4>
           <div className="flex items-center gap-4">
             <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="text-vento-cream/80 hover:text-vento-gold transition-colors" aria-label="WhatsApp">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -78,7 +78,7 @@ export default function Footer() {
 
         {/* Also Available At */}
         <div>
-          <h4 className="font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Also Available At</h4>
+          <h4 className="font-sans font-bold text-[11px] tracking-widest uppercase mb-6 text-vento-gold">Also Available At</h4>
           <a href="https://www.amazon.in/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center border border-gray-500 rounded-md p-3 hover:border-vento-gold hover:bg-white/5 transition-all w-32 h-12">
             <svg viewBox="0 0 100 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg" className="w-full text-white">
               <path d="M57.6,18.9c-0.1-0.2-0.2-0.4-0.4-0.5c-0.6-0.5-2.2-1.3-4.1-1.3c-2.3,0-4.6,1-6.1,2.8c-1.5,1.7-2,3.8-2,5.5c0,1.8,0.6,4,2.3,5.6 c1.5,1.5,3.6,2.3,5.9,2.3c2.2,0,4-0.9,4.9-1.5v1.2c0,0.5,0.4,0.9,0.9,0.9h3.7c0.5,0,0.9-0.4,0.9-0.9V13c0-3-0.8-5.2-2.3-6.6 c-1.6-1.5-3.8-2.1-6.6-2.1c-2,0-4.5,0.4-6.4,1.4c-0.4,0.2-0.6,0.6-0.6,1l0.6,3c0.1,0.4,0.5,0.6,0.9,0.5c1.6-0.8,3.7-1.3,5.4-1.3 c1.6,0,2.8,0.3,3.7,1.1c0.9,0.8,1.2,2,1.2,3.9v1.4C59,16.2,58.3,17.2,57.6,18.9z M54.6,27.1c-0.8,0.5-1.9,0.9-3.2,0.9 c-2.3,0-4.1-1.4-4.1-3.6c0-2.3,1.9-3.8,4.5-3.8c1.3,0,2.2,0.3,2.8,0.5V27.1z M34.9,23.3V5.1c0-0.5-0.4-0.9-0.9-0.9h-4.3 c-0.5,0-0.9,0.4-0.9,0.9v17.5c0,2.4,0.6,4.4,1.8,5.8c1.2,1.4,3.1,2.1,5.5,2.1c1.9,0,3.6-0.3,4.7-0.7c0.4-0.1,0.6-0.6,0.5-1L40.4,26 c-0.1-0.4-0.5-0.6-0.9-0.4c-0.8,0.3-2,0.6-3.2,0.6c-0.9,0-1.6-0.3-2-0.9C35.1,24.8,34.9,24.2,34.9,23.3z M18.9,21.7v1.1c0,0.5,0.4,0.9,0.9,0.9h4.3c0.5,0,0.9-0.4,0.9-0.9v-2.8c-1.3,0.7-3,1.2-5,1.2c-2.3,0-4.3-0.8-5.8-2.2 c-1.5-1.5-2.2-3.4-2.2-5.7c0-2.2,0.8-4.2,2.3-5.7c1.6-1.6,3.7-2.3,6.2-2.3c3.4,0,5.7,1.1,5.8,1.2c0.4,0.2,0.6,0.6,0.5,1l-0.9,2.8 c-0.1,0.4-0.6,0.6-1,0.4c-1.2-0.6-2.9-1.2-4.5-1.2c-2.6,0-4.7,1.6-4.7,4.3C15.8,19.9,16.8,21.7,18.9,21.7z M26.4,14.6 c-0.5-0.8-1.4-1.3-2.6-1.3c-1.5,0-2.7,0.7-3.4,1.7v4.6c0.6,1,1.9,1.7,3.4,1.7c1.3,0,2.2-0.5,2.7-1.3v-5.4H26.4z"/>
@@ -99,7 +99,7 @@ export default function Footer() {
 
       {/* Huge Faded Brand Marquee */}
       <div className="w-full -mt-4 md:-mt-8 pointer-events-none select-none relative z-0 mb-0">
-        <div className="animate-marquee flex whitespace-nowrap font-serif font-black text-[15vw] leading-none text-green-500/10 tracking-tighter">
+        <div className="animate-marquee flex whitespace-nowrap font-display font-black text-[15vw] leading-none text-green-500/10 tracking-tighter">
           <span className="mx-8">VENTO TEA</span>
           <span className="mx-8">VENTO TEA</span>
           <span className="mx-8">VENTO TEA</span>

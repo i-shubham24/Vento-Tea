@@ -48,7 +48,8 @@ export default function Blogs() {
     <div className="pb-24 bg-vento-cream min-h-screen">
       <SEO title="The Vento Journal" description="Stories, guides, and insights from the world of premium Indian tea." keywords="tea blog, brewing guide, health benefits of tea" />
       
-      <PageBanner 
+      <PageBanner
+        eyebrow="Stories & Guides"
         title="The Vento Journal"
         subtitle="Stories, guides, and insights from the world of premium Indian tea."
         imagePath="/brand/media_1787991645085.jpg"

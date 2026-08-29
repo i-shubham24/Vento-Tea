@@ -1,9 +1,9 @@
 import SEO from '../components/SEO';
 import { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import ProductCatalog from '../components/ProductCatalog';
 import PageBanner from '../components/PageBanner';
 import TeaProductCard from '../components/TeaProductCard';
+import { Stagger, StaggerItem } from '../components/Stagger';
 import { mockProducts } from '../data/mockData';
 import { ChevronDown } from 'lucide-react';
 
@@ -42,7 +42,8 @@ export default function Shop() {
   return (
     <div className="pb-20 bg-vento-cream min-h-screen">
       <SEO title="Shop Premium Tea" description="Browse our collection of fresh Assam, Darjeeling, and Wellness teas." keywords="buy tea online, shop tea, premium indian tea" />
-      <PageBanner 
+      <PageBanner
+        eyebrow="The Collection"
         title="Shop All"
         subtitle={initialSearch ? `Search results for "${initialSearch}"` : "Explore our entire premium collection of authentic Indian teas."}
         imagePath="/brand/media_1787991645120.jpg"
@@ -52,23 +53,27 @@ export default function Shop() {
         <div className="flex flex-col lg:flex-row gap-8 mt-4">
           
           {/* Sidebar */}
-          <div className="lg:w-64 flex-shrink-0">
-            <h3 className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-4">Categories</h3>
+          <div className="lg:w-64 flex-shrink-0 lg:sticky lg:top-28 lg:self-start h-fit">
+            <h3 className="text-xs font-bold text-vento-gold uppercase tracking-[0.2em] mb-5">Categories</h3>
             <ul className="space-y-1">
-              {categories.map(category => (
-                <li key={category}>
-                  <button 
-                    onClick={() => setSelectedCategory(category)}
-                    className={`w-full text-left px-4 py-2.5 rounded-lg text-sm font-medium transition-colors ${
-                      selectedCategory === category 
-                        ? 'bg-vento-forest text-vento-cream font-bold shadow-md' 
-                        : 'text-gray-600 hover:bg-vento-forest/10 hover:text-vento-forest'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                </li>
-              ))}
+              {categories.map(category => {
+                const active = selectedCategory === category;
+                return (
+                  <li key={category}>
+                    <button
+                      onClick={() => setSelectedCategory(category)}
+                      className={`group w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+                        active
+                          ? 'bg-vento-forest text-vento-cream font-semibold shadow-md'
+                          : 'text-gray-600 hover:bg-vento-forest/10 hover:text-vento-forest'
+                      }`}
+                    >
+                      <span className={`h-4 w-[3px] rounded-full transition-colors ${active ? 'bg-vento-gold' : 'bg-transparent group-hover:bg-vento-gold/50'}`}></span>
+                      {category}
+                    </button>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
@@ -94,16 +99,19 @@ export default function Shop() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredAndSortedProducts.map(product => (
-                <TeaProductCard key={product.id} product={product} />
-              ))}
-              {filteredAndSortedProducts.length === 0 && (
-                <div className="col-span-full py-20 text-center text-gray-500">
-                  No products found matching your criteria.
-                </div>
-              )}
-            </div>
+            {filteredAndSortedProducts.length === 0 ? (
+              <div className="py-20 text-center text-gray-500">
+                No products found matching your criteria.
+              </div>
+            ) : (
+              <Stagger key={`${selectedCategory}-${sortOption}`} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {filteredAndSortedProducts.map(product => (
+                  <StaggerItem key={product.id} className="h-full">
+                    <TeaProductCard product={product} />
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            )}
           </div>
 
         </div>

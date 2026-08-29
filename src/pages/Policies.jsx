@@ -93,7 +93,8 @@ export default function Policies({ type }) {
         keywords={`${currentPolicy.title.toLowerCase()}, vento tea policies, terms and conditions`} 
       />
 
-      <PageBanner 
+      <PageBanner
+        eyebrow="Legal"
         title={currentPolicy.title}
         imagePath="/brand/media_1787993346176.png"
       />

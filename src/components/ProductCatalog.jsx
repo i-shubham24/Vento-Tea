@@ -1,5 +1,6 @@
 import TeaProductCard from './TeaProductCard';
 import { mockProducts } from '../data/mockData';
+import { Stagger, StaggerItem } from './Stagger';
 
 export default function ProductCatalog({ limit }) {
   const displayProducts = limit ? mockProducts.slice(0, limit) : mockProducts;
@@ -14,11 +15,13 @@ export default function ProductCatalog({ limit }) {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
         {displayProducts.map(product => (
-          <TeaProductCard key={product.id} product={product} />
+          <StaggerItem key={product.id} className="h-full">
+            <TeaProductCard product={product} />
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
     </section>
   );
 }

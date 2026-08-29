@@ -4,7 +4,12 @@ export const mockProducts = [
     name: "Gold Long Leaf Tea",
     slug: "gold-long-leaf",
     tagline: "Beas Special - Authentic Whole Leaf",
-    images: ["/brand/media_1787991645006.jpg", "/brand/placeholder-leaf.jpg"],
+    images: [
+      "/brand/client/products/gold-long-leaf/4.png",
+      "/brand/client/products/gold-long-leaf/1.png",
+      "/brand/client/products/gold-long-leaf/2.png",
+      "/brand/client/products/gold-long-leaf/3.png",
+    ],
     badges: ["Premium"],
     category: "Whole Leaf",
     priceInr: 299,
@@ -33,7 +38,14 @@ export const mockProducts = [
     name: "Gold Tea",
     slug: "gold-tea",
     tagline: "Khushboo Khile, Swad Mile",
-    images: ["/brand/media_1787991645120.jpg", "/brand/placeholder-gold.jpg"],
+    images: [
+      "/brand/client/products/gold-tea/5.png",
+      "/brand/client/products/gold-tea/6.png",
+      "/brand/client/products/gold-tea/1.png",
+      "/brand/client/products/gold-tea/2.png",
+      "/brand/client/products/gold-tea/3.png",
+      "/brand/client/products/gold-tea/4.png",
+    ],
     badges: ["Best Seller"],
     category: "Everyday Chai",
     priceInr: 199,
@@ -62,7 +74,12 @@ export const mockProducts = [
     name: "Punjabi Masala Tea",
     slug: "punjabi-masala",
     tagline: "Vento Chai Josh Jagaye - Premium Spices",
-    images: ["/brand/media_1787991645006.jpg", "/brand/placeholder-masala.jpg"],
+    images: [
+      "/brand/client/products/punjabi-masala/4.png",
+      "/brand/client/products/punjabi-masala/1.png",
+      "/brand/client/products/punjabi-masala/2.png",
+      "/brand/client/products/punjabi-masala/3.png",
+    ],
     badges: ["Immunity Booster"],
     category: "Masala Chai",
     priceInr: 149,
@@ -90,7 +107,12 @@ export const mockProducts = [
     name: "Kadak Chai",
     slug: "kadak-chai",
     tagline: "Vento Chai Josh Jagaye - Extra Strong",
-    images: ["/brand/media_1787991645076.jpg", "/brand/placeholder-kadak.jpg"],
+    images: [
+      "/brand/client/products/kadak-chai/4.png",
+      "/brand/client/products/kadak-chai/1.png",
+      "/brand/client/products/kadak-chai/2.png",
+      "/brand/client/products/kadak-chai/3.png",
+    ],
     badges: ["Extra Strong"],
     category: "Everyday Chai",
     priceInr: 179,
@@ -143,4 +165,5 @@ export const mockProducts = [
   }
 ];
 
+export const FREE_SHIPPING_THRESHOLD = 499;
 export const CART_REWARD_THRESHOLD = 999;

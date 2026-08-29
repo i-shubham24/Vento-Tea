@@ -1,7 +1,7 @@
 import SEO from '../components/SEO';
 import PageBanner from '../components/PageBanner';
-import ScrollReveal from '../components/ScrollReveal';
-import { Star } from 'lucide-react';
+import { Stagger, StaggerItem } from '../components/Stagger';
+import { Star, Quote } from 'lucide-react';
 
 export default function Reviews() {
   const reviews = [
@@ -63,23 +63,25 @@ export default function Reviews() {
         keywords="tea reviews, Vento tea customer reviews, best tea brand reviews India, buy premium tea" 
       />
 
-      <PageBanner 
+      <PageBanner
+        eyebrow="Loved across India"
         title="Customer Reviews"
         subtitle="Don't just take our word for it. Hear from tea lovers across the country."
         imagePath="/brand/media_1787991645076.jpg"
       />
 
       <div className="max-w-7xl mx-auto px-4 mt-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {reviews.map((review, idx) => (
-            <ScrollReveal key={review.id} delay={idx * 0.1}>
-              <div className="bg-white p-8 rounded-3xl shadow-sm border border-vento-cream-dark h-full flex flex-col hover:shadow-md transition-shadow">
+        <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {reviews.map((review) => (
+            <StaggerItem key={review.id} className="h-full">
+              <div className="relative bg-white p-8 rounded-3xl shadow-sm border border-vento-cream-dark h-full flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+                <Quote size={40} className="absolute top-6 right-6 text-vento-gold/15" fill="currentColor" />
                 <div className="flex text-vento-gold mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} size={18} fill={i < review.rating ? "currentColor" : "none"} className={i >= review.rating ? "text-gray-300" : ""} />
                   ))}
                 </div>
-                <p className="text-gray-600 italic mb-6 flex-grow">"{review.text}"</p>
+                <p className="text-gray-600 italic mb-6 flex-grow relative z-10">"{review.text}"</p>
                 <div className="mt-auto border-t border-gray-100 pt-4">
                   <p className="font-bold text-vento-forest">{review.name}</p>
                   <div className="flex justify-between items-center mt-1">
@@ -88,9 +90,9 @@ export default function Reviews() {
                   </div>
                 </div>
               </div>
-            </ScrollReveal>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
       </div>
     </div>
   );

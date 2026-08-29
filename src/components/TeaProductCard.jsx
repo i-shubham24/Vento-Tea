@@ -2,25 +2,14 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
-import { ShoppingBag, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
+import { ShoppingBag, Heart, Leaf } from 'lucide-react';
 
 export default function TeaProductCard({ product }) {
   const { addItem } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedWeight, setSelectedWeight] = useState(product.weights[0]);
-  const [currentImageIdx, setCurrentImageIdx] = useState(0);
 
   const inWishlist = isInWishlist(product.id);
-
-  const nextImage = (e) => {
-    e.preventDefault();
-    setCurrentImageIdx((prev) => (prev + 1) % product.images.length);
-  };
-
-  const prevImage = (e) => {
-    e.preventDefault();
-    setCurrentImageIdx((prev) => (prev - 1 + product.images.length) % product.images.length);
-  };
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -28,14 +17,21 @@ export default function TeaProductCard({ product }) {
   };
 
   return (
-    <div className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-vento-cream-dark relative">
-      {/* Image Gallery */}
+    <div className="group h-full flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-vento-cream-dark relative">
+      {/* Product image — static primary, crossfades to the alternate version on hover */}
       <Link to={`/product/${product.slug}`} className="relative aspect-[6/5] overflow-hidden bg-vento-cream block">
-        <img 
-          src={product.images[currentImageIdx]} 
-          alt={product.name} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        <img
+          src={product.images[0]}
+          alt={product.name}
+          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
         />
+        {product.images[1] && (
+          <img
+            src={product.images[1]}
+            alt={`${product.name} — alternate view`}
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+          />
+        )}
       </Link>
         
       {/* Badges */}
@@ -61,26 +57,30 @@ export default function TeaProductCard({ product }) {
         <Heart size={20} fill={inWishlist ? "currentColor" : "none"} className={inWishlist ? "text-red-500" : "text-gray-400"} />
       </button>
 
-      {/* Carousel Controls */}
-      {product.images.length > 1 && (
-        <>
-          <button onClick={prevImage} className="absolute left-2 top-[35%] -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity z-10">
-            <ChevronLeft size={20} />
-          </button>
-          <button onClick={nextImage} className="absolute right-2 top-[35%] -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity z-10">
-            <ChevronRight size={20} />
-          </button>
-        </>
-      )}
-
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
         <Link to={`/product/${product.slug}`} className="mb-4 block hover:opacity-80 transition-opacity">
-          <h3 className="text-2xl font-serif text-vento-forest mb-1 line-clamp-1">{product.name}</h3>
+          <h3 className="text-2xl font-sans font-semibold text-vento-forest mb-1 line-clamp-1">{product.name}</h3>
           <p className="text-vento-gold-dark text-sm font-medium line-clamp-1">{product.tagline}</p>
         </Link>
         
-        <p className="text-gray-600 text-sm mb-6 line-clamp-2">{product.description}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+
+        {/* Benefit pills — surfaced from real product.features */}
+        {product.features?.length > 0 && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {product.features.slice(0, 2).map((f) => (
+              <span
+                key={f.title}
+                title={f.desc}
+                className="inline-flex items-center gap-1.5 rounded-full bg-vento-cream border border-vento-gold/40 text-vento-forest text-[11px] font-semibold px-2.5 py-1"
+              >
+                <Leaf size={12} className="text-vento-gold-dark" />
+                {f.title}
+              </span>
+            ))}
+          </div>
+        )}
 
         {/* Weight Selector */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -111,12 +111,16 @@ export default function TeaProductCard({ product }) {
               ₹{selectedWeight.priceInr}
             </span>
           </div>
-          <button 
+          <button
             onClick={handleAdd}
-            className="flex items-center gap-2 bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-semibold py-2.5 px-6 rounded-full transition-colors"
+            className="group/add relative overflow-hidden flex items-center gap-2 bg-vento-gold text-vento-forest font-semibold py-2.5 px-6 rounded-full"
           >
-            <ShoppingBag size={18} />
-            Add
+            {/* Fill sweep on hover */}
+            <span className="absolute inset-0 bg-vento-forest translate-y-full group-hover/add:translate-y-0 transition-transform duration-300 ease-out"></span>
+            <span className="relative flex items-center gap-2 transition-colors duration-300 group-hover/add:text-vento-cream">
+              <ShoppingBag size={18} />
+              Add
+            </span>
           </button>
         </div>
       </div>

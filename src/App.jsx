@@ -1,5 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { MotionConfig } from 'framer-motion';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
@@ -35,6 +36,7 @@ function App() {
         <CartProvider>
           <WishlistProvider>
             <Router>
+              <MotionConfig reducedMotion="user">
               <ScrollToTop />
               <ScrollProgress />
               <div className="min-h-screen flex flex-col font-sans relative">
@@ -66,6 +68,7 @@ function App() {
                 <WishlistSidebar />
                 <AuthModal />
               </div>
+              </MotionConfig>
             </Router>
           </WishlistProvider>
         </CartProvider>

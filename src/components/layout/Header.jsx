@@ -3,8 +3,10 @@ import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
 import { ShoppingBag, User, Heart, Search, X } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import { AnimatePresence } from 'framer-motion';
 import { mockProducts } from '../../data/mockData';
+import MobileMenu from '../MobileMenu';
 
 export default function Header() {
   const { cartCount, setIsOpen } = useCart();
@@ -13,8 +15,11 @@ export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
+
+  const closeMenu = useCallback(() => setIsMenuOpen(false), []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -162,10 +167,29 @@ export default function Header() {
                 </span>
               )}
             </button>
+
+            {/* Hamburger — mobile only */}
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              aria-label="Open menu"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
+              className="lg:hidden p-2 text-vento-forest hover:text-green-500 transition-colors"
+            >
+              <span className="flex flex-col items-end gap-[5px] w-6">
+                <span className="block h-[2px] w-6 bg-current rounded-full"></span>
+                <span className="block h-[2px] w-4 bg-current rounded-full"></span>
+                <span className="block h-[2px] w-6 bg-current rounded-full"></span>
+              </span>
+            </button>
           </div>
         </div>
       </header>
     </div>
+
+    <AnimatePresence>
+      {isMenuOpen && <MobileMenu onClose={closeMenu} />}
+    </AnimatePresence>
   </>
 );
 }

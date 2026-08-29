@@ -44,7 +44,7 @@ export default function Home() {
       />
       <CinematicHero />
       <Marquee />
-      
+
       <ScrollReveal>
         <Categories />
       </ScrollReveal>

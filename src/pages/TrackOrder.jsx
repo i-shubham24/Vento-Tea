@@ -30,7 +30,8 @@ export default function TrackOrder() {
         keywords="track order, vento tea tracking, delivery status" 
       />
 
-      <PageBanner 
+      <PageBanner
+        eyebrow="Order Tracking"
         title="Track Order"
         subtitle="Follow your fresh tea's journey from our estate to your doorstep."
         imagePath="/brand/media_1787994118797.png"

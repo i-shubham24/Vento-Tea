@@ -5,6 +5,8 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { Heart, Truck, ShieldCheck, Flame } from 'lucide-react';
 import TeaProductCard from '../components/TeaProductCard';
+import SEO from '../components/SEO';
+import SEO from '../components/SEO';
 
 export default function ProductDetails() {
   const { slug } = useParams();
@@ -70,7 +72,7 @@ export default function ProductDetails() {
 
           {/* Right: Details */}
           <div className="flex flex-col">
-            <h1 className="text-3xl md:text-4xl font-serif text-vento-forest mb-2">{product.name}</h1>
+            <h1 className="text-3xl md:text-4xl font-sans font-semibold text-vento-forest mb-2">{product.name}</h1>
             <p className="text-gray-500 mb-4">{product.description}</p>
 
             <div className="flex items-end gap-3 mb-8">
