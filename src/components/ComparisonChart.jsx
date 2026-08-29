@@ -1,5 +1,7 @@
 import { CheckCircle2, XCircle } from 'lucide-react';
 
+import SplitReveal from './SplitReveal';
+
 export default function ComparisonChart() {
   const comparison = [
     { feature: "Tea Leaves", vento: "Premium Whole Leaf", ordinary: "Dust & Fannings" },
@@ -12,7 +14,7 @@ export default function ComparisonChart() {
   return (
     <section className="py-20 px-4 max-w-4xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-serif text-vento-forest mb-4">The Vento Difference</h2>
+        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="The Vento Difference" />
         <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
         <p className="text-gray-600">See why connoisseurs choose Vento over ordinary tea brands.</p>
       </div>

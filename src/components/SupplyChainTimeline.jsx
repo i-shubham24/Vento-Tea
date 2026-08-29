@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import { motion, useScroll, useTransform, useReducedMotion } from 'framer-motion';
 import { Leaf, PackageCheck, Truck } from 'lucide-react';
 import { Stagger, StaggerItem } from './Stagger';
+import SplitReveal from './SplitReveal';
 import { EASE_OUT_SINE } from '../lib/motion';
 
 const steps = [
@@ -47,7 +48,7 @@ export default function SupplyChainTimeline() {
       </div>
 
       <div className="relative z-10 max-w-5xl mx-auto">
-        <h2 className="text-3xl md:text-5xl font-serif text-center text-vento-forest mb-16">The Vento Promise</h2>
+        <SplitReveal as="h2" className="text-3xl md:text-5xl font-serif text-center text-vento-forest mb-16" text="The Vento Promise" />
 
         <div className="flex flex-col md:flex-row items-center justify-between relative">
 

@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 
+import SplitReveal from './SplitReveal';
+
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(0);
 
@@ -30,7 +32,7 @@ export default function FAQ() {
   return (
     <section className="py-24 px-4 max-w-3xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-serif text-vento-forest mb-4">Frequently Asked Questions</h2>
+        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="Frequently Asked Questions" />
         <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
       </div>
 

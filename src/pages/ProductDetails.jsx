@@ -6,7 +6,6 @@ import { useWishlist } from '../context/WishlistContext';
 import { Heart, Truck, ShieldCheck, Flame } from 'lucide-react';
 import TeaProductCard from '../components/TeaProductCard';
 import SEO from '../components/SEO';
-import SEO from '../components/SEO';
 
 export default function ProductDetails() {
   const { slug } = useParams();

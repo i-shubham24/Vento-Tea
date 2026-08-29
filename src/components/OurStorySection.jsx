@@ -1,3 +1,5 @@
+import SplitReveal from './SplitReveal';
+
 export default function OurStorySection() {
   return (
     <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-12">
@@ -7,7 +9,7 @@ export default function OurStorySection() {
         </div>
       </div>
       <div className="w-full md:w-1/2">
-        <h2 className="text-4xl md:text-5xl font-serif text-vento-forest mb-6">Crafted to be Savoured.</h2>
+        <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-6" text="Crafted to be Savoured." />
         <div className="w-20 h-1 bg-vento-gold mb-6"></div>
         <p className="text-gray-600 mb-4 text-lg leading-relaxed">
           Every expression of one obsession. Flavour without compromise. 

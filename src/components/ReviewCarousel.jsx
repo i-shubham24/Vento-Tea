@@ -1,5 +1,7 @@
 import { Star } from 'lucide-react';
 
+import SplitReveal from './SplitReveal';
+
 export default function ReviewCarousel() {
   const reviews = [
     { name: "Rahul S.", rating: 5, text: "The Punjabi Masala tea is absolutely incredible. Smells amazing and the taste is super authentic." },
@@ -15,7 +17,7 @@ export default function ReviewCarousel() {
   return (
     <section className="bg-vento-cream-dark py-20 overflow-hidden border-t border-vento-gold/20">
       <div className="text-center mb-12 px-4">
-        <h2 className="text-4xl font-serif text-vento-forest mb-4">What Our Tea Family Says</h2>
+        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="What Our Tea Family Says" />
         <div className="w-20 h-1 bg-vento-gold mx-auto mb-4"></div>
         <div className="flex items-center justify-center gap-2 text-vento-forest font-semibold">
            <span className="text-xl">4.9/5</span> 
