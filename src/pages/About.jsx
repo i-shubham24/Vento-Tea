@@ -1,19 +1,20 @@
+import SEO from '../components/SEO';
 import OurStorySection from '../components/OurStorySection';
 import FarmerPromise from '../components/FarmerPromise';
 import ProcessSection from '../components/ProcessSection';
 import ScrollReveal from '../components/ScrollReveal';
+import PageBanner from '../components/PageBanner';
 
 export default function About() {
   return (
-    <div className="pt-32 pb-20 bg-vento-cream">
-      <ScrollReveal>
-        <div className="max-w-7xl mx-auto px-4 mb-8 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif text-vento-forest mb-4">Our Story</h1>
-          <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto">Discover the heritage, passion, and people behind every cup of Vento tea.</p>
-        </div>
-      </ScrollReveal>
-      
+    <div className="pb-20 bg-vento-cream">
+      <SEO title="Our Story" description="Learn about the heritage of Vento Tea and our commitment to local farmers." keywords="about vento tea, tea estate history" />
+      <PageBanner 
+        title="Our Story"
+        subtitle="A journey from the misty hills of Assam to your daily cup."
+        imagePath="/brand/media_1787991645006.jpg"
+      />
+        
       <ScrollReveal>
         <OurStorySection />
       </ScrollReveal>

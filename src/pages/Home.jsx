@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import CinematicHero from '../components/CinematicHero';
 import Marquee from '../components/Marquee';
 import Categories from '../components/Categories';
@@ -16,8 +17,31 @@ import DeliveryBanner from '../components/DeliveryBanner';
 import ScrollReveal from '../components/ScrollReveal';
 
 export default function Home() {
+  const localBusinessSchema = {
+    "@context": "https://schema.org",
+    "@type": "TeaHouse",
+    "name": "Vento Tea",
+    "image": "https://teawebsite-b65ea.web.app/images/web/logo.png",
+    "@id": "https://ventotea.com",
+    "url": "https://ventotea.com",
+    "telephone": "+919876543210",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Vento Tea HQ",
+      "addressLocality": "New Delhi",
+      "postalCode": "110001",
+      "addressCountry": "IN"
+    },
+    "description": "Vento Tea is India's premier local tea business offering authentic Assam and Darjeeling blends, delivered fresh to your door."
+  };
+
   return (
     <div>
+      <SEO 
+        title="Home" 
+        schema={localBusinessSchema}
+      />
       <CinematicHero />
       <Marquee />
       

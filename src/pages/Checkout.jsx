@@ -1,3 +1,4 @@
+import SEO from '../components/SEO';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
@@ -17,6 +18,7 @@ export default function Checkout() {
   if (items.length === 0) {
     return (
       <div className="min-h-[70vh] bg-gray-50 flex flex-col items-center justify-center p-4">
+      <SEO title="Checkout" description="Securely checkout your Vento Tea order." keywords="checkout" />
         <h1 className="text-3xl font-serif text-vento-forest mb-4">Your cart is empty</h1>
         <Link to="/shop" className="bg-vento-forest text-vento-cream px-8 py-3 rounded-full font-semibold hover:bg-vento-forest-light transition-colors">
           Return to Shop

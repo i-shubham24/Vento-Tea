@@ -1,0 +1,2050 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VENTO TEA | The Taste of Tradition</title>
+  <meta name="description" content="VENTO TEA, a premium Indian tea house. Masala tea and gold long leaf tea crafted with traditional care." />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=4" />
+  <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png?v=4" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
+  <meta name="theme-color" content="#FAF7F0" />
+
+  <!-- Share card (WhatsApp / iMessage / Facebook / Twitter). The image
+       URL MUST be absolute and live on the deployed domain below. -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="VENTO TEA" />
+  <meta property="og:title" content="VENTO TEA | The Taste of Tradition" />
+  <meta property="og:description" content="A premium Indian tea house. Masala tea and gold long leaf tea crafted with traditional care." />
+  <meta property="og:url" content="https://tea-web-one.vercel.app/" />
+  <meta property="og:image" content="https://tea-web-one.vercel.app/og-image.jpg" />
+  <meta property="og:image:secure_url" content="https://tea-web-one.vercel.app/og-image.jpg" />
+  <meta property="og:image:type" content="image/jpeg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="VENTO TEA. The Taste of Tradition. A steaming glass cup of premium Indian tea." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VENTO TEA | The Taste of Tradition" />
+  <meta name="twitter:description" content="A premium Indian tea house. Masala tea and gold long leaf tea crafted with traditional care." />
+  <meta name="twitter:image" content="https://tea-web-one.vercel.app/og-image.jpg" />
+
+  <!-- Claim scroll control before the browser can restore an old
+       position; every visit opens on the first frame of the film -->
+  <script>history.scrollRestoration = 'manual';</script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/assets/css/chrome.css" />
+  <style>
+  /* ==========================================================
+     VENTO TEA · Design tokens
+     ========================================================== */
+  :root {
+    /* Warm ivory page, deep tea-leaf ink, antique gold accent.
+       Text tones are all AA on --bg; --gold-lux is decorative only */
+    /* Three grounds, not one: ivory pages, a warmer sand band to break
+       them up, and a deep tea-leaf green to close the page on */
+    --bg:        #FAF7F0;
+    --sand:      #F1E9D9;
+    --green:     #14301F;
+    --text:      #1B2B22;
+    --gold:      #85590C;
+    --gold-lit:  #E8C67C;
+    --gold-soft: rgba(133, 89, 12, 0.32);
+    --gold-dim:  rgba(133, 89, 12, 0.10);
+    --muted:     #52625A;
+    --faint:     #5F6B65;
+    --hairline:  rgba(27, 43, 34, 0.14);
+    --on-green:  #FAF7F0;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body:    'Inter', -apple-system, sans-serif;
+
+    --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    --container: min(92vw, 1440px);
+    --header-h: 70px;
+  }
+
+  /* ==========================================================
+     Reset & base
+     ========================================================== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font: 300 1rem/1.7 var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  body.no-scroll { overflow: hidden; }
+
+  img, svg, video { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; cursor: pointer; touch-action: manipulation; }
+  button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; touch-action: manipulation; }
+  ::selection { background: var(--gold); color: var(--bg); }
+
+  :focus-visible { outline: 1px solid var(--gold); outline-offset: 4px; }
+
+  /* The golden rail is the only scroll indicator this page shows; the
+     native bar is hidden on every engine (Blink/WebKit, Firefox, legacy
+     Edge). Scrolling itself is untouched */
+  html, body { scrollbar-width: none; -ms-overflow-style: none; }
+  ::-webkit-scrollbar { width: 0; height: 0; display: none; }
+
+  section { scroll-margin-top: calc(var(--header-h) + 20px); }
+
+  /* Inertial smooth-scroll mode (added on capable desktops).
+     The window keeps its native scrollbar; the content layer is
+     fixed and glides to the scroll position with a gentle lerp. */
+  html.smooth { scroll-behavior: auto; }
+  html.smooth #smooth-content {
+    position: fixed; top: 0; left: 0; width: 100%;
+    will-change: transform;
+    backface-visibility: hidden;
+  }
+  html.smooth .hero-sticky { position: relative; }
+
+  /* Shared type helpers */
+  .eyebrow {
+    display: block;
+    font: 500 0.72rem/1 var(--font-body);
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.75rem;
+  }
+  .display {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.06;
+    letter-spacing: 0.005em;
+  }
+  .container { width: var(--container); margin-inline: auto; }
+
+  /* Word-split animation wrappers */
+  .w  { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+  .wi { display: inline-block; will-change: transform; }
+
+  /* ==========================================================
+     Film grain (static, ultra subtle)
+     ========================================================== */
+  .grain {
+    position: fixed; inset: 0; z-index: 90; pointer-events: none; opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* ==========================================================
+     Loader
+     ========================================================== */
+  /* Deep leaf green with light blooming behind the mark; the ivory
+     page arrives as a reveal rather than the loader being it already */
+  #loader {
+    position: fixed; inset: 0; z-index: 1000;
+    background: var(--green); color: var(--on-green);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2.6rem; overflow: hidden;
+  }
+  #loader::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(70% 48% at 50% 42%, rgba(232, 198, 124, 0.22), transparent 66%),
+      radial-gradient(60% 40% at 50% 108%, rgba(232, 198, 124, 0.12), transparent 60%);
+  }
+  /* A slow breathing ring, so the wait has something alive in it */
+  #loader::after {
+    content: ''; position: absolute; pointer-events: none;
+    width: min(46vw, 420px); aspect-ratio: 1;
+    border: 1px solid rgba(232, 198, 124, 0.22); border-radius: 50%;
+    animation: loader-breathe 4.5s var(--ease) infinite;
+  }
+  @keyframes loader-breathe {
+    0%, 100% { transform: scale(0.94); opacity: 0.35; }
+    50%      { transform: scale(1.04); opacity: 0.8; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    #loader::after { animation: none; }
+  }
+  #loader > * { position: relative; z-index: 1; }
+  #loader .loader-logo {
+    width: clamp(96px, 14vw, 132px); height: auto;
+    filter: drop-shadow(0 18px 34px rgba(0, 0, 0, 0.45));
+  }
+  #loader .loader-eyebrow {
+    font: 500 0.66rem/1 var(--font-body);
+    letter-spacing: 0.5em; text-transform: uppercase;
+    color: rgba(250, 247, 240, 0.66);
+  }
+  #loader .loader-mark {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.8rem, 8vw, 5.5rem);
+    letter-spacing: 0.14em;
+    color: var(--gold-lit);
+    line-height: 1;
+  }
+  #loader .loader-bar {
+    width: min(240px, 60vw); height: 1px;
+    background: rgba(250, 247, 240, 0.18);
+    overflow: hidden;
+  }
+  #loader .loader-bar-fill {
+    display: block; width: 100%; height: 100%;
+    background: linear-gradient(90deg, rgba(232, 198, 124, 0.55), #F0DCA8);
+    transform: scaleX(0); transform-origin: left;
+  }
+
+  /* ==========================================================
+     Header
+     ========================================================== */
+  #site-header {
+    position: fixed; inset: 0 0 auto 0; z-index: 200;
+    height: var(--header-h);
+    display: flex; align-items: center;
+    transition: background 0.6s var(--ease), backdrop-filter 0.6s var(--ease), border-color 0.6s var(--ease);
+    border-bottom: 1px solid transparent;
+  }
+  #site-header.scrolled {
+    background: rgba(250, 247, 240, 0.93);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    backdrop-filter: blur(14px) saturate(1.2);
+    border-bottom-color: var(--hairline);
+    color: var(--text);
+  }
+  /* Before the page scrolls, the bar floats on the film, so it carries
+     the hero's ivory rather than the page's ink */
+  #site-header:not(.scrolled) { color: #FAF7F0; }
+  .header-inner {
+    width: var(--container); margin-inline: auto;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .cart-link {
+    position: relative;
+    width: 44px; height: 44px;
+    display: inline-flex; align-items: center; justify-content: center;
+    color: inherit;
+  }
+  .cart-link svg {
+    width: 21px; height: 21px;
+    fill: none; stroke: currentColor; stroke-width: 1.4;
+    stroke-linecap: round; stroke-linejoin: round;
+    transition: transform 0.4s var(--ease);
+  }
+  .cart-link:hover svg { transform: scale(1.09); }
+  .cart-count {
+    position: absolute; top: 3px; right: 1px;
+    min-width: 17px; height: 17px; padding: 0 4px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 9px;
+    background: var(--gold); color: #fff;
+    font: 600 0.6rem/1 var(--font-body); font-feature-settings: 'tnum';
+  }
+  /* an author display value beats the UA rule for [hidden], so the
+     empty-cart state has to opt out explicitly */
+  .cart-count[hidden] { display: none; }
+  .cart-count.bump { animation: cartBump 0.45s var(--ease); }
+  @keyframes cartBump {
+    0% { transform: scale(1); } 40% { transform: scale(1.45); } 100% { transform: scale(1); }
+  }
+  .logo {
+    display: flex; align-items: center; min-height: 44px;
+  }
+  .logo .logo-mark { height: 32px; width: auto; }
+
+  /* ==========================================================
+     Scroll progress rail (right edge)
+     ========================================================== */
+  .scroll-rail {
+    position: fixed; right: 16px; top: 50%; transform: translateY(-50%);
+    width: 2px; height: 34vh; z-index: 150;
+    background: var(--hairline);
+  }
+  .scroll-rail-fill {
+    position: absolute; inset: 0;
+    background: var(--gold);
+    transform: scaleY(0); transform-origin: top;
+  }
+
+  /* ==========================================================
+     Hero · 800vh scroll-scrubbed video
+     ========================================================== */
+  #hero { height: 800vh; position: relative; }
+  .hero-sticky {
+    position: sticky; top: 0;
+    height: 100vh; height: 100svh;
+    overflow: hidden;
+  }
+  #hero-video {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transform: translateZ(0);
+  }
+  /* An ivory wash desaturated the film into a milky plate. A light
+     tea-leaf scrim keeps the greens and golds saturated and simply
+     seats the ivory type on top of them */
+  .hero-vignette {
+    position: absolute; inset: 0; pointer-events: none;
+    background:
+      radial-gradient(ellipse at center, rgba(18, 32, 25, 0.34) 0%, rgba(18, 32, 25, 0.42) 55%, rgba(18, 32, 25, 0.62) 100%),
+      linear-gradient(to bottom, rgba(18, 32, 25, 0.55), rgba(18, 32, 25, 0.12) 22%, rgba(18, 32, 25, 0.16) 64%, rgba(18, 32, 25, 0.72));
+  }
+  .hero-fade {
+    position: absolute; inset: 0; pointer-events: none;
+    background: var(--bg); opacity: 0;
+  }
+  #hero { color: #FAF7F0; }
+
+  .hero-stage {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center; pointer-events: none;
+    padding: 0 6vw;
+  }
+  .stage-inner { opacity: 0; will-change: transform, opacity; }
+
+  #stage-title .stage-eyebrow {
+    font: 500 0.72rem/1 var(--font-body);
+    letter-spacing: 0.55em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 3rem;
+  }
+  #stage-title h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(4.2rem, 15vw, 13rem);
+    line-height: 0.98; letter-spacing: 0.06em;
+  }
+  #stage-title .stage-sub {
+    margin-top: 2.4rem;
+    font-family: var(--font-display); font-style: italic;
+    font-size: clamp(1.05rem, 2vw, 1.5rem);
+    color: var(--muted);
+  }
+
+  #stage-crafted h2, #stage-tradition h2 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(2.6rem, 7.5vw, 6.5rem);
+    line-height: 1.08;
+  }
+  /* Single line at every viewport: the phrase measures ~14.5em incl.
+     tracking, so cap the size at what 88vw of space can hold */
+  #stage-tradition h2 {
+    white-space: nowrap;
+    font-size: clamp(1.2rem, 5.6vw, 5.5rem);
+  }
+  #stage-crafted p {
+    margin-top: 2rem;
+    font: 300 clamp(0.95rem, 1.6vw, 1.2rem)/1.6 var(--font-body);
+    letter-spacing: 0.06em; color: var(--muted);
+  }
+  #stage-tradition h2 { letter-spacing: 0.12em; }
+  #stage-tradition .stage-rule {
+    width: 72px; height: 1px; background: var(--gold);
+    margin: 2.4rem auto 0;
+  }
+
+  .hero-hint {
+    position: absolute; bottom: 4.5vh; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 0.9rem;
+    font: 500 0.62rem/1 var(--font-body);
+    letter-spacing: 0.5em; text-transform: uppercase; color: var(--faint);
+    opacity: 0; pointer-events: none;
+  }
+  .hero-hint::after {
+    content: ''; width: 1px; height: 46px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: hint-drop 2.4s var(--ease) infinite;
+  }
+  @keyframes hint-drop {
+    0%   { transform: scaleY(0); transform-origin: top; }
+    45%  { transform: scaleY(1); transform-origin: top; }
+    55%  { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  /* The hero is the one photographic surface on an otherwise ivory
+     site, so its type inverts to ivory and its gold lifts to a tone
+     that reads against film rather than against paper. These follow
+     the stage rules above so they win on source order */
+  #stage-title .stage-eyebrow { color: #F0DCA8; }
+  #stage-tradition .stage-rule { background: #E8C67C; }
+  #stage-title .stage-sub,
+  #stage-crafted .split-sub,
+  #stage-crafted p { color: rgba(250, 247, 240, 0.88); }
+  .hero-hint { color: rgba(250, 247, 240, 0.82); }
+  .hero-hint::after { background: linear-gradient(to bottom, #E8C67C, transparent); }
+  .skip-film {
+    color: rgba(250, 247, 240, 0.9);
+    background: rgba(18, 32, 25, 0.42);
+    border-color: rgba(250, 247, 240, 0.34);
+  }
+  .skip-film:active { color: #E8C67C; border-color: #E8C67C; }
+
+  /* Cinema mode (touch devices): the hero is one full screen and the
+     film simply plays; no scroll-scrubbing, no 800vh runway */
+  html.cinema #hero { height: 100vh; height: 100svh; }
+  .skip-film {
+    position: absolute; right: 6vw; bottom: 4.5vh; z-index: 6;
+    font: 500 0.62rem/1 var(--font-body);
+    letter-spacing: 0.32em; text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.9rem 1.4rem 0.9rem 1.6rem;
+    border: 1px solid var(--hairline);
+    background: rgba(250, 247, 240, 0.62);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.7s var(--ease), color 0.3s, border-color 0.3s;
+  }
+  .skip-film:active { color: var(--gold); border-color: var(--gold-soft); }
+  .skip-film.on { opacity: 1; pointer-events: auto; }
+
+
+  /* ==========================================================
+     Products · shoppable card grid
+     ========================================================== */
+  .products { padding-top: clamp(6rem, 14vh, 11rem); padding-bottom: clamp(4rem, 10vh, 8rem); }
+  .products-head { text-align: center; margin-bottom: clamp(2rem, 8vh, 5rem); }
+  .products-head h2 { font-size: clamp(2.8rem, 6.5vw, 6rem); }
+  .products-head p {
+    margin: 1.8rem auto 0; max-width: 36em;
+    color: var(--muted); font-size: 0.95rem; letter-spacing: 0.03em;
+  }
+
+  .product-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: clamp(1.2rem, 2.4vw, 2.2rem);
+  }
+  .grid-status {
+    grid-column: 1 / -1; text-align: center; padding: 4rem 0;
+    color: var(--faint); font-size: 0.9rem; letter-spacing: 0.05em;
+  }
+
+  .p-card {
+    display: flex; flex-direction: column;
+    background: #fff;
+    border: 1px solid var(--hairline);
+    border-radius: 3px;
+    overflow: hidden;
+    /* cards rise in on scroll; JS adds .in */
+    opacity: 0; transform: translateY(26px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease),
+                box-shadow 0.5s var(--ease), border-color 0.5s var(--ease);
+  }
+  .p-card.in { opacity: 1; transform: none; }
+  .p-card:hover {
+    box-shadow: 0 22px 48px rgba(27, 43, 34, 0.13);
+    border-color: var(--gold-soft);
+  }
+
+  /* --- media: two stacked frames, the second fades up on hover --- */
+  .p-shot {
+    position: relative; aspect-ratio: 4 / 5;
+    background: var(--sand); overflow: hidden;
+  }
+  .p-shot img {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%; object-fit: cover;
+    transition: opacity 0.7s var(--ease), transform 1.2s var(--ease);
+  }
+  .p-shot .shot-b { opacity: 0; }
+  /* Hover (and keyboard focus) swaps to the second shot */
+  .p-card:hover .shot-a,
+  .p-card:focus-within .shot-a { opacity: 0; }
+  .p-card:hover .shot-b,
+  .p-card:focus-within .shot-b { opacity: 1; }
+  .p-card:hover .p-shot img,
+  .p-card:focus-within .p-shot img { transform: scale(1.05); }
+  /* Manual carousel overrides the hover pair once a dot is chosen */
+  .p-shot[data-shot="b"] .shot-a { opacity: 0; }
+  .p-shot[data-shot="b"] .shot-b { opacity: 1; }
+
+  .p-dots {
+    position: absolute; left: 0; right: 0; bottom: 0.9rem; z-index: 2;
+    display: flex; justify-content: center; gap: 0.45rem;
+  }
+  .p-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: rgba(250, 247, 240, 0.55);
+    border: 1px solid rgba(27, 43, 34, 0.28);
+    padding: 0; transition: background-color 0.4s var(--ease), transform 0.4s var(--ease);
+  }
+  .p-dot.is-on { background: var(--gold-lit); transform: scale(1.25); }
+
+  .p-tag {
+    position: absolute; top: 0.9rem; left: 0.9rem; z-index: 2;
+    font: 500 0.58rem/1 var(--font-body);
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--on-green); background: var(--green);
+    padding: 0.42rem 0.7rem; border-radius: 2px;
+  }
+  .p-tag.sold { background: #6C2B2B; }
+
+  /* --- body --- */
+  .p-body { padding: 1.4rem 1.3rem 1.5rem; display: flex; flex-direction: column; flex: 1; }
+  .p-name {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 1.32rem; line-height: 1.25; color: var(--text);
+  }
+  .p-variant {
+    margin-top: 0.35rem;
+    font: 400 0.72rem/1.3 var(--font-body);
+    letter-spacing: 0.16em; text-transform: uppercase; color: var(--faint);
+  }
+  .p-sizes { display: flex; gap: 0.45rem; flex-wrap: wrap; margin-top: 1.1rem; }
+  .p-size {
+    font: 400 0.68rem/1 var(--font-body);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--faint);
+    padding: 0.55rem 0.75rem;
+    border: 1px solid var(--hairline); border-radius: 2px;
+    transition: color 0.35s var(--ease), border-color 0.35s var(--ease), background-color 0.35s var(--ease);
+  }
+  .p-size:hover:not(:disabled) { color: var(--text); border-color: rgba(27, 43, 34, 0.30); }
+  .p-size.is-active { color: var(--gold); border-color: var(--gold-soft); background: var(--gold-dim); }
+  .p-size:disabled { opacity: 0.35; text-decoration: line-through; cursor: not-allowed; }
+
+  .p-price {
+    margin-top: 1.1rem;
+    display: flex; align-items: baseline; gap: 0.7rem; flex-wrap: wrap;
+    font-feature-settings: 'tnum';
+  }
+  .p-now {
+    font-family: var(--font-display); font-size: 1.6rem;
+    font-weight: 500; color: var(--gold);
+  }
+  .p-mrp {
+    font: 300 0.85rem/1 var(--font-body);
+    color: var(--faint); text-decoration: line-through;
+    text-decoration-color: rgba(27, 43, 34, 0.42);
+  }
+  .p-off {
+    font: 500 0.62rem/1 var(--font-body);
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: #2F6B43;
+  }
+  .p-stock {
+    margin-top: 0.55rem;
+    font: 400 0.68rem/1 var(--font-body);
+    letter-spacing: 0.1em; color: #8A5A2B; min-height: 0.68rem;
+  }
+  .p-note { margin-top: 0.75rem; color: var(--muted); font-size: 0.82rem; line-height: 1.5; }
+
+  /* the button is pinned to the card bottom so every card lines up */
+  .p-add {
+    margin-top: auto; width: 100%;
+    display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+    min-height: 46px; padding: 0.9rem 1rem;
+    font: 500 0.7rem/1 var(--font-body);
+    letter-spacing: 0.24em; text-transform: uppercase;
+    color: var(--on-green); background: var(--green);
+    border-radius: 2px;
+    transition: background-color 0.4s var(--ease), color 0.4s var(--ease), opacity 0.3s;
+  }
+  .p-add:hover:not(:disabled) { background: #1D4029; }
+  .p-add:disabled { background: var(--sand); color: var(--faint); cursor: not-allowed; }
+  .p-add.done { background: var(--gold); color: #fff; }
+  .p-add svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+
+  /* ==========================================================
+     The range · family shot beside real copy
+     ========================================================== */
+  .range {
+    padding: clamp(5rem, 13vh, 10rem) 0;
+    position: relative; overflow: hidden;
+    background:
+      radial-gradient(110% 70% at 80% 45%, rgba(192, 138, 46, 0.13), transparent 62%),
+      linear-gradient(180deg, var(--bg) 0%, #F4ECDD 55%, var(--bg) 100%);
+  }
+  /* a pale gold arc drifting off the left edge, echoing a cup rim */
+  .range::before {
+    content: ''; position: absolute; pointer-events: none;
+    width: 52vw; height: 52vw; left: -24vw; top: 12%;
+    border: 1px solid rgba(133, 89, 12, 0.14); border-radius: 50%;
+  }
+  .range-inner {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(2rem, 5vw, 5rem); align-items: center;
+  }
+  .range-copy h2 { font-size: clamp(2.1rem, 4.6vw, 3.8rem); margin-top: 1rem; }
+  .range-copy > p { margin-top: 1.6rem; max-width: 30em; color: var(--muted); font-size: 0.95rem; }
+  .range-copy .btn-luxe { margin-top: 2.2rem; }
+  .range-media img {
+    width: 100%; height: auto; border-radius: 3px;
+    filter: drop-shadow(0 30px 52px rgba(27, 43, 34, 0.20));
+  }
+
+  /* ==========================================================
+     Delivery
+     ========================================================== */
+  .deliver { padding: clamp(4rem, 10vh, 8rem) 0; background: var(--sand); border-block: 1px solid var(--hairline); }
+  .deliver-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: clamp(2rem, 5vw, 4.5rem); align-items: center;
+  }
+  .deliver-copy h2 { font-size: clamp(2.2rem, 5vw, 4rem); margin-top: 1rem; }
+  .deliver-copy > p { margin-top: 1.2rem; max-width: 26em; color: var(--muted); font-size: 0.95rem; }
+  .deliver-facts { list-style: none; margin-top: 1.8rem; }
+  .deliver-facts li {
+    padding: 0.85rem 0; border-top: 1px solid var(--hairline);
+    color: var(--muted); font-size: 0.9rem;
+  }
+  .deliver-facts li strong {
+    color: var(--text); font-weight: 500;
+    font-family: var(--font-display); font-size: 1.05rem;
+  }
+  .deliver-copy .btn-luxe { margin-top: 2rem; }
+  .deliver-media img { width: 100%; height: auto; }
+
+  /* ==========================================================
+     Process · rebuilt from the infographic as real markup
+     ========================================================== */
+  .process { padding: clamp(5rem, 12vh, 9rem) 0; background: var(--sand); border-block: 1px solid var(--hairline); }
+  .process-head { text-align: center; margin-bottom: clamp(2.5rem, 7vh, 4.5rem); }
+  .process-head h2 { font-size: clamp(2.2rem, 5vw, 4rem); }
+  .process-grid {
+    list-style: none; display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: clamp(1.5rem, 3vw, 3rem);
+  }
+  .process-step { position: relative; padding-top: 2.2rem; border-top: 1px solid var(--gold-soft); }
+  .ps-num {
+    position: absolute; top: -0.85rem; left: 0;
+    background: var(--sand); padding-right: 0.8rem;
+    font: 500 0.72rem/1 var(--font-body);
+    letter-spacing: 0.34em; color: var(--gold);
+  }
+  .process-step h3 {
+    font-family: var(--font-display); font-weight: 500;
+    font-size: 1.24rem; color: var(--text);
+  }
+  .process-step p { margin-top: 0.7rem; color: var(--muted); font-size: 0.88rem; line-height: 1.65; }
+
+  /* ==========================================================
+     Craft · photography beside real, selectable copy
+     ========================================================== */
+  .craft { padding: clamp(5rem, 12vh, 9rem) 0; }
+  .craft-row {
+    display: grid; grid-template-columns: 0.85fr 1fr;
+    gap: clamp(2rem, 5vw, 5rem); align-items: center;
+  }
+  .craft-row + .craft-row { margin-top: clamp(4rem, 10vh, 8rem); }
+  .craft-row.flip .craft-media { order: 2; }
+  .craft-media { position: relative; aspect-ratio: 4 / 5; overflow: hidden; border-radius: 3px; }
+  .craft-media img { width: 100%; height: 100%; object-fit: cover; }
+  .craft-copy h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); margin-top: 1rem; }
+  .promise-list { list-style: none; margin-top: 2.2rem; }
+  .promise-list li {
+    padding: 1.2rem 0; border-top: 1px solid var(--hairline);
+    color: var(--muted); font-size: 0.9rem; line-height: 1.7;
+  }
+  .promise-list li strong {
+    display: block; margin-bottom: 0.35rem;
+    font-family: var(--font-display); font-weight: 500; font-size: 1.06rem;
+    color: var(--text); letter-spacing: 0.01em;
+  }
+  .craft-quote {
+    margin-top: 1.8rem;
+    font-family: var(--font-display); font-style: italic;
+    font-size: 1.05rem; color: var(--faint); line-height: 1.6;
+  }
+
+  /* The provenance line, used as a quiet refrain across the page */
+  .brand-line {
+    margin-top: 1.6rem;
+    display: inline-flex; align-items: center; gap: 0.85rem;
+    font: 400 0.66rem/1 var(--font-body);
+    letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold);
+  }
+  .brand-line::before, .brand-line::after {
+    content: ''; width: clamp(18px, 5vw, 46px); height: 1px;
+    background: var(--gold-soft);
+  }
+
+  /* ==========================================================
+     Reviews · a masonry wall of quotes, no photographs
+     ========================================================== */
+  .reviews {
+    padding: clamp(5rem, 12vh, 9rem) 0;
+    background:
+      radial-gradient(90% 60% at 50% 0%, rgba(192, 138, 46, 0.10), transparent 60%),
+      var(--sand);
+    border-block: 1px solid var(--hairline);
+  }
+  .reviews[hidden] { display: none; }
+  .reviews-head { text-align: center; margin-bottom: clamp(2.5rem, 7vh, 4.5rem); }
+  .reviews-head h2 { font-size: clamp(2.2rem, 5vw, 4rem); }
+  .reviews-head p {
+    margin: 1.4rem auto 0; max-width: 34em;
+    color: var(--muted); font-size: 0.92rem; letter-spacing: 0.04em;
+  }
+  /* CSS columns give a natural masonry stagger without JS measuring */
+  .reviews-wall { columns: 3; column-gap: clamp(1rem, 2vw, 1.8rem); }
+  .r-card {
+    break-inside: avoid; margin-bottom: clamp(1rem, 2vw, 1.8rem);
+    position: relative;
+    background: var(--bg);
+    border: 1px solid var(--hairline); border-radius: 3px;
+    padding: 1.9rem 1.5rem 1.5rem;
+    transition: box-shadow 0.5s var(--ease), border-color 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .r-card:hover {
+    box-shadow: 0 18px 40px rgba(27, 43, 34, 0.11);
+    border-color: var(--gold-soft); transform: translateY(-2px);
+  }
+  /* an open quote mark set into the top edge, in place of a photo */
+  .r-card::before {
+    content: '\201C';
+    position: absolute; top: -0.35rem; left: 1.2rem;
+    font-family: var(--font-display); font-size: 4.2rem; line-height: 1;
+    color: var(--gold-soft); pointer-events: none;
+  }
+  .r-stars { display: flex; gap: 0.18rem; color: var(--gold); font-size: 0.82rem; letter-spacing: 0.1em; }
+  .r-stars .off { color: rgba(27, 43, 34, 0.2); }
+  .r-text {
+    margin-top: 0.9rem;
+    font-family: var(--font-display);
+    font-size: 1.06rem; line-height: 1.65; color: var(--text);
+  }
+  .r-foot {
+    margin-top: 1.2rem; padding-top: 0.9rem;
+    border-top: 1px solid var(--hairline);
+    display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap;
+  }
+  .r-name {
+    font: 500 0.76rem/1 var(--font-body);
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text);
+  }
+  .r-place { font-size: 0.74rem; color: var(--faint); letter-spacing: 0.06em; }
+  .r-verified {
+    margin-left: auto;
+    font: 500 0.56rem/1 var(--font-body);
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--on-green); background: var(--green);
+    padding: 0.32rem 0.5rem; border-radius: 2px;
+  }
+
+  /* ==========================================================
+     Trust numbers
+     ========================================================== */
+  .stats { padding: clamp(4rem, 9vh, 7rem) 0; background: var(--green); color: var(--on-green); }
+  .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(1.5rem, 3vw, 3rem); }
+  .stat { text-align: center; }
+  .stat dt {
+    font: 400 0.64rem/1 var(--font-body);
+    letter-spacing: 0.34em; text-transform: uppercase;
+    color: rgba(250, 247, 240, 0.58);
+  }
+  .stat dd {
+    margin-top: 0.9rem;
+    font-family: var(--font-display); font-weight: 500;
+    font-size: clamp(2.4rem, 5vw, 3.6rem); line-height: 1;
+    color: var(--gold-lit); font-feature-settings: 'tnum';
+  }
+  .stat dd span { font-size: 0.5em; }
+  .stat p { margin-top: 0.7rem; font-size: 0.82rem; color: rgba(250, 247, 240, 0.72); }
+
+  /* ==========================================================
+     Why VENTO · four columns
+     ========================================================== */
+  .why {
+    padding: clamp(7rem, 18vh, 13rem) 0;
+    background: var(--sand);
+    border-block: 1px solid var(--hairline);
+  }
+  .why-head { text-align: center; margin-bottom: clamp(3.5rem, 9vh, 6rem); }
+  .why-head h2 { font-size: clamp(2.4rem, 5vw, 4.5rem); }
+  .why-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 1px; background: var(--hairline);
+    border-block: 1px solid var(--hairline);
+  }
+  .why-col {
+    background: var(--bg);
+    padding: 3.4rem 2.2rem;
+    text-align: center;
+  }
+  .why-col svg { width: 42px; height: 42px; margin: 0 auto 1.9rem; stroke: var(--gold); }
+  .why-col h3 {
+    font-family: var(--font-display);
+    font-size: 1.4rem; font-weight: 500; letter-spacing: 0.04em;
+  }
+  .why-col p { margin-top: 0.9rem; font-size: 0.85rem; color: var(--muted); }
+
+
+  /* ==========================================================
+     CTA
+     ========================================================== */
+  /* The page closes on the deep leaf green; the ivory sections read
+     as daylight and this as the cup itself */
+  .cta {
+    padding: clamp(8rem, 22vh, 15rem) 0;
+    text-align: center;
+    background: var(--green); color: var(--on-green);
+    position: relative; overflow: hidden;
+  }
+  /* The chai photograph carries the band; the scrim over it is what
+     keeps the ivory type comfortably above AA on every crop */
+  .cta::after {
+    content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(9, 26, 16, 0.82), rgba(9, 26, 16, 0.88)),
+      url('images/web/chai-band.webp');
+    background-size: cover; background-position: center;
+  }
+  .cta::before {
+    content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+    background: radial-gradient(ellipse at 50% 0%, rgba(232, 198, 124, 0.16), transparent 62%);
+  }
+  .cta > * { z-index: 2; }
+  .cta > * { position: relative; z-index: 1; }
+  .cta .eyebrow { color: var(--gold-lit); }
+  .cta h2 { font-size: clamp(2.8rem, 7vw, 6.5rem); max-width: 11em; margin-inline: auto; }
+  .cta p {
+    margin: 2.2rem auto 0; max-width: 34em;
+    font-family: var(--font-display); font-style: italic;
+    font-size: clamp(1.05rem, 1.8vw, 1.35rem); color: rgba(250, 247, 240, 0.76);
+  }
+  .cta .btn-luxe { border-color: var(--gold-lit); color: var(--gold-lit); }
+  .cta .btn-luxe::before { background: var(--gold-lit); }
+  .cta .btn-luxe:hover { color: var(--green); }
+  .btn-luxe {
+    position: relative; z-index: 0;
+    display: inline-block; margin-top: 3.8rem;
+    padding: 1.35rem 3.6rem;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font: 500 0.74rem/1 var(--font-body);
+    letter-spacing: 0.4em; text-transform: uppercase;
+    overflow: hidden;
+    transition: color 0.55s var(--ease);
+  }
+  .btn-luxe::before {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: var(--gold);
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.65s var(--ease);
+  }
+  .btn-luxe:hover { color: var(--bg); }
+  .btn-luxe:hover::before { transform: scaleX(1); }
+
+
+  /* ==========================================================
+     Responsive
+     ========================================================== */
+  @media (max-width: 1024px) {
+    .why-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  @media (max-width: 900px) {
+  }
+
+  @media (max-width: 860px) {
+    .scroll-rail { right: 8px; }
+
+
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .craft-row { grid-template-columns: 1fr; gap: 2.5rem; }
+    .craft-row.flip .craft-media { order: 0; }
+    .process-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-wall { columns: 2; }
+    .range-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .range-media { order: -1; }
+    .deliver-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .deliver-media { order: -1; max-width: 460px; margin-inline: auto; }
+  }
+
+  @media (max-width: 640px) {
+    .logo .logo-mark { height: 26px; }
+
+    .why-grid { grid-template-columns: 1fr; }
+    /* Two columns still beat one here: the cards stay glanceable and
+       the section does not turn into an endless single file */
+    .product-grid { gap: 0.8rem; }
+    .p-body { padding: 1.1rem 0.9rem 1.2rem; }
+    .p-name { font-size: 1.08rem; }
+    .p-now { font-size: 1.35rem; }
+    .p-add { letter-spacing: 0.16em; font-size: 0.64rem; padding-inline: 0.5rem; }
+    .p-size { padding: 0.5rem 0.6rem; font-size: 0.63rem; letter-spacing: 0.1em; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .reviews-wall { columns: 1; }
+  }
+
+  /* ==========================================================
+     Reduced motion
+     ========================================================== */
+  @media (prefers-reduced-motion: reduce) {
+    #hero { height: 100vh; }
+    .stage-inner { opacity: 1; }
+    #stage-crafted, #stage-tradition, .hero-hint { display: none; }
+    .hero-hint::after { animation: none; }
+    *, *::before, *::after { transition-duration: 0.01ms !important; }
+  }
+  </style>
+</head>
+<body>
+
+  <!-- ======================= LOADER ======================= -->
+  <div id="loader" role="status" aria-label="Loading VENTO TEA">
+    <img class="loader-logo" src="images/web/logo.png" alt="" width="480" height="307" />
+    <span class="loader-eyebrow">Premium Indian Tea</span>
+    <div class="loader-mark">VENTO&nbsp;TEA</div>
+    <div class="loader-bar"><span class="loader-bar-fill"></span></div>
+  </div>
+
+  <!-- ======================= HEADER ======================= -->
+  <header id="site-header">
+    <div class="header-inner">
+      <a class="logo" href="#top">
+        <img class="logo-mark" src="images/web/logo.png" alt="VENTO TEA" width="480" height="307" />
+      </a>
+      <!-- No nav and no menu by design: the page is one uninterrupted
+           scroll. The cart is the single exception; a shop needs a way
+           back to the basket from anywhere on the page -->
+      <a class="cart-link" href="/cart" aria-label="Cart">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h2.2l2.1 10.4a1.6 1.6 0 0 0 1.6 1.3h7.9a1.6 1.6 0 0 0 1.6-1.2L20 7.5H6"/>
+          <circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/>
+        </svg>
+        <span class="cart-count" id="cart-count" hidden>0</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- =================== SCROLL RAIL ====================== -->
+  <div class="scroll-rail" aria-hidden="true"><span class="scroll-rail-fill"></span></div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- The content layer glides inside this wrapper when
+       inertial smooth scrolling is active -->
+  <div id="smooth-content">
+  <main id="top">
+
+    <!-- ============ HERO · SCRUBBED VIDEO (800vh) ============ -->
+    <section id="hero" aria-label="VENTO TEA cinematic introduction">
+      <div class="hero-sticky">
+        <!-- No src: the loader downloads the whole film once (with real
+             progress), then plays it from memory so every seek is instant -->
+        <video id="hero-video" muted playsinline preload="none"
+               poster="images/web/poster.jpg?v=6"></video>
+        <div class="hero-vignette" aria-hidden="true"></div>
+
+        <!-- Stage 1 · ~5% -->
+        <div class="hero-stage" id="stage-title">
+          <div class="stage-inner">
+            <p class="stage-eyebrow">Premium Indian Tea</p>
+            <h1>VENTO TEA</h1>
+            <p class="stage-sub">The taste of tradition, poured slowly.</p>
+          </div>
+        </div>
+
+        <!-- Stage 2 · ~18% -->
+        <div class="hero-stage" id="stage-crafted">
+          <div class="stage-inner">
+            <h2 class="split">Crafted in Every Leaf.</h2>
+            <p class="split-sub">From the finest tea gardens</p>
+          </div>
+        </div>
+
+        <!-- Stage 3 · ~35% -->
+        <div class="hero-stage" id="stage-tradition">
+          <div class="stage-inner">
+            <h2>Directly To Your Cup</h2>
+            <div class="stage-rule"></div>
+          </div>
+        </div>
+
+        <div class="hero-hint">Scroll</div>
+        <div class="hero-fade" aria-hidden="true"></div>
+      </div>
+    </section>
+
+
+    <!-- ============ PRODUCTS · SHOPPABLE GRID ============ -->
+    <section class="products" id="products">
+      <div class="products-head container">
+        <span class="eyebrow reveal">The Collection</span>
+        <h2 class="display split">Crafted to be Savoured.</h2>
+        <p class="reveal">Every expression of one obsession. Flavour without compromise.</p>
+        <p class="brand-line reveal">Delivered fresh from Assam and Darjeeling</p>
+      </div>
+      <!-- Cards are rendered from the live Firestore catalogue by the
+           store module at the end of this file; this is only the shell -->
+      <div class="container">
+        <div id="product-grid" class="product-grid" aria-busy="true">
+          <p class="grid-status">Loading the collection…</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= WHY VENTO ======================== -->
+    <section class="why">
+      <div class="container">
+        <div class="why-head">
+          <span class="eyebrow reveal">The Vento Promise</span>
+          <h2 class="display split">Why Choose VENTO</h2>
+        </div>
+        <div class="why-grid">
+          <div class="why-col">
+            <svg viewBox="0 0 48 48" fill="none" stroke-width="1.5" aria-hidden="true">
+              <path d="M10 38C10 22 22 10 38 10c0 16-12 28-28 28Z"/>
+              <path d="M10 38C18 30 26 22 34 14" stroke-opacity=".6"/>
+            </svg>
+            <h3>100% Premium Quality</h3>
+            <p>Only the finest high grade leaf ever makes the cut.</p>
+          </div>
+          <div class="why-col">
+            <svg viewBox="0 0 48 48" fill="none" stroke-width="1.5" aria-hidden="true">
+              <path d="M24 6l14 7v18l-14 7-14-7V13l14-7Z"/>
+              <path d="M10 13l14 7 14-7M24 20v18" stroke-opacity=".6"/>
+            </svg>
+            <h3>Fresh Packaging</h3>
+            <p>Sealed at source to protect aroma, colour and character.</p>
+          </div>
+          <div class="why-col">
+            <svg viewBox="0 0 48 48" fill="none" stroke-width="1.5" aria-hidden="true">
+              <path d="M8 20h26v10a10 10 0 0 1-10 10h-6A10 10 0 0 1 8 30V20Z"/>
+              <path d="M34 22h3a5 5 0 0 1 0 10h-3M15 14c0-2 2-2 2-4M23 14c0-2 2-2 2-4" stroke-opacity=".6"/>
+            </svg>
+            <h3>Authentic Taste</h3>
+            <p>The kadak, honest flavour India grew up on.</p>
+          </div>
+          <div class="why-col">
+            <svg viewBox="0 0 48 48" fill="none" stroke-width="1.5" aria-hidden="true">
+              <circle cx="24" cy="20" r="11"/>
+              <path d="M18 29l-4 13 10-6 10 6-4-13M24 15l1.7 3.4 3.8.6-2.7 2.7.6 3.8-3.4-1.8-3.4 1.8.6-3.8-2.7-2.7 3.8-.6L24 15Z" stroke-opacity=".6"/>
+            </svg>
+            <h3>Trusted Since Years</h3>
+            <p>A promise kept in lakhs of cups, every single day.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ============ THE RANGE · the family shot from the brand kit ====
+         The artwork's own headline and stats panel were cropped away so
+         the type here is real, responsive text rather than baked pixels. -->
+    <section class="range">
+      <div class="container range-inner">
+        <div class="range-copy">
+          <span class="eyebrow reveal">The Full Range</span>
+          <h2 class="display split">Five Blends. One Standard.</h2>
+          <p class="reveal">From the everyday kadak cup to whole gold long leaf,
+            every Vento pack is sealed at origin and built on the same promise.</p>
+          <p class="brand-line reveal">Delivered fresh from Assam and Darjeeling</p>
+          <a class="btn-luxe reveal" href="#products">Shop the Collection</a>
+        </div>
+        <figure class="range-media reveal">
+          <img src="images/web/range-family.webp"
+               srcset="images/web/range-family@sm.webp 750w, images/web/range-family.webp 1072w"
+               sizes="(max-width: 900px) 92vw, 52vw"
+               width="1072" height="502" loading="lazy" decoding="async"
+               alt="The full Vento range: Gold Long Leaf Beas Special, Gold Tea, Punjabi Masala Tea, Kadak Chai and Premium Tea" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS · built in code, not a flat image =========
+         The source artwork was a text-heavy infographic; as a JPEG the
+         labels would be unreadable on a phone and invisible to search
+         engines and screen readers, so it is rebuilt as real markup. -->
+    <section class="process">
+      <div class="container">
+        <div class="process-head">
+          <span class="eyebrow reveal">Our Tea Process</span>
+          <h2 class="display split">Pure Leaves. Rich Aroma.</h2>
+        </div>
+        <ol class="process-grid">
+          <li class="process-step reveal">
+            <span class="ps-num">01</span>
+            <h3>Carefully Picked</h3>
+            <p>Handpicked at the peak of freshness to ensure only the finest two leaves and a bud.</p>
+          </li>
+          <li class="process-step reveal">
+            <span class="ps-num">02</span>
+            <h3>Naturally Processed</h3>
+            <p>Withered and rolled by time-honoured methods that keep the leaf's own character intact.</p>
+          </li>
+          <li class="process-step reveal">
+            <span class="ps-num">03</span>
+            <h3>Sorted &amp; Cleaned</h3>
+            <p>Expertly graded and cleaned, so every spoonful pours the same strength and colour.</p>
+          </li>
+          <li class="process-step reveal">
+            <span class="ps-num">04</span>
+            <h3>Packed &amp; Sealed</h3>
+            <p>Sealed at origin to lock in freshness, so the pack opens on the aroma of the garden.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ THE PEOPLE · photography + real copy ============ -->
+    <section class="craft" id="about-vento">
+      <div class="container">
+        <div class="craft-row">
+          <div class="craft-media reveal">
+            <img src="images/web/craft-pickers.webp" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="A Vento tea picker gathering fresh leaves in a hillside garden at sunrise" />
+          </div>
+          <div class="craft-copy">
+            <span class="eyebrow reveal">The Vento Promise</span>
+            <h2 class="display split">Good Leaves. Great Tea.</h2>
+            <ul class="promise-list">
+              <li class="reveal"><strong>Finest tea gardens</strong>Handpicked from India's renowned estates for consistent freshness and an honest, authentic taste.</li>
+              <li class="reveal"><strong>Carefully selected leaves</strong>Only premium quality leaves are chosen, for vibrant colour and a naturally rich flavour.</li>
+              <li class="reveal"><strong>Expertly crafted blends</strong>Our master blenders build each blend for the right strength, smooth taste and a memorable cup.</li>
+              <li class="reveal"><strong>Quality you can trust</strong>Every pack is processed and sealed under strict standards to preserve freshness and purity.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="craft-row flip">
+          <div class="craft-media reveal">
+            <img src="images/web/craft-harvest.webp" width="1000" height="1250" loading="lazy" decoding="async"
+                 alt="Vento partner farmers harvesting tea by hand on a terraced estate" />
+          </div>
+          <div class="craft-copy">
+            <span class="eyebrow reveal">Farmer Promise</span>
+            <h2 class="display split">Growing Together.</h2>
+            <ul class="promise-list">
+              <li class="reveal"><strong>Fair &amp; respectful partnerships</strong>Long-term relationships with trusted growers who value their craft as much as we do.</li>
+              <li class="reveal"><strong>Responsible sourcing</strong>Leaf drawn from gardens where careful cultivation and responsible farming are the norm.</li>
+              <li class="reveal"><strong>Supporting local communities</strong>Every purchase sustains tea-growing families and preserves generations of expertise.</li>
+            </ul>
+            <p class="craft-quote reveal">“Behind every cup of Vento Tea is the dedication of the people who nurture every leaf.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ REVIEWS · admin-managed, text only ==============
+         Hidden entirely until real reviews are published from the
+         admin panel; nothing here is seeded or invented. -->
+    <section class="reviews" id="reviews" hidden>
+      <div class="container">
+        <div class="reviews-head">
+          <span class="eyebrow reveal">In Their Words</span>
+          <h2 class="display split">Loved by Chai Lovers</h2>
+          <p class="reveal" id="reviews-sub"></p>
+        </div>
+        <div class="reviews-wall" id="reviews-wall"></div>
+      </div>
+    </section>
+
+    <!-- ============ DELIVERY · truck art + real copy ================= -->
+    <section class="deliver">
+      <div class="container deliver-inner">
+        <div class="deliver-copy">
+          <span class="eyebrow reveal">Premium Teas, Purest Experience</span>
+          <h2 class="display split">Want it Fast?</h2>
+          <p class="reveal">Order now and have it at your doorstep faster than
+            you can say chai.</p>
+          <ul class="deliver-facts">
+            <li class="reveal"><strong>One-day delivery</strong> in major metro cities</li>
+            <li class="reveal"><strong>Free shipping</strong> on orders over ₹499</li>
+            <li class="reveal"><strong>Sealed at origin</strong>, never repacked in transit</li>
+          </ul>
+          <a class="btn-luxe reveal" href="#products">Order Now</a>
+        </div>
+        <figure class="deliver-media reveal">
+          <img src="images/web/delivery-truck.webp" width="1064" height="654"
+               loading="lazy" decoding="async"
+               alt="A Vento delivery van loaded with sealed tea cartons" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- ============ TRUST · numbers as text, not baked pixels ======== -->
+    <section class="stats">
+      <div class="container">
+        <dl class="stats-grid">
+          <div class="stat reveal"><dt>Trusted by</dt><dd>10,000<span>+</span></dd><p>customers across India</p></div>
+          <div class="stat reveal"><dt>Over</dt><dd>1<span> M+</span></dd><p>cups served and counting</p></div>
+          <div class="stat reveal"><dt>A team of</dt><dd>22<span>+</span></dd><p>passionate tea lovers</p></div>
+          <div class="stat reveal"><dt>Sourced from</dt><dd>75<span>+</span></dd><p>partner farming families</p></div>
+        </dl>
+      </div>
+    </section>
+
+    <!-- ==================== CTA =========================== -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <span class="eyebrow reveal">Begin the Ritual</span>
+        <h2 class="display split">Experience the Taste of Tradition.</h2>
+        <p class="reveal">From our gardens to your home, VENTO brings the ritual of fine tea to every table.</p>
+        <a class="btn-luxe reveal" href="#products">Explore Products</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== FOOTER ====================
+       Markup comes from assets/js/site.js so the home page and
+       every editorial page share one definition -->
+  <footer class="site-footer"></footer>
+  </div><!-- /#smooth-content -->
+
+  <!-- ===================== GSAP =========================== -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+
+  <script>
+  /* ============================================================
+     VENTO TEA · Experience engine
+     Modules: data > build > smooth scroll > loader > header/menu >
+              rail > hero scrub > hero stages > section reveals
+     ============================================================ */
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({ ignoreMobileResize: true });
+
+  const $  = (s, c = document) => c.querySelector(s);
+  const $$ = (s, c = document) => [...c.querySelectorAll(s)];
+  const REDUCED = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const MOBILE = window.matchMedia('(max-width: 860px), (pointer: coarse)').matches;
+  // Touch devices don't scrub the film off the scrollbar (seeking every
+  // frame is what caused the jank); they play it once, cinema style,
+  // with the overlay stages timed to the video clock instead of scroll
+  const CINEMA = MOBILE && !REDUCED;
+  let heroStageTL = null; // cinema drives this timeline by video time
+  if (CINEMA) document.documentElement.classList.add('cinema');
+  let SMOOTH = false;
+  // Programmatic scroll for smooth mode, wired up by initSmoothScroll.
+  // A plain window.scrollTo cannot survive a ScrollTrigger refresh (the
+  // refresh restores scroll from the eased position and strands the
+  // glide), so nav uses a tween that owns the scroll every frame instead.
+  let navTo = null;
+
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  /* ---------------------------------------------------------
+     3 · Inertial smooth scrolling (desktop, fine pointers)
+     The window keeps native scrolling and its scrollbar; the
+     content layer eases toward the scroll position every frame.
+     ScrollTrigger reads the eased value through a scrollerProxy
+     so every animation rides the same silk.
+     --------------------------------------------------------- */
+  function initSmoothScroll() {
+    if (REDUCED || !window.matchMedia('(pointer: fine)').matches) return;
+
+    const content = $('#smooth-content');
+    SMOOTH = true;
+    document.documentElement.classList.add('smooth');
+
+    let current = window.scrollY || 0;
+    const setHeight = () => { document.body.style.height = content.offsetHeight + 'px'; };
+
+    ScrollTrigger.scrollerProxy(document.body, {
+      scrollTop(value) {
+        if (arguments.length) {
+          current = value;
+          // Keep the content layer in lock-step with the value ScrollTrigger
+          // sets. During a refresh it probes scrollTop(0) then restores; if the
+          // transform lagged behind, pinned elements (the hero) would be
+          // measured at a shifted position and stick at their end state.
+          content.style.transform = `translate3d(0, ${-value}px, 0)`;
+          window.scrollTo(0, value);
+        }
+        return current;
+      },
+      getBoundingClientRect() {
+        return { top: 0, left: 0, width: window.innerWidth, height: window.innerHeight };
+      },
+      pinType: 'transform',
+    });
+    ScrollTrigger.defaults({ scroller: document.body });
+
+    // A refresh must never read a half-eased position: snap the
+    // glide to the real scroll value before ScrollTrigger measures
+    ScrollTrigger.addEventListener('refreshInit', () => {
+      setHeight();
+      current = window.scrollY;
+      content.style.transform = `translate3d(0, ${-current}px, 0)`;
+    });
+
+    // Programmatic nav-scroll: a single tween drives both the window
+    // scroll and the eased position every frame, so a mid-glide refresh
+    // (e.g. the scrollbar toggling when the menu opens) cannot strand it.
+    let navTween = null;
+    navTo = (top) => {
+      if (navTween) navTween.kill();
+      const o = { v: current };
+      navTween = gsap.to(o, {
+        v: top, duration: 1.1, ease: 'power3.inOut',
+        onUpdate() {
+          current = o.v;
+          window.scrollTo(0, Math.round(current));
+          content.style.transform = `translate3d(0, ${-current}px, 0)`;
+          ScrollTrigger.update();
+        },
+        onComplete() { navTween = null; },
+      });
+    };
+
+    // Any manual scroll input cancels an in-flight nav-scroll
+    const clearNav = () => { if (navTween) { navTween.kill(); navTween = null; } };
+    ['wheel', 'touchstart', 'keydown'].forEach((ev) =>
+      window.addEventListener(ev, clearNav, { passive: true }));
+
+    // Frame-rate independent lerp keeps the glide identical at
+    // 60, 120 or 144 Hz. While a nav tween runs it holds window.scrollY
+    // equal to current, so this stays a no-op and never fights it.
+    // A 150ms constant with a 0.1px cutoff spent close to a second
+    // crawling the last few pixels after the wheel stopped; the glide
+    // now lands in roughly a third of that and terminates a sub-pixel
+    // short, which is invisible but ends the drift cleanly
+    let lastPaint = null;
+    gsap.ticker.add((time, deltaMS) => {
+      const target = window.scrollY;
+      if (current !== target) {
+        const alpha = 1 - Math.exp(-deltaMS / 70);
+        current += (target - current) * alpha;
+        if (Math.abs(target - current) < 0.5) current = target;
+      } else if (lastPaint === current) {
+        return; // parked: nothing to repaint, nothing to re-measure
+      }
+      lastPaint = current;
+      content.style.transform = `translate3d(0, ${-current}px, 0)`;
+      ScrollTrigger.update();
+    });
+
+    let roTimer;
+    const ro = new ResizeObserver(() => {
+      clearTimeout(roTimer);
+      roTimer = setTimeout(() => { setHeight(); ScrollTrigger.refresh(); }, 150);
+    });
+    ro.observe(content);
+    setHeight();
+  }
+
+  /* ---------------------------------------------------------
+     4 · Loader · downloads the whole hero film once, then lifts.
+     Scrubbing a half-buffered network stream is what caused the
+     scroll lag in production: every seek waited on the CDN. With
+     the full file in memory every currentTime write is instant.
+     --------------------------------------------------------- */
+  // v6: public/ used to hold an older cut of the film under v4, so the
+  // version is bumped to evict anything cached from that copy
+  const HERO_SRC = MOBILE ? 'hero-720.mp4?v=6' : 'hero-1080.mp4?v=6';
+
+  function initLoader() {
+    const loader = $('#loader');
+    const fillEl = $('.loader-bar-fill');
+    const video  = $('#hero-video');
+    let finished = false;
+
+    const fill = { v: 0 };
+    const setFill = () => (fillEl.style.transform = `scaleX(${fill.v})`);
+    const showFill = (v) => gsap.to(fill, {
+      v, duration: 0.4, ease: 'power1.out', overwrite: true, onUpdate: setFill,
+    });
+
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      gsap.timeline()
+        .to(fill, { v: 1, duration: 0.45, ease: 'power2.out', overwrite: true, onUpdate: setFill })
+        .to(loader, { autoAlpha: 0, duration: 1, ease: 'power2.inOut', delay: 0.25 })
+        .set(loader, { display: 'none' })
+        .add(introIn, '-=1.1');
+    };
+
+    const armVideo = () => {
+      if (video.readyState >= 3) return finish();
+      video.addEventListener('canplaythrough', finish, { once: true });
+      video.addEventListener('loadeddata', () => setTimeout(finish, 400), { once: true });
+      video.addEventListener('error', finish, { once: true });
+      video.load();
+    };
+
+    // Plan B: stream straight from the CDN like before
+    const streamFallback = () => {
+      if (video.src) return;
+      video.src = HERO_SRC;
+      armVideo();
+      setTimeout(finish, 9000);
+    };
+
+    // Plan A: fetch the full film, bar mirrors true download progress
+    (async () => {
+      try {
+        showFill(0.04);
+        const res = await fetch(HERO_SRC);
+        if (!res.ok || !res.body) throw new Error('http ' + res.status);
+        const total = +res.headers.get('Content-Length') || 0;
+        const reader = res.body.getReader();
+        const chunks = [];
+        let got = 0;
+        for (;;) {
+          const { done, value } = await reader.read();
+          if (done) break;
+          chunks.push(value);
+          got += value.length;
+          if (total) showFill(Math.min(got / total, 1) * 0.96);
+        }
+        video.src = URL.createObjectURL(new Blob(chunks, { type: 'video/mp4' }));
+        armVideo();
+      } catch (err) {
+        streamFallback();
+      }
+    })();
+  }
+
+  /* Entrance once the loader lifts */
+  function introIn() {
+    if (REDUCED) return;
+    gsap.fromTo('#site-header', { y: -16, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 1.2, ease: 'power3.out' });
+    const titleIn = gsap.fromTo('#stage-title .stage-inner', { y: 34, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 1.6, ease: 'power3.out', delay: 0.15 });
+    gsap.to('.hero-hint', { autoAlpha: 1, duration: 1.2, delay: 0.9 });
+
+    // Scrolling away mid-entrance would leave this tween writing the
+    // title back to full opacity on top of the next stage; the scrubbed
+    // timeline owns the element from the first scroll onward
+    window.addEventListener('scroll', () => {
+      if (titleIn.isActive()) {
+        titleIn.kill();
+        ScrollTrigger.update();
+      }
+    }, { once: true, passive: true });
+  }
+
+  /* ---------------------------------------------------------
+     5 · Header blur + full-screen menu
+     --------------------------------------------------------- */
+  function initHeader() {
+    const header = $('#site-header');
+    const hero = $('#hero');
+    // The bar only takes its ivory glass once the film is behind us; // over the hero it floats transparent so nothing cuts the frame.
+    // Driven straight off position rather than a ScrollTrigger, which
+    // reads inactive on the last pixel and dropped the glass at the foot
+    // ScrollTrigger reads the eased position through the smooth-scroll
+    // proxy, so the swap lands exactly as the film clears the bar.
+    // onEnter/onLeaveBack only; a range ending at 'max' reads inactive
+    // on the last pixel and dropped the glass at the foot of the page
+    ScrollTrigger.create({
+      trigger: hero,
+      start: () => 'bottom top+=' + header.offsetHeight,
+      onEnter: () => header.classList.add('scrolled'),
+      onLeaveBack: () => header.classList.remove('scrolled'),
+    });
+  }
+
+  /* ---------------------------------------------------------
+     6 · Golden scroll rail
+     --------------------------------------------------------- */
+  function initRail() {
+    gsap.to('.scroll-rail-fill', {
+      scaleY: 1, ease: 'none',
+      scrollTrigger: { start: 0, end: 'max', scrub: 0.4 },
+    });
+  }
+
+  /* ---------------------------------------------------------
+     7 · Hero video scrub · scroll owns the timeline
+     --------------------------------------------------------- */
+  function initHeroScrub() {
+    const video = $('#hero-video');
+    let duration = 0;
+    let progress = 0;
+    let playhead = 0;
+
+    video.pause(); // never autoplays on its own; a gesture starts cinema
+    if (CINEMA) return initCinema(video);
+
+    video.addEventListener('loadedmetadata', () => (duration = video.duration));
+    if (video.readyState >= 1) duration = video.duration;
+
+    // In smooth mode the hero is pinned by ScrollTrigger because
+    // position: sticky cannot live inside a transformed layer
+    if (SMOOTH) {
+      ScrollTrigger.create({
+        trigger: '#hero', start: 'top top', end: 'bottom bottom',
+        pin: '.hero-sticky', pinSpacing: false,
+      });
+    }
+
+    ScrollTrigger.create({
+      trigger: '#hero', start: 'top top', end: 'bottom bottom',
+      onUpdate: (self) => (progress = self.progress),
+    });
+
+    if (REDUCED) return; // the poster frame stands in
+
+    // Seek on frame boundaries rather than a time threshold. A threshold
+    // lets an offset build up while the film sits on a stale frame, and
+    // the landing seek then has to jump it; a visible hop after a pause.
+    // Quantising means every frame change is issued exactly once and the
+    // film is never mid-way between two frames. (The hero is encoded 30p.)
+    const FPS = 30;
+    let lastFrame = -1;
+    const seekTo = (p, force) => {
+      if (video.seeking) return false;
+      const t = Math.min(p * duration, duration - 0.05);
+      const frame = Math.round(t * FPS);
+      if (!force && frame === lastFrame) return true;
+      lastFrame = frame;
+      video.currentTime = t;
+      return true;
+    };
+
+    // `progress` already arrives off the eased scroll layer, so this is
+    // a light second pass only. It used to run at 90ms, and two slow
+    // filters in series left the film trailing the page and creeping to
+    // a stop one sparse frame at a time; which is what read as lag.
+    // Closing the last ~1 frame of lag in one step instead of easing
+    // through it is what removes the crawl: measured end-to-end, the
+    // film now stops in ~230ms with every step a display frame apart.
+    const LAND = 0.003; // ≈ one frame of the film
+    let landed = false;
+    gsap.ticker.add((time, deltaMS) => {
+      if (!duration) return;
+
+      if (Math.abs(progress - playhead) < LAND) {
+        playhead = progress;
+        // Land the exact frame once on arrival; but keep tracking
+        // afterwards, or a slow drag that never exceeds LAND would
+        // hold the film on a stale frame
+        if (!landed) landed = seekTo(playhead, true);
+        else seekTo(playhead, false);
+        return;
+      }
+
+      landed = false;
+      playhead += (progress - playhead) * (1 - Math.exp(-deltaMS / 42));
+      seekTo(playhead, false);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     7b · Cinema mode (touch): first gesture plays the film once.
+     Scroll stays locked while it runs, the overlay stages follow
+     the video clock, and the page releases into the story after
+     the final frame (or the skip button).
+     --------------------------------------------------------- */
+  function initCinema(video) {
+    const hint = $('.hero-hint');
+    hint.textContent = 'Tap to Begin';
+
+    const skip = document.createElement('button');
+    skip.className = 'skip-film';
+    skip.textContent = 'Skip Film';
+    skip.setAttribute('aria-label', 'Skip the intro film');
+    $('.hero-sticky').appendChild(skip);
+
+    let started = false;
+    let released = false;
+
+    const blockTouch = (e) => e.preventDefault();
+
+    // The stage timeline is authored in 0-100 units (= film fraction),
+    // so drive it by absolute time, not progress: without the desktop
+    // hand-off tween its duration is shorter than 100
+    const sync = () => {
+      if (heroStageTL && video.duration) {
+        heroStageTL.time(Math.min(
+          (video.currentTime / video.duration) * 100, heroStageTL.duration()));
+      }
+    };
+
+    // Glide into the first section after the film, but hand the wheel
+    // back the moment the user touches: native smooth scrollIntoView is
+    // not reliably interruptible on iOS and reads as "scroll is stuck"
+    const glideToStory = () => {
+      const target = $('#products');
+      if (!target) return;
+      const pos = { y: window.scrollY };
+      const tween = gsap.to(pos, {
+        y: target.getBoundingClientRect().top + window.scrollY,
+        duration: 1.1, ease: 'power2.inOut',
+        onUpdate: () => window.scrollTo(0, pos.y),
+      });
+      const cancel = () => tween.kill();
+      ['touchstart', 'wheel'].forEach((ev) =>
+        window.addEventListener(ev, cancel, { once: true, passive: true }));
+    };
+
+    const release = (guide) => {
+      if (released) return;
+      released = true;
+      gsap.ticker.remove(sync);
+      video.pause();
+      if (heroStageTL) heroStageTL.progress(1);
+      skip.classList.remove('on');
+      document.body.classList.remove('no-scroll');
+      window.removeEventListener('touchmove', blockTouch);
+      if (guide) glideToStory();
+    };
+
+    const start = () => {
+      if (started) return;
+      started = true;
+      document.body.classList.add('no-scroll');
+      window.addEventListener('touchmove', blockTouch, { passive: false });
+      window.scrollTo(0, 0);
+      video.playbackRate = 1; // the film is short enough to run at its own pace
+      const played = video.play();
+      if (played && played.catch) played.catch(() => release(false));
+      gsap.ticker.add(sync);
+      setTimeout(() => { if (!released) skip.classList.add('on'); }, 1500);
+    };
+
+    video.addEventListener('ended', () => release(true), { once: true });
+    video.addEventListener('error', () => release(false));
+    skip.addEventListener('click', (e) => { e.stopPropagation(); release(true); });
+
+    // In-page navigation (menu links) must always win over the lock
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('a[href^="#"]')) release(false);
+    }, true);
+
+    // Arm the start gesture only once the film can actually play; a
+    // touch during the loader must not consume (and break) the intro
+    const onGesture = () => {
+      if (released || video.readyState < 3) return;
+      ['touchstart', 'pointerdown', 'wheel'].forEach((ev) =>
+        window.removeEventListener(ev, onGesture));
+      start();
+    };
+    ['touchstart', 'pointerdown', 'wheel'].forEach((ev) =>
+      window.addEventListener(ev, onGesture, { passive: true }));
+  }
+
+  /* ---------------------------------------------------------
+     8 · Hero overlay stages (scrubbed master timeline)
+     Timeline space: 0 to 100 maps to the full 800vh hero
+     --------------------------------------------------------- */
+  function splitWords(el) {
+    const words = el.textContent.trim().split(/\s+/);
+    el.setAttribute('aria-label', el.textContent.trim());
+    el.innerHTML = words
+      .map((w) => `<span class="w" aria-hidden="true"><span class="wi">${w}</span></span>`)
+      .join(' ');
+    return $$('.wi', el);
+  }
+
+  function initHeroStages() {
+    if (REDUCED) return;
+
+    const craftedWords = splitWords($('#stage-crafted h2'));
+    // Cinema: same choreography, but paused; the film's clock drives it
+    const tl = gsap.timeline(CINEMA
+      ? { defaults: { ease: 'none' }, paused: true }
+      : { defaults: { ease: 'none' },
+          scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.5 } });
+    if (CINEMA) heroStageTL = tl;
+
+    // Hint retires as the journey begins
+    tl.to('.hero-hint', { autoAlpha: 0, duration: 2.5 }, 1);
+
+    // Stage 1: VENTO TEA (visible at rest, departs around 12%)
+    tl.fromTo('#stage-title .stage-inner',
+      { autoAlpha: 1, y: 0, scale: 1 },
+      { autoAlpha: 0, y: -70, scale: 1.04, duration: 5 }, 11);
+
+    // Stage 2: "Crafted in Every Leaf." word by word (around 18%)
+    tl.set('#stage-crafted .stage-inner', { autoAlpha: 1 }, 17)
+      .fromTo(craftedWords, { yPercent: 118 },
+        { yPercent: 0, duration: 4.5, stagger: 0.9, ease: 'power2.out' }, 17.5)
+      .fromTo('#stage-crafted .split-sub', { autoAlpha: 0, y: 26 },
+        { autoAlpha: 1, y: 0, duration: 3.5 }, 21)
+      .to('#stage-crafted .stage-inner',
+        { autoAlpha: 0, y: -60, duration: 4 }, 29);
+
+    // Stage 3: "Directly To Your Cup" (around 35%).
+    // Scale only: animating letter-spacing reflowed the line count
+    tl.fromTo('#stage-tradition .stage-inner', { autoAlpha: 0 },
+        { autoAlpha: 1, duration: 4.5 }, 35)
+      .fromTo('#stage-tradition h2', { scale: 1.06 },
+        { scale: 1, duration: 9, ease: 'power1.out' }, 35)
+      .fromTo('#stage-tradition .stage-rule', { scaleX: 0 },
+        { scaleX: 1, duration: 4 }, 37.5)
+      .to('#stage-tradition .stage-inner',
+        { autoAlpha: 0, y: -50, duration: 4 }, 46);
+
+    // Cinematic hand-off into the story. Cinema ends on the final
+    // frame instead; the cup stays as the hero image once released
+    if (!CINEMA) {
+      tl.fromTo('.hero-fade', { autoAlpha: 0 }, { autoAlpha: 1, duration: 9 }, 91);
+    }
+  }
+
+  /* ---------------------------------------------------------
+     9 · Section reveals
+     --------------------------------------------------------- */
+  function initReveals() {
+    if (REDUCED) return;
+
+    // Masked word reveals for every .split headline outside the hero
+    $$('.split').forEach((el) => {
+      if (el.closest('#hero')) return;
+      const words = splitWords(el);
+      gsap.fromTo(words, { yPercent: 118 }, {
+        yPercent: 0, duration: 1.1, stagger: 0.06, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 84%', once: true },
+      });
+    });
+
+    // Gentle fade-ups
+    $$('.reveal').forEach((el) => {
+      gsap.fromTo(el, { y: 34, autoAlpha: 0 }, {
+        y: 0, autoAlpha: 1, duration: 1.2, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true },
+      });
+    });
+
+    // Product cards animate themselves in the store module; they are
+    // rendered asynchronously from Firestore, long after this runs.
+
+    // Why columns
+    gsap.fromTo('.why-col', { y: 44, autoAlpha: 0 }, {
+      y: 0, autoAlpha: 1, duration: 1.1, stagger: 0.12, ease: 'power3.out',
+      scrollTrigger: { trigger: '.why-grid', start: 'top 82%', once: true },
+    });
+
+
+    // Footer breathes in
+    gsap.fromTo('.foot-grid', { autoAlpha: 0, y: 24 }, {
+      autoAlpha: 1, y: 0, duration: 1.2, ease: 'power2.out',
+      scrollTrigger: { trigger: 'footer', start: 'top 96%', once: true },
+    });
+  }
+
+  /* ---------------------------------------------------------
+     10 · In-page anchor navigation
+     In smooth mode the whole page lives inside a position:fixed,
+     transformed layer, so native #hash jumps have no real scroll
+     offset to land on. Intercept every in-page link and scroll the
+     window ourselves; the inertial ticker eases the glide.
+     --------------------------------------------------------- */
+  function initAnchors() {
+    const headerH = parseInt(
+      getComputedStyle(document.documentElement).getPropertyValue('--header-h'), 10) || 70;
+    const OFFSET = headerH + 20; // matches section scroll-margin-top
+
+    // Layout offset from the document top. Uses offsetTop rather than
+    // getBoundingClientRect because the hero's pinned/transformed layer
+    // distorts client rects for far-down sections while at the top.
+    const layoutTop = (el) => {
+      let y = 0;
+      for (let n = el; n; n = n.offsetParent) y += n.offsetTop;
+      return y;
+    };
+
+    const scrollToTarget = (target) => {
+      const top = Math.max(0, Math.round(layoutTop(target) - OFFSET));
+      // Smooth mode glides via its own tween; otherwise native smooth scroll
+      if (SMOOTH && navTo) navTo(top);
+      else window.scrollTo({ top, behavior: REDUCED ? 'auto' : 'smooth' });
+    };
+
+    document.addEventListener('click', (e) => {
+      const link = e.target.closest('a[href^="#"]');
+      if (!link) return;
+      const hash = link.getAttribute('href');
+      if (!hash || hash === '#') return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      e.preventDefault();
+      scrollToTarget(target);
+      history.pushState(null, '', hash);
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Boot (smooth scroll first so every trigger uses its proxy)
+     --------------------------------------------------------- */
+  initSmoothScroll();
+  initLoader();
+  initHeader();
+  initRail();
+  initHeroScrub();
+  initHeroStages();
+  initReveals();
+  initAnchors();
+
+  window.addEventListener('load', () => {
+    // A second pass beats the browser's async scroll restoration so
+    // every visit opens on the first frame of the film
+    if (!location.hash) {
+      window.scrollTo(0, 0);
+      setTimeout(() => window.scrollTo(0, 0), 60);
+    }
+    ScrollTrigger.refresh();
+  });
+  </script>
+
+  <!-- ===================================================================
+       STORE · live catalogue + cart
+       Runs as a module so it can share the exact cart the rest of the
+       shop uses (localStorage + carts/{uid} mirror). Money shown here is
+       display only; the server reprices every line at checkout.
+       =================================================================== -->
+  <script type="module">
+  import {db} from '/assets/js/firebase-init.js';
+  import {collection, query, where, getDocs}
+    from 'https://www.gstatic.com/firebasejs/11.9.0/firebase-firestore.js';
+  import {addToCart, cartCount} from '/assets/js/cart.js';
+  import {renderSiteFooter, mountWhatsApp} from '/assets/js/site.js';
+
+  renderSiteFooter();
+  mountWhatsApp();
+
+  const grid = document.getElementById('product-grid');
+  const esc = (s) => String(s ?? '')
+    .replaceAll('&', '&amp;').replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+  const rupees = (n) => '₹' + Number(n || 0).toLocaleString('en-IN');
+
+  /* ---- cart badge -------------------------------------------------- */
+  const countEl = document.getElementById('cart-count');
+  function syncCart() {
+    const c = cartCount();
+    countEl.textContent = String(c);
+    countEl.hidden = c === 0;
+    countEl.classList.remove('bump');
+    void countEl.offsetWidth; // restart the animation
+    countEl.classList.add('bump');
+  }
+  syncCart();
+  window.addEventListener('vento-cart', syncCart);
+
+  /* ---- curated art -------------------------------------------------
+     The catalogue's own image URLs are the plain packshots uploaded
+     through the admin panel. These hand-picked pairs (a = pack hero,
+     b = the cup in context) are what the grid actually shows; anything
+     unmatched falls back to whatever the product doc carries.        */
+  /* Order matters and the patterns must be narrow: "Vento Gold Tea ·
+     Select Long Leaf" also contains "long leaf", so Beas is matched on
+     its own name only, and Gold on "gold tea" rather than bare "gold". */
+  const ART = [
+    [/beas/i,             'beas'],
+    [/kadak/i,            'kadak'],
+    [/masala|punjabi/i,   'masala'],
+    [/gold\s*tea/i,       'gold'],
+    [/premium/i,          'premium'],
+  ];
+  function artFor(p) {
+    const hit = ART.find(([re]) => re.test(p.name || ''));
+    if (!hit) {
+      const one = Array.isArray(p.images) && p.images[0] ? p.images[0] : '';
+      return one ? [one, one] : null;
+    }
+    const s = hit[1];
+    return [`images/products/${s}-a.webp`, `images/products/${s}-b.webp`];
+  }
+
+  /* ---- card -------------------------------------------------------- */
+  function cardHTML(p) {
+    const art = artFor(p);
+    const variants = (Array.isArray(p.variants) ? p.variants : [])
+      .filter((v) => v && v.id);
+    if (!variants.length) return '';
+    const inStock = variants.filter((v) => (v.stock | 0) > 0);
+    const sold = inStock.length === 0;
+    // open on the cheapest variant that can actually be bought
+    const first = (sold ? variants : inStock)
+      .reduce((a, b) => (Number(b.price) < Number(a.price) ? b : a));
+    const off = first.mrp && Number(first.mrp) > Number(first.price)
+      ? Math.round((1 - Number(first.price) / Number(first.mrp)) * 100) : 0;
+
+    // Curated art ships at two widths; the plain fallback (a catalogue
+    // URL) has no @sm twin, so it is served without a srcset.
+    const SIZES = '(max-width: 860px) 46vw, 30vw';
+    const srcset = (u) => u.startsWith('images/products/')
+      ? ` srcset="${esc(u.replace(/\.webp$/, '@sm.webp'))} 400w, ${esc(u)} 800w" sizes="${SIZES}"` : '';
+    const shots = art ? `
+      <img class="shot-a" src="${esc(art[0])}"${srcset(art[0])} alt="${esc(p.name)}"
+           width="800" height="1000" loading="lazy" decoding="async" />
+      <img class="shot-b" src="${esc(art[1])}"${srcset(art[1])} alt="" aria-hidden="true"
+           width="800" height="1000" loading="lazy" decoding="async" />` : '';
+
+    const sizes = variants.map((v, i) => {
+      const out = (v.stock | 0) <= 0;
+      return `<button type="button" class="p-size${v.id === first.id ? ' is-active' : ''}"
+        data-vid="${esc(v.id)}" data-price="${esc(v.price)}" data-mrp="${esc(v.mrp ?? '')}"
+        data-stock="${v.stock | 0}" aria-pressed="${v.id === first.id}"
+        ${out ? 'disabled aria-label="' + esc(v.label) + ', out of stock"' : ''}
+        >${esc(v.label)}</button>`;
+    }).join('');
+
+    const desc = String(p.description || '').trim();
+    const short = desc.length > 96 ? desc.slice(0, 95).replace(/\s+\S*$/, '') + '…' : desc;
+
+    return `
+    <article class="p-card" data-pid="${esc(p.id)}">
+      <div class="p-shot">
+        ${sold ? '<span class="p-tag sold">Sold out</span>'
+               : (off ? `<span class="p-tag">${off}% off</span>` : '')}
+        ${shots}
+        ${art ? `<div class="p-dots" role="group" aria-label="Change image">
+          <button type="button" class="p-dot is-on" data-shot="a" aria-label="Pack shot"></button>
+          <button type="button" class="p-dot" data-shot="b" aria-label="In the cup"></button>
+        </div>` : ''}
+      </div>
+      <div class="p-body">
+        <h3 class="p-name">${esc((p.name || '').split('·')[0].trim())}</h3>
+        <p class="p-variant">${esc(((p.name || '').split('·')[1] || p.category || '').trim())}</p>
+        <div class="p-sizes" role="group" aria-label="Choose pack size">${sizes}</div>
+        <div class="p-price">
+          <span class="p-now">${rupees(first.price)}</span>
+          ${first.mrp && Number(first.mrp) > Number(first.price)
+            ? `<del class="p-mrp">${rupees(first.mrp)}</del><span class="p-off">Save ${off}%</span>` : ''}
+        </div>
+        <p class="p-stock"></p>
+        ${short ? `<p class="p-note">${esc(short)}</p>` : ''}
+        <button type="button" class="p-add" ${sold ? 'disabled' : ''}>
+          ${sold ? 'Sold out' : `<svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2.2l2.1 10.4a1.6 1.6 0 0 0 1.6 1.3h7.9a1.6 1.6 0 0 0 1.6-1.2L20 7.5H6"/>
+            <circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/>
+          </svg> Add to cart`}
+        </button>
+      </div>
+    </article>`;
+  }
+
+  /* ---- interactions (delegated: cards are replaced wholesale) ------- */
+  function lowStockNote(el, stock) {
+    el.textContent = stock > 0 && stock <= 10 ? `Only ${stock} left` : '';
+  }
+
+  grid.addEventListener('click', (e) => {
+    const dot = e.target.closest('.p-dot');
+    if (dot) {
+      const shot = dot.closest('.p-shot');
+      shot.dataset.shot = dot.dataset.shot;
+      shot.querySelectorAll('.p-dot').forEach((d) =>
+        d.classList.toggle('is-on', d === dot));
+      return;
+    }
+
+    const size = e.target.closest('.p-size');
+    if (size && !size.disabled) {
+      const card = size.closest('.p-card');
+      card.querySelectorAll('.p-size').forEach((b) => {
+        b.classList.toggle('is-active', b === size);
+        b.setAttribute('aria-pressed', String(b === size));
+      });
+      const price = Number(size.dataset.price);
+      const mrp = Number(size.dataset.mrp);
+      const off = mrp > price ? Math.round((1 - price / mrp) * 100) : 0;
+      card.querySelector('.p-price').innerHTML =
+        `<span class="p-now">${rupees(price)}</span>` +
+        (off ? `<del class="p-mrp">${rupees(mrp)}</del><span class="p-off">Save ${off}%</span>` : '');
+      lowStockNote(card.querySelector('.p-stock'), Number(size.dataset.stock));
+      return;
+    }
+
+    const add = e.target.closest('.p-add');
+    if (add && !add.disabled) {
+      const card = add.closest('.p-card');
+      const chosen = card.querySelector('.p-size.is-active');
+      if (!chosen) return;
+      const ok = addToCart(card.dataset.pid, chosen.dataset.vid, 1);
+      if (!ok) { add.textContent = 'Cart is full'; return; }
+      add.classList.add('done');
+      add.innerHTML = 'Added ✓';
+      clearTimeout(add._t);
+      add._t = setTimeout(() => {
+        add.classList.remove('done');
+        add.innerHTML = `<svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 4h2.2l2.1 10.4a1.6 1.6 0 0 0 1.6 1.3h7.9a1.6 1.6 0 0 0 1.6-1.2L20 7.5H6"/>
+          <circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/>
+        </svg> Add to cart`;
+      }, 1800);
+    }
+  });
+
+  /* ---- load -------------------------------------------------------- */
+  const reveal = new IntersectionObserver((entries) => {
+    entries.forEach((en, i) => {
+      if (!en.isIntersecting) return;
+      setTimeout(() => en.target.classList.add('in'), i * 80);
+      reveal.unobserve(en.target);
+    });
+  }, {rootMargin: '0px 0px -8% 0px'});
+
+  /* ---- reviews ------------------------------------------------------
+     Text only, by request. The section stays hidden unless the shop has
+     published real reviews from the admin panel.                      */
+  (async function loadReviews() {
+    const sec = document.getElementById('reviews');
+    const wall = document.getElementById('reviews-wall');
+    if (!sec) return;
+    try {
+      const snap = await getDocs(query(
+        collection(db, 'reviews'), where('published', '==', true)));
+      const list = snap.docs.map((d) => ({id: d.id, ...d.data()}))
+        .sort((a, b) => (a.sortOrder ?? 99) - (b.sortOrder ?? 99) ||
+                        (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
+      if (!list.length) return;           // stays hidden
+
+      const stars = (n) => {
+        const r = Math.max(1, Math.min(5, Number(n) || 5));
+        return `<div class="r-stars" role="img" aria-label="${r} out of 5 stars">` +
+          '★'.repeat(r).split('').map(() => '<span>★</span>').join('') +
+          '☆'.repeat(5 - r).split('').map(() => '<span class="off">★</span>').join('') +
+          '</div>';
+      };
+      wall.innerHTML = list.map((r) => `
+        <figure class="r-card">
+          ${stars(r.rating)}
+          <blockquote class="r-text">${esc(r.text || '')}</blockquote>
+          <figcaption class="r-foot">
+            <span class="r-name">${esc(r.name || '')}</span>
+            ${r.location ? `<span class="r-place">${esc(r.location)}</span>` : ''}
+            ${r.verified ? '<span class="r-verified">Verified buyer</span>' : ''}
+          </figcaption>
+        </figure>`).join('');
+
+      const sub = document.getElementById('reviews-sub');
+      if (sub) {
+        sub.textContent = `${list.length} ${list.length === 1 ? 'review' : 'reviews'} from ` +
+          'people who drink Vento every day. Delivered fresh from Assam and Darjeeling.';
+      }
+      sec.hidden = false;
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    } catch (err) {
+      console.error('reviews load failed', err);   // section simply stays hidden
+    }
+  })();
+
+  (async function load() {
+    try {
+      // Same filter the rules require for a public read.
+      const snap = await getDocs(query(
+        collection(db, 'products'), where('isActive', '==', true)));
+      const products = snap.docs
+        .map((d) => ({id: d.id, ...d.data()}))
+        .sort((a, b) => (a.sortOrder ?? 99) - (b.sortOrder ?? 99) ||
+                        String(a.name).localeCompare(String(b.name)));
+
+      if (!products.length) {
+        grid.innerHTML = '<p class="grid-status">Our collection is being restocked. Please check back shortly.</p>';
+      } else {
+        grid.innerHTML = products.map(cardHTML).join('');
+        grid.querySelectorAll('.p-card').forEach((c) => {
+          reveal.observe(c);
+          const on = c.querySelector('.p-size.is-active');
+          if (on) lowStockNote(c.querySelector('.p-stock'), Number(on.dataset.stock));
+        });
+      }
+    } catch (err) {
+      console.error('catalogue load failed', err);
+      grid.innerHTML = '<p class="grid-status">We couldn\'t load the collection just now. Please refresh to try again.</p>';
+    } finally {
+      grid.setAttribute('aria-busy', 'false');
+      if (window.ScrollTrigger) window.ScrollTrigger.refresh();
+    }
+  })();
+  </script>
+</body>
+</html>

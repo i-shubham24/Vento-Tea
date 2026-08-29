@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { ShoppingBag, ChevronLeft, ChevronRight, Heart } from 'lucide-react';
@@ -27,54 +28,59 @@ export default function TeaProductCard({ product }) {
   };
 
   return (
-    <div className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-vento-cream-dark">
+    <div className="group flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-vento-cream-dark relative">
       {/* Image Gallery */}
-      <div className="relative aspect-square overflow-hidden bg-vento-cream">
+      <Link to={`/product/${product.slug}`} className="relative aspect-[6/5] overflow-hidden bg-vento-cream block">
         <img 
           src={product.images[currentImageIdx]} 
           alt={product.name} 
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
+      </Link>
         
-        {/* Badges */}
-        <div className="absolute top-4 left-4 flex flex-col gap-2">
-          {product.badges.map(badge => (
-            <span key={badge} className="bg-vento-forest text-vento-cream text-xs font-semibold px-3 py-1 rounded-full shadow-md">
-              {badge}
-            </span>
-          ))}
-        </div>
-
-        {/* Wishlist Pill */}
-        <button 
-          onClick={(e) => { e.preventDefault(); toggleWishlist(product.id); }}
-          className="absolute top-4 right-4 bg-white/90 p-2 rounded-full shadow-sm hover:scale-110 transition-transform text-red-500"
-          aria-label="Toggle Wishlist"
-        >
-          <Heart size={20} fill={inWishlist ? "currentColor" : "none"} className={inWishlist ? "text-red-500" : "text-gray-400"} />
-        </button>
-
-        {/* Carousel Controls */}
-        {product.images.length > 1 && (
-          <>
-            <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity">
-              <ChevronLeft size={20} />
-            </button>
-            <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity">
-              <ChevronRight size={20} />
-            </button>
-          </>
+      {/* Badges */}
+      <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none">
+        {product.discount && (
+          <span className="bg-yellow-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm w-max">
+            SAVE {product.discount}%
+          </span>
         )}
+        {product.badges.map(badge => (
+          <span key={badge} className="bg-vento-forest/80 text-vento-cream text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-sm w-max backdrop-blur-sm">
+            {badge}
+          </span>
+        ))}
       </div>
+
+      {/* Wishlist Pill */}
+      <button 
+        onClick={(e) => { e.preventDefault(); toggleWishlist(product.id); }}
+        className="absolute top-4 right-4 bg-white/90 p-2 rounded-full shadow-sm hover:scale-110 transition-transform text-red-500 z-10"
+        aria-label="Toggle Wishlist"
+      >
+        <Heart size={20} fill={inWishlist ? "currentColor" : "none"} className={inWishlist ? "text-red-500" : "text-gray-400"} />
+      </button>
+
+      {/* Carousel Controls */}
+      {product.images.length > 1 && (
+        <>
+          <button onClick={prevImage} className="absolute left-2 top-[35%] -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity z-10">
+            <ChevronLeft size={20} />
+          </button>
+          <button onClick={nextImage} className="absolute right-2 top-[35%] -translate-y-1/2 bg-white/80 p-1.5 rounded-full shadow hover:bg-white text-vento-forest opacity-0 group-hover:opacity-100 transition-opacity z-10">
+            <ChevronRight size={20} />
+          </button>
+        </>
+      )}
 
       {/* Content */}
       <div className="p-6 flex flex-col flex-grow">
-        <div className="mb-4">
-          <h3 className="text-2xl font-serif text-vento-forest mb-1">{product.name}</h3>
-          <p className="text-vento-gold-dark text-sm font-medium">{product.tagline}</p>
-        </div>
+        <Link to={`/product/${product.slug}`} className="mb-4 block hover:opacity-80 transition-opacity">
+          <h3 className="text-2xl font-serif text-vento-forest mb-1 line-clamp-1">{product.name}</h3>
+          <p className="text-vento-gold-dark text-sm font-medium line-clamp-1">{product.tagline}</p>
+        </Link>
         
-        <p className="text-gray-600 text-sm mb-6 flex-grow">{product.description}</p>
+        <p className="text-gray-600 text-sm mb-6 line-clamp-2">{product.description}</p>
 
         {/* Weight Selector */}
         <div className="flex flex-wrap gap-2 mb-6">
@@ -95,8 +101,15 @@ export default function TeaProductCard({ product }) {
 
         {/* Price & Action */}
         <div className="flex items-center justify-between mt-auto">
-          <div className="text-2xl font-semibold text-vento-forest">
-            ₹{selectedWeight.priceInr}
+          <div className="flex flex-col">
+            {product.discount && (
+              <span className="text-sm text-gray-400 line-through">
+                ₹{Math.round(selectedWeight.priceInr / (1 - product.discount / 100))}
+              </span>
+            )}
+            <span className="text-2xl font-semibold text-vento-forest">
+              ₹{selectedWeight.priceInr}
+            </span>
           </div>
           <button 
             onClick={handleAdd}

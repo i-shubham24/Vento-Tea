@@ -1,19 +1,19 @@
+import SEO from '../components/SEO';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import PageBanner from '../components/PageBanner';
 
 export default function Contact() {
   return (
-    <div className="pt-32 pb-20 bg-vento-cream min-h-[80vh]">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className="pb-20 bg-vento-cream min-h-[80vh]">
+      <SEO title="Contact Us" description="Get in touch with the Vento Tea team for support and wholesale inquiries." keywords="contact vento tea, customer support" />
+      <PageBanner 
+        title="Get in Touch"
+        subtitle="Whether you have a question about our blends, your order, or just want to say hello, we're here for you."
+        imagePath="/brand/media_1787991645100.jpg"
+      />
+      <div className="max-w-7xl mx-auto px-4 mt-8">
         
-        <div className="text-center mb-16 mt-8">
-          <h1 className="text-4xl md:text-5xl font-serif text-vento-forest mb-4">Get in Touch</h1>
-          <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
-            Whether you have a question about our blends, your order, or just want to say hello, we're here for you.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mt-8">
           
           {/* Contact Details & Map */}
           <div className="space-y-12">

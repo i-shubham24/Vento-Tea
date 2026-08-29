@@ -1,5 +1,7 @@
+import SEO from '../components/SEO';
 import { Link } from 'react-router-dom';
 import ScrollReveal from '../components/ScrollReveal';
+import PageBanner from '../components/PageBanner';
 import { ArrowRight, Calendar } from 'lucide-react';
 
 export default function Blogs() {
@@ -43,17 +45,16 @@ export default function Blogs() {
   const regularBlogs = blogs.filter(b => !b.featured);
 
   return (
-    <div className="pt-32 pb-24 bg-vento-cream min-h-screen">
+    <div className="pb-24 bg-vento-cream min-h-screen">
+      <SEO title="The Vento Journal" description="Stories, guides, and insights from the world of premium Indian tea." keywords="tea blog, brewing guide, health benefits of tea" />
       
-      <ScrollReveal>
-        <div className="max-w-7xl mx-auto px-4 mb-16 text-center">
-          <h1 className="text-4xl md:text-5xl font-serif text-vento-forest mb-4">The Vento Journal</h1>
-          <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">Stories, guides, and insights from the world of premium Indian tea.</p>
-        </div>
-      </ScrollReveal>
+      <PageBanner 
+        title="The Vento Journal"
+        subtitle="Stories, guides, and insights from the world of premium Indian tea."
+        imagePath="/brand/media_1787991645085.jpg"
+      />
 
-      <div className="max-w-7xl mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 mt-8">
         
         {/* Featured Blog */}
         {featuredBlog && (
