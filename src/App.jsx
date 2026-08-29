@@ -19,6 +19,7 @@ import Checkout from './pages/Checkout';
 import ClickLeaves from './components/ClickLeaves';
 import WishlistSidebar from './components/WishlistSidebar';
 import PromoPopup from './components/PromoPopup';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
       <CartProvider>
         <WishlistProvider>
           <Router>
+            <ScrollToTop />
             <div className="min-h-screen flex flex-col font-sans relative">
               <ClickLeaves />
               <PromoPopup />

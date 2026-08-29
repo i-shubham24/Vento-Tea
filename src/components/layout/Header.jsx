@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useCart } from '../../context/CartContext';
 import { useAuth } from '../../context/AuthContext';
 import { useWishlist } from '../../context/WishlistContext';
@@ -10,22 +10,30 @@ export default function Header() {
   const { user, openAuth } = useAuth();
   const { wishlist, setIsWishlistOpen } = useWishlist();
   const [isScrolled, setIsScrolled] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      // If on the home page, wait until past the 300vh cinematic hero scroll. 
+      // Otherwise, reduce opacity almost immediately (50px) on other pages.
+      const threshold = location.pathname === '/' ? window.innerHeight * 2.8 : 50;
+      setIsScrolled(window.scrollY > threshold);
     };
+    
+    // Check initially in case of page reload halfway down
+    handleScroll();
+    
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <>
       <div className="w-full flex justify-center fixed top-4 z-50 transition-all duration-300">
         <header className={`w-[95%] max-w-7xl backdrop-blur-md rounded-full transition-all duration-300 border ${
           isScrolled 
-            ? 'bg-white/95 border-gray-200 shadow-xl' 
-            : 'bg-white/60 border-white/50 shadow-md hover:bg-white/80'
+            ? 'bg-white/60 border-white/50 shadow-md hover:bg-white/80'
+            : 'bg-white/95 border-gray-200 shadow-xl' 
         }`}>
           <div className="px-6 md:px-8 h-16 md:h-20 flex items-center justify-between">
           
