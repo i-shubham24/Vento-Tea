@@ -34,13 +34,13 @@ export default function GamifiedCart() {
   let rewardKey;
   if (!freeShipUnlocked) {
     rewardKey = 'ship';
-    rewardMessage = <>Add <span className="text-vento-gold-dark font-bold">₹{shipRemaining}</span> more to unlock <span className="font-bold">Free Shipping</span></>;
+    rewardMessage = <span>Add{" "}<span className="text-vento-gold-dark font-bold">{"\u20B9"}{shipRemaining}</span>{" "}more to unlock{" "}<span className="font-bold">Free Shipping</span></span>;
   } else if (!giftUnlocked) {
     rewardKey = 'gift';
-    rewardMessage = <><span className="text-vento-forest font-bold">🎉 Free Shipping unlocked!</span> Add <span className="text-vento-gold-dark font-bold">₹{rewardRemaining}</span> more for a Free Glass Cup &amp; Spices</>;
+    rewardMessage = <span><span className="text-vento-forest font-bold">{"\u{1F389}"} Free Shipping unlocked!</span>{" "}Add{" "}<span className="text-vento-gold-dark font-bold">{"\u20B9"}{rewardRemaining}</span>{" "}more for a Free Glass Cup &amp; Spices</span>;
   } else {
     rewardKey = 'done';
-    rewardMessage = <span className="text-vento-forest font-bold">🎉 You&apos;ve unlocked Free Shipping + a Free Glass Cup &amp; Spices!</span>;
+    rewardMessage = <span className="text-vento-forest font-bold">{"\u{1F389}"} You&apos;ve unlocked Free Shipping + a Free Glass Cup &amp; Spices!</span>;
   }
 
   const handleCheckout = () => {

@@ -20,10 +20,10 @@ export default function CartProgressBar() {
   let rewardMessage;
   if (!freeShipUnlocked) {
     const diff = freeShippingThreshold - subtotal;
-    rewardMessage = <span>Add{" "}<strong className="text-vento-gold-dark">₹{diff}</strong>{" "}more to unlock{" "}<strong>Free Express Shipping!</strong></span>;
+    rewardMessage = <span>Add{" "}<strong className="text-vento-gold-dark">{"\u20B9"}{diff}</strong>{" "}more to unlock{" "}<strong>Free Express Shipping!</strong></span>;
   } else if (!giftUnlocked) {
     const diff = freeGiftThreshold - subtotal;
-    rewardMessage = <span>You got Free Shipping! Add{" "}<strong className="text-vento-gold-dark">₹{diff}</strong>{" "}more for a{" "}<strong>Free Tea Sampler Gift!</strong></span>;
+    rewardMessage = <span>You got Free Shipping! Add{" "}<strong className="text-vento-gold-dark">{"\u20B9"}{diff}</strong>{" "}more for a{" "}<strong>Free Tea Sampler Gift!</strong></span>;
   } else {
     rewardMessage = <span className="flex items-center justify-center gap-2 text-vento-gold-dark"><Sparkles size={18} /> <strong>Amazing! You've unlocked Free Shipping & a Free Gift!</strong></span>;
   }
