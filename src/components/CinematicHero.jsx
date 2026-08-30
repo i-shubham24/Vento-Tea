@@ -28,27 +28,27 @@ export default function CinematicHero() {
   // Scroll hint retires as the journey begins.
   const hintOpacity = useTransform(p, [0.01, 0.035], [1, 0]);
 
-  // Stage 1 — VENTO TEA (visible at rest, departs ~11-16%).
+  // Stage 1 - VENTO TEA (visible at rest, departs ~11-16%)
   const op1 = useTransform(p, [0, 0.11, 0.16], [1, 1, 0]);
   const y1 = useTransform(p, [0.11, 0.16], [0, -70]);
   const scale1 = useTransform(p, [0.11, 0.16], [1, 1.04]);
 
-  // Stage 2 — "Crafted in Every Leaf." word-by-word masked rise (~17-33%).
-  const c2op = useTransform(p, [0.169, 0.17, 0.29, 0.33], [0, 1, 1, 0]);
-  const c2y = useTransform(p, [0.58, 0.65], [0, -60]);
-  const w0 = useTransform(p, [0.35, 0.42], ['118%', '0%'], { ease: easeOut });
-  const w1 = useTransform(p, [0.37, 0.44], ['118%', '0%'], { ease: easeOut });
-  const w2 = useTransform(p, [0.39, 0.46], ['118%', '0%'], { ease: easeOut });
-  const w3 = useTransform(p, [0.41, 0.48], ['118%', '0%'], { ease: easeOut });
+  // Stage 2
+  const c2op = useTransform(p, [0.17, 0.22, 0.29, 0.33], [0, 1, 1, 0]);
+  const c2y = useTransform(p, [0.29, 0.33], [0, -60]);
+  const w0 = useTransform(p, [0.175, 0.220], ['118%', '0%'], { ease: easeOut });
+  const w1 = useTransform(p, [0.184, 0.229], ['118%', '0%'], { ease: easeOut });
+  const w2 = useTransform(p, [0.193, 0.238], ['118%', '0%'], { ease: easeOut });
+  const w3 = useTransform(p, [0.202, 0.247], ['118%', '0%'], { ease: easeOut });
   const words = [w0, w1, w2, w3];
-  const sub2op = useTransform(p, [0.45, 0.52], [0, 1]);
-  const sub2y = useTransform(p, [0.45, 0.52], [26, 0]);
+  const sub2op = useTransform(p, [0.21, 0.245], [0, 1]);
+  const sub2y = useTransform(p, [0.21, 0.245], [26, 0]);
 
-  // Stage 3 — "Directly To Your Cup" scales in + rule draw (~35-50%).
-  const op3 = useTransform(p, [0.68, 0.78, 0.92, 0.97], [0, 1, 1, 0]);
-  const y3 = useTransform(p, [0.92, 0.97], [0, -50]);
-  const scale3 = useTransform(p, [0.68, 0.85], [1.06, 1], { ease: easeOut });
-  const ruleScaleX = useTransform(p, [0.73, 0.81], [0, 1]);
+  // Stage 3
+  const op3 = useTransform(p, [0.35, 0.395, 0.46, 0.50], [0, 1, 1, 0]);
+  const y3 = useTransform(p, [0.46, 0.50], [0, -50]);
+  const scale3 = useTransform(p, [0.35, 0.44], [1.06, 1], { ease: easeOut });
+  const ruleScaleX = useTransform(p, [0.375, 0.415], [0, 1]);
 
   // The film dissolves into the page near the very end.
   
