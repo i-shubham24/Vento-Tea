@@ -18,7 +18,7 @@ export default function Categories() {
       <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
         {categories.map((cat, idx) => (
           <Link to={cat.link} key={idx} className="group flex flex-col items-center">
-            <div className="w-full aspect-square rounded-full overflow-hidden shadow-md border-4 border-vento-cream transition-transform duration-500 group-hover:scale-105 group-hover:border-vento-gold relative mb-4">
+            <div className="w-32 md:w-48 aspect-square mx-auto rounded-full overflow-hidden shadow-md border-4 border-vento-cream transition-transform duration-500 group-hover:scale-105 group-hover:border-vento-gold relative mb-4">
               <div className="absolute inset-0 bg-vento-forest/10 group-hover:bg-transparent transition-colors z-10"></div>
               <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
             </div>

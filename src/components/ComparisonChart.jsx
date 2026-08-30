@@ -12,7 +12,7 @@ export default function ComparisonChart() {
   ];
 
   return (
-    <section className="py-20 px-4 max-w-4xl mx-auto">
+    <section className="py-20 px-4 max-w-3xl mx-auto">
       <div className="text-center mb-12">
         <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="The Vento Difference" />
         <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
@@ -22,7 +22,7 @@ export default function ComparisonChart() {
       <div className="bg-white rounded-3xl shadow-xl border border-vento-cream-dark overflow-hidden">
         
         {/* Table Header */}
-        <div className="grid grid-cols-3 bg-vento-cream-dark p-6 border-b border-gray-200">
+        <div className="grid grid-cols-3 bg-vento-cream-dark p-4 md:p-5 border-b border-gray-200">
           <div className="font-semibold text-gray-500 uppercase tracking-wider text-sm flex items-center">Feature</div>
           <div className="font-serif font-bold text-xl md:text-2xl text-vento-forest text-center flex items-center justify-center gap-2">
             <span className="text-vento-gold">★</span> Vento Tea
@@ -33,7 +33,7 @@ export default function ComparisonChart() {
         {/* Table Body */}
         <div className="divide-y divide-gray-100">
           {comparison.map((item, idx) => (
-            <div key={idx} className="grid grid-cols-3 p-6 items-center hover:bg-gray-50 transition-colors">
+            <div key={idx} className="grid grid-cols-3 p-4 md:p-5 items-center hover:bg-gray-50 transition-colors">
               <div className="font-medium text-vento-forest">{item.feature}</div>
               
               <div className="flex flex-col md:flex-row items-center justify-center gap-3 text-center md:text-left text-green-700 font-semibold bg-green-50 p-3 rounded-xl border border-green-100">

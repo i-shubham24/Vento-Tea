@@ -218,7 +218,7 @@ export default function ProductDetails() {
             <div ref={addToCartRef} className="flex gap-4">
               <button 
                 onClick={handleAddToCart}
-                className="flex-1 bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
+                className="flex-1 bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
               >
                 <ShoppingBag size={18} />
                 Add to cart
@@ -365,7 +365,7 @@ export default function ProductDetails() {
 
               <button 
                 onClick={handleAddToCart}
-                className="bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 shadow-lg flex items-center justify-center gap-2 uppercase tracking-widest text-xs shrink-0"
+                className="bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-xs shrink-0"
               >
                 <ShoppingBag size={14} />
                 <span className="hidden xs:inline">Add to cart</span>

@@ -56,9 +56,9 @@ export default function PromoPopup() {
             {/* Left Image Section */}
             <div className="md:w-1/2 relative bg-vento-cream-dark min-h-[250px] md:min-h-[500px]">
               <img 
-                src="/brand/media_1787991645006.jpg" 
+                src="https://teawebsite-b65ea.web.app/images/web/craft-pickers.webp" 
                 alt="Premium Tea Selection" 
-                className="absolute inset-0 w-full h-full object-cover mix-blend-multiply opacity-90"
+                className="absolute inset-0 w-full h-full object-cover opacity-100"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-vento-forest/80 to-transparent flex items-end p-8">
                 <p className="text-vento-cream font-serif text-2xl drop-shadow-md">
@@ -103,11 +103,11 @@ export default function PromoPopup() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Drop your email" 
-                      className="w-full py-4 px-6 bg-gray-50 border border-gray-200 rounded-full outline-none focus:border-vento-gold focus:ring-4 focus:ring-vento-gold/20 transition-all text-center placeholder:text-gray-400 font-medium text-gray-700"
+                      className="w-full py-3 px-6 bg-white border-2 border-vento-gold/40 rounded-full outline-none hover:border-vento-gold/70 focus:border-vento-gold focus:ring-4 focus:ring-vento-gold/20 transition-all text-center placeholder:text-gray-400 font-medium text-gray-700 shadow-sm"
                     />
                     <button 
                       type="submit"
-                      className="w-full bg-vento-forest hover:bg-vento-forest-light text-vento-gold font-bold tracking-widest py-4 px-6 rounded-full transition-colors shadow-lg shadow-vento-forest/30"
+                      className="w-[60%] mx-auto bg-vento-forest hover:bg-vento-forest-light text-vento-gold font-bold tracking-wider text-xs py-2.5 px-4 rounded-full transition-colors shadow-lg shadow-vento-forest/30"
                     >
                       TRY YOUR LUCK
                     </button>

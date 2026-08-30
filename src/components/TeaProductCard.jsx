@@ -64,23 +64,9 @@ export default function TeaProductCard({ product }) {
           <p className="text-vento-gold-dark text-sm font-medium line-clamp-1">{product.tagline}</p>
         </Link>
         
-        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{product.description}</p>
+        <p className="text-gray-600 text-sm mb-4 line-clamp-1">{product.description}</p>
 
-        {/* Benefit pills — surfaced from real product.features */}
-        {product.features?.length > 0 && (
-          <div className="flex gap-2 mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] mask-image-fade-right pb-1">
-            {product.features.slice(0, 2).map((f) => (
-              <span
-                key={f.title}
-                title={f.desc}
-                className="inline-flex items-center gap-1.5 rounded-full bg-vento-cream border border-vento-gold/40 text-vento-forest text-[11px] font-semibold px-2.5 py-1 whitespace-nowrap shrink-0"
-              >
-                <Leaf size={12} className="text-vento-gold-dark" />
-                {f.title}
-              </span>
-            ))}
-          </div>
-        )}
+        
 
         {/* Weight Selector */}
         <div className="flex gap-2 mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
@@ -113,14 +99,10 @@ export default function TeaProductCard({ product }) {
           </div>
           <button
             onClick={handleAdd}
-            className="group/add relative overflow-hidden flex items-center gap-2 bg-vento-gold text-vento-forest font-semibold py-2.5 px-6 rounded-full"
+            className="flex items-center gap-2 bg-vento-gold text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-bold py-2.5 px-6 rounded-full transition-all duration-300 transform hover:scale-105 hover:shadow-lg active:scale-95"
           >
-            {/* Fill sweep on hover */}
-            <span className="absolute inset-0 bg-vento-forest translate-y-full group-hover/add:translate-y-0 transition-transform duration-300 ease-out"></span>
-            <span className="relative flex items-center gap-2 transition-colors duration-300 group-hover/add:text-vento-cream">
-              <ShoppingBag size={18} />
-              Add
-            </span>
+            <ShoppingBag size={18} />
+            Add
           </button>
         </div>
       </div>

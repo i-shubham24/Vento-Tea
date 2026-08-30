@@ -53,8 +53,8 @@ export default function Header() {
       <div className="w-full flex justify-center fixed top-4 z-50 transition-all duration-300">
         <header className={`w-[95%] max-w-7xl backdrop-blur-md rounded-full transition-all duration-300 border ${
           isScrolled 
-            ? 'bg-white/60 border-white/50 shadow-md hover:bg-white/80'
-            : 'bg-white/95 border-gray-200 shadow-xl' 
+            ? 'bg-vento-forest/80 border-vento-gold/20 shadow-md hover:bg-vento-forest/95'
+            : 'bg-vento-forest border-vento-gold/30 shadow-xl' 
         }`}>
           <div className="flex items-center justify-between px-6 py-3">
           
@@ -72,9 +72,9 @@ export default function Header() {
               { name: 'Blogs', path: '/blogs' },
               { name: 'Contact', path: '/contact' }
             ].map((link) => (
-              <Link key={link.name} to={link.path} className="group relative text-vento-forest hover:text-green-500 font-medium pb-1 transition-colors duration-300">
+              <Link key={link.name} to={link.path} className="group relative text-vento-cream hover:text-vento-gold font-medium pb-1 transition-colors duration-300">
                 {link.name}
-                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-green-500 scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-vento-gold scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
               </Link>
             ))}
           </nav>
@@ -94,9 +94,9 @@ export default function Header() {
                   }}
                   onFocus={() => setShowSearch(true)}
                   placeholder="Search teas..." 
-                  className="bg-white border border-vento-forest/20 text-vento-forest text-sm rounded-full pl-4 pr-10 py-2 outline-none focus:border-vento-forest transition-colors w-40 lg:w-60 placeholder:text-vento-forest/50"
+                  className="bg-white/15 border border-vento-gold/30 text-vento-cream text-sm rounded-full pl-4 pr-10 py-2 outline-none focus:border-vento-gold transition-colors w-40 lg:w-60 placeholder:text-vento-cream/50"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-forest hover:text-green-500 transition-colors">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-cream hover:text-vento-gold transition-colors">
                   <Search size={18} />
                 </button>
               </form>
@@ -105,7 +105,7 @@ export default function Header() {
               {showSearch && searchQuery.length > 1 && (
                 <>
                   <div className="fixed inset-0 z-40" onClick={() => setShowSearch(false)}></div>
-                  <div className="absolute top-full mt-2 w-full bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden z-50 flex flex-col max-h-80">
+                  <div className="absolute top-full mt-2 w-full bg-[#1a2d23] rounded-2xl shadow-xl border border-vento-gold/30 overflow-hidden z-50 flex flex-col max-h-80">
                     {searchResults.length > 0 ? (
                       searchResults.map(product => (
                         <Link 
@@ -115,17 +115,17 @@ export default function Header() {
                             setShowSearch(false);
                             setSearchQuery('');
                           }}
-                          className="flex items-center gap-3 p-3 hover:bg-vento-cream transition-colors border-b border-gray-50 last:border-0"
+                          className="flex items-center gap-3 p-3 hover:bg-[#233d2f] transition-colors border-b border-white/10 last:border-0"
                         >
                           <img src={product.images[0]} alt={product.name} className="w-10 h-10 object-cover rounded-md" />
                           <div>
-                            <p className="text-sm font-semibold text-vento-forest">{product.name}</p>
-                            <p className="text-xs text-gray-500">{product.category}</p>
+                            <p className="text-sm font-semibold text-vento-gold">{product.name}</p>
+                            <p className="text-xs text-vento-cream/70">{product.category}</p>
                           </div>
                         </Link>
                       ))
                     ) : (
-                      <div className="p-4 text-center text-sm text-gray-500">
+                      <div className="p-4 text-center text-sm text-vento-cream/70">
                         No results found for "{searchQuery}"
                       </div>
                     )}
@@ -135,11 +135,11 @@ export default function Header() {
             </div>
 
             {user ? (
-              <Link to="/account" className="p-2 text-vento-forest hover:text-green-500 transition-colors">
+              <Link to="/account" className="p-2 text-vento-cream hover:text-vento-gold transition-colors">
                 <User size={24} />
               </Link>
             ) : (
-              <button onClick={openAuth} className="hidden lg:block text-sm font-semibold text-vento-forest hover:text-green-500 transition-colors mx-2 cursor-pointer">
+              <button onClick={openAuth} className="hidden lg:block text-sm font-semibold text-vento-cream hover:text-vento-gold transition-colors mx-2 cursor-pointer">
                 Login
               </button>
             )}
@@ -158,7 +158,7 @@ export default function Header() {
 
             <button 
               onClick={() => setIsOpen(true)}
-              className="relative p-2 text-vento-forest hover:text-green-500 transition-colors flex items-center"
+              className="relative p-2 text-vento-cream hover:text-vento-gold transition-colors flex items-center"
             >
               <ShoppingBag size={24} />
               {cartCount > 0 && (
@@ -174,7 +174,7 @@ export default function Header() {
               aria-label="Open menu"
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
-              className="lg:hidden p-2 text-vento-forest hover:text-green-500 transition-colors"
+              className="lg:hidden p-2 text-vento-cream hover:text-vento-gold transition-colors"
             >
               <span className="flex flex-col items-end gap-[5px] w-6">
                 <span className="block h-[2px] w-6 bg-current rounded-full"></span>
