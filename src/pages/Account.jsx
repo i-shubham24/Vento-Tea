@@ -12,7 +12,7 @@ export default function Account() {
 
   return (
     <div className="pt-32 pb-20 px-4 max-w-7xl mx-auto min-h-[70vh]">
-      <SEO title="My Account" description="Manage your Vento Tea orders and account details." keywords="my account" />
+      <SEO title="My Account" description="Manage your Vento Tea orders and account details." keywords="my account" noindex />
       <div className="flex justify-between items-center mb-12">
         <div>
           <h1 className="text-4xl font-serif text-vento-forest mb-2">My Account</h1>

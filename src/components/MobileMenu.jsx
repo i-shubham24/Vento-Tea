@@ -91,7 +91,7 @@ export default function MobileMenu({ onClose }) {
           aria-label="Close menu"
           className="p-2 rounded-full hover:bg-white/10 transition-colors"
         >
-          <X size={26} />
+          <X className="hover:rotate-90 transition-transform duration-300" size={26} />
         </button>
       </div>
 

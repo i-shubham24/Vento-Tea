@@ -62,7 +62,7 @@ export default function AuthModal() {
       
       <div className="relative bg-vento-cream w-full max-w-md rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all max-h-[95vh] overflow-hidden">
         <button onClick={handleClose} className="absolute top-4 right-4 p-2 text-gray-400 hover:text-vento-forest transition-colors">
-          <X size={20} />
+          <X className="hover:rotate-90 transition-transform duration-300" size={20} />
         </button>
 
         {!isLogin && (

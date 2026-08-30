@@ -27,7 +27,8 @@ export default function TrackOrder() {
       <SEO 
         title="Track Your Order" 
         description="Track your Vento Tea order status in real-time. Fast, reliable delivery of fresh tea across India." 
-        keywords="track order, vento tea tracking, delivery status" 
+        keywords="track order, vento tea tracking, delivery status"
+        noindex
       />
 
       <PageBanner

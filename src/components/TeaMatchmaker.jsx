@@ -121,7 +121,7 @@ export default function TeaMatchmaker() {
                   onClick={handleClose}
                   className="absolute top-4 right-4 text-vento-cream/70 hover:text-vento-gold transition-colors"
                 >
-                  <X size={24} />
+                  <X className="hover:rotate-90 transition-transform duration-300" size={24} />
                 </button>
                 <Sparkles size={24} className="text-vento-gold mx-auto mb-2 mt-2" />
                 <h3 className="text-xl font-serif text-vento-cream">Find Your Perfect Cup</h3>

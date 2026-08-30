@@ -68,12 +68,12 @@ export default function TeaProductCard({ product }) {
 
         {/* Benefit pills — surfaced from real product.features */}
         {product.features?.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-6">
+          <div className="flex gap-2 mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] mask-image-fade-right pb-1">
             {product.features.slice(0, 2).map((f) => (
               <span
                 key={f.title}
                 title={f.desc}
-                className="inline-flex items-center gap-1.5 rounded-full bg-vento-cream border border-vento-gold/40 text-vento-forest text-[11px] font-semibold px-2.5 py-1"
+                className="inline-flex items-center gap-1.5 rounded-full bg-vento-cream border border-vento-gold/40 text-vento-forest text-[11px] font-semibold px-2.5 py-1 whitespace-nowrap shrink-0"
               >
                 <Leaf size={12} className="text-vento-gold-dark" />
                 {f.title}
@@ -83,12 +83,12 @@ export default function TeaProductCard({ product }) {
         )}
 
         {/* Weight Selector */}
-        <div className="flex flex-wrap gap-2 mb-6">
+        <div className="flex gap-2 mb-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-1">
           {product.weights.map(w => (
             <button
               key={w.grams}
               onClick={(e) => { e.preventDefault(); setSelectedWeight(w); }}
-              className={`px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
+              className={`shrink-0 whitespace-nowrap px-4 py-1.5 rounded-full text-sm font-medium transition-colors border ${
                 selectedWeight.grams === w.grams 
                   ? 'bg-vento-forest text-white border-vento-forest' 
                   : 'bg-white text-vento-forest border-gray-200 hover:border-vento-forest'

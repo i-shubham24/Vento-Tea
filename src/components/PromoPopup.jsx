@@ -50,7 +50,7 @@ export default function PromoPopup() {
               onClick={() => setIsVisible(false)}
               className="absolute top-4 right-4 z-10 w-8 h-8 flex items-center justify-center bg-white/50 hover:bg-white rounded-full text-vento-forest transition-colors shadow-sm"
             >
-              <X size={20} />
+              <X className="hover:rotate-90 transition-transform duration-300" size={20} />
             </button>
 
             {/* Left Image Section */}
