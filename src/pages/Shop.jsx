@@ -13,7 +13,7 @@ export default function Shop() {
   const initialSearch = searchParams.get('search') || '';
   
   const [selectedCategory, setSelectedCategory] = useState('All products');
-  const [sortOption, setSortOption] = useState('New Arrivals');
+  const [sortOption, setSortOption] = useState('Price: Low to High');
   
   const categories = ['All products', 'Everyday Chai', 'Whole Leaf', 'Masala Chai', 'Gift Boxes'];
 
@@ -62,35 +62,32 @@ export default function Shop() {
       />
       <div className="max-w-7xl mx-auto px-4">
         
-        <div className="flex flex-col lg:flex-row gap-8 mt-4">
+        <div className="flex flex-col gap-6 mt-4">
           
-          {/* Sidebar */}
-          <div className="lg:w-64 flex-shrink-0 lg:sticky lg:top-28 lg:self-start h-fit">
-            <h3 className="text-xs font-bold text-vento-gold uppercase tracking-[0.2em] mb-5">Categories</h3>
-            <ul className="space-y-1">
+          {/* Horizontal Categories */}
+          <div className="w-full overflow-hidden">
+            <div className="flex overflow-x-auto gap-3 pb-4 pt-2 px-1 -mx-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories.map(category => {
                 const active = selectedCategory === category;
                 return (
-                  <li key={category}>
-                    <button
-                      onClick={() => setSelectedCategory(category)}
-                      className={`group w-full text-left flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
-                        active
-                          ? 'bg-vento-forest text-vento-cream font-semibold shadow-md'
-                          : 'text-gray-600 hover:bg-vento-forest/10 hover:text-vento-forest'
-                      }`}
-                    >
-                      <span className={`h-4 w-[3px] rounded-full transition-colors ${active ? 'bg-vento-gold' : 'bg-transparent group-hover:bg-vento-gold/50'}`}></span>
-                      {category}
-                    </button>
-                  </li>
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`shrink-0 px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border shadow-sm ${
+                      active
+                        ? 'bg-vento-forest text-vento-cream border-vento-forest'
+                        : 'bg-white text-gray-700 border-vento-gold/30 hover:border-vento-gold hover:text-vento-forest'
+                    }`}
+                  >
+                    {category}
+                  </button>
                 );
               })}
-            </ul>
+            </div>
           </div>
 
           {/* Main Content */}
-          <div className="flex-1">
+          <div className="w-full">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
               <p className="text-sm text-gray-500">{filteredAndSortedProducts.length} products</p>
               
