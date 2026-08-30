@@ -3,7 +3,7 @@ export default function ProcessSection() {
     <section className="py-24 bg-white px-4 md:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-16">
         <div className="w-full md:w-1/2 order-2 md:order-1">
-          <h2 className="text-4xl md:text-5xl font-serif text-vento-forest mb-6">Pure Leaves. Rich Aroma.</h2>
+          <h2 className="text-4xl md:text-5xl font-serif text-vento-forest mb-6">How We Make Your Tea</h2>
           <div className="w-20 h-1 bg-vento-gold mb-8"></div>
           
           <div className="space-y-6">

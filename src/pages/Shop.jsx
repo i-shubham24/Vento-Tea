@@ -64,8 +64,22 @@ export default function Shop() {
         
         <div className="flex flex-col gap-6 mt-4">
           
-          {/* Horizontal Categories */}
-          <div className="w-full overflow-hidden">
+          {/* Mobile Categories Dropdown */}
+          <div className="md:hidden relative w-full mb-2">
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="w-full appearance-none bg-white border border-vento-gold/30 text-vento-forest py-3 pl-4 pr-10 rounded-xl outline-none focus:border-vento-forest cursor-pointer font-semibold shadow-sm"
+            >
+              {categories.map(category => (
+                <option key={category} value={category}>{category}</option>
+              ))}
+            </select>
+            <ChevronDown size={18} className="absolute right-4 top-1/2 -translate-y-1/2 text-vento-gold pointer-events-none" />
+          </div>
+
+          {/* Desktop Horizontal Categories */}
+          <div className="hidden md:block w-full overflow-hidden">
             <div className="flex overflow-x-auto gap-3 pb-4 pt-2 px-1 -mx-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {categories.map(category => {
                 const active = selectedCategory === category;

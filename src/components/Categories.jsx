@@ -11,7 +11,7 @@ export default function Categories() {
   return (
     <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-12">
-        <h2 className="text-4xl font-serif text-vento-forest mb-4">Browse by Category</h2>
+        <h2 className="text-4xl font-serif text-vento-forest mb-4">Shop by Category</h2>
         <div className="w-20 h-1 bg-vento-gold mx-auto"></div>
       </div>
       

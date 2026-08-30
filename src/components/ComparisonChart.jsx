@@ -14,7 +14,7 @@ export default function ComparisonChart() {
   return (
     <section className="py-20 px-4 max-w-3xl mx-auto">
       <div className="text-center mb-12">
-        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="The Vento Difference" />
+        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="Why Choose Vento" />
         <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
         <p className="text-gray-600">See why connoisseurs choose Vento over ordinary tea brands.</p>
       </div>

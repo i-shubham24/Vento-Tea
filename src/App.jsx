@@ -1,6 +1,7 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { MotionConfig } from 'framer-motion';
+import { MotionConfig, AnimatePresence } from 'framer-motion';
+import PageTransition from './components/PageTransition';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { WishlistProvider } from './context/WishlistContext';
@@ -33,6 +34,34 @@ import PromoPopup from './components/PromoPopup';
 import ScrollToTop from './components/ScrollToTop';
 import ScrollProgress from './components/ScrollProgress';
 
+function AnimatedRoutes() {
+  const location = useLocation();
+  return (
+    <AnimatePresence mode="wait">
+      <PageTransition key={location.pathname}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/shop" element={<Shop />} />
+          <Route path="/product/:slug" element={<ProductDetails />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/wholesale" element={<WholesalePage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/reviews" element={<Reviews />} />
+          <Route path="/track-order" element={<TrackOrder />} />
+          <Route path="/return-policy" element={<Policies type="return" />} />
+          <Route path="/refund-policy" element={<Policies type="refund" />} />
+          <Route path="/terms-of-use" element={<Policies type="terms" />} />
+          <Route path="/privacy-policy" element={<Policies type="privacy" />} />
+        </Routes>
+      </PageTransition>
+    </AnimatePresence>
+  );
+}
+
 function App() {
   return (
     <HelmetProvider>
@@ -51,24 +80,7 @@ function App() {
                 <PromoPopup />
                 <Header />
                 <main className="flex-grow">
-                  <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/shop" element={<Shop />} />
-                    <Route path="/product/:slug" element={<ProductDetails />} />
-                    <Route path="/account" element={<Account />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/blogs" element={<Blogs />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/wholesale" element={<WholesalePage />} />
-                    <Route path="/cart" element={<CartPage />} />
-                    <Route path="/checkout" element={<Checkout />} />
-                    <Route path="/reviews" element={<Reviews />} />
-                    <Route path="/track-order" element={<TrackOrder />} />
-                    <Route path="/return-policy" element={<Policies type="return" />} />
-                    <Route path="/refund-policy" element={<Policies type="refund" />} />
-                    <Route path="/terms-of-use" element={<Policies type="terms" />} />
-                    <Route path="/privacy-policy" element={<Policies type="privacy" />} />
-                  </Routes>
+                  <AnimatedRoutes />
                 </main>
                 <Footer />
                 

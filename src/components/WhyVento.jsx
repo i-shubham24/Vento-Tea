@@ -27,7 +27,7 @@ export default function WhyVento() {
           
           <div className="md:col-span-1 text-center md:text-left border-b md:border-b-0 md:border-r border-gray-200 pb-12 md:pb-0 md:pr-8">
             <h2 className="text-3xl md:text-4xl font-serif text-vento-forest mb-4 leading-tight">
-              Why Vento
+              Why Choose Vento
             </h2>
             <p className="text-gray-600 text-sm leading-relaxed">
               Experience the unmatched quality of India's finest tea, curated with passion.

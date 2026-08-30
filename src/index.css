@@ -3,11 +3,15 @@
 @theme {
   --color-vento-forest: #0A2A1B;
   --color-vento-forest-light: #1a3c34;
+  --color-vento-forest-muted: #143328;
   --color-vento-cream: #F9F7F2;
   --color-vento-cream-dark: #F5EFE6;
+  --color-vento-stone: #EDE8E0;
   --color-vento-gold: #C5A059;
   --color-vento-gold-dark: #D4AF37;
   --color-vento-amber: #b45309;
+  --color-vento-terracotta: #C67A3E;
+  --color-vento-sage: #8B9A7E;
   
   /* Cormorant — The Showstopper: hero headlines, big section titles, pull quotes */
   --font-serif: "Cormorant", Georgia, serif;
@@ -21,12 +25,21 @@
 
 @layer base {
   body {
-    @apply font-sans bg-vento-cream text-vento-forest;
+    @apply font-sans bg-vento-cream text-vento-forest antialiased;
+    font-size: 16px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
   }
 
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
   }
+
+  h1 { font-size: clamp(2.75rem, 6vw, 4.5rem); }
+  h2 { font-size: clamp(1.875rem, 4vw, 3rem); }
+  h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
 
   /* Paragraphs carry the storytelling voice by default.
      Any element given a font-* utility (font-sans / font-serif) still wins,
@@ -120,5 +133,21 @@
 .hero-grain {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
+}
+
+/* Tier 3 — Accessibility: keyboard focus visibility */
+*:focus-visible {
+  outline: 2px solid var(--color-vento-gold);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--color-vento-gold);
+  outline-offset: 3px;
+}
+/* Remove default blue ring, replace with gold */
+*:focus:not(:focus-visible) {
+  outline: none;
 }
 

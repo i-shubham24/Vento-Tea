@@ -17,6 +17,9 @@ import DeliveryBanner from '../components/DeliveryBanner';
 import ScrollReveal from '../components/ScrollReveal';
 import WhyVento from '../components/WhyVento';
 import WholesaleBanner from '../components/WholesaleBanner';
+import TodaysDeal from '../components/TodaysDeal';
+import LivePurchaseToast from '../components/LivePurchaseToast';
+import TrustSignals from '../components/TrustSignals';
 
 export default function Home() {
   const localBusinessSchema = {
@@ -46,6 +49,7 @@ export default function Home() {
       />
       <CinematicHero />
       <Marquee />
+      <LivePurchaseToast />
 
       <ScrollReveal>
         <Categories />
@@ -58,6 +62,10 @@ export default function Home() {
           </div>
           <ProductCatalog limit={4} />
         </div>
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <TodaysDeal />
       </ScrollReveal>
 
       <ScrollReveal>
@@ -107,6 +115,8 @@ export default function Home() {
       <ScrollReveal>
         <TrustStrip />
       </ScrollReveal>
+
+      <TrustSignals />
 
       <ScrollReveal>
         <DeliveryBanner />

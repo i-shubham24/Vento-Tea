@@ -8,16 +8,53 @@ export default function PromoPopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    // Show randomly between 10 to 20 seconds after component mounts (load/refresh)
-    const minTime = 10000; // 10 seconds
-    const maxTime = 20000; // 20 seconds
-    const randomDelay = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime);
+    // Show 20-30s after first user interactivity (scroll/click/mousemove/keydown/touch)
+    // If user never interacts, fallback to 35s after mount
+    const minTime = 20000;
+    const maxTime = 30000;
+    let interacted = false;
+    let timer = null;
 
-    const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, randomDelay);
+    const schedule = () => {
+      if (timer) return;
+      const delay = Math.floor(Math.random() * (maxTime - minTime + 1) + minTime);
+      timer = setTimeout(() => setIsVisible(true), delay);
+    };
 
-    return () => clearTimeout(timer);
+    const onInteract = () => {
+      if (interacted) return;
+      interacted = true;
+      schedule();
+      window.removeEventListener('scroll', onInteract);
+      window.removeEventListener('click', onInteract);
+      window.removeEventListener('mousemove', onInteract);
+      window.removeEventListener('keydown', onInteract);
+      window.removeEventListener('touchstart', onInteract);
+    };
+
+    window.addEventListener('scroll', onInteract, { passive: true });
+    window.addEventListener('click', onInteract);
+    window.addEventListener('mousemove', onInteract);
+    window.addEventListener('keydown', onInteract);
+    window.addEventListener('touchstart', onInteract, { passive: true });
+
+    // Fallback: show even without interaction after 35s
+    const fallback = setTimeout(() => {
+      if (!interacted) {
+        interacted = true;
+        schedule();
+      }
+    }, 35000);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      clearTimeout(fallback);
+      window.removeEventListener('scroll', onInteract);
+      window.removeEventListener('click', onInteract);
+      window.removeEventListener('mousemove', onInteract);
+      window.removeEventListener('keydown', onInteract);
+      window.removeEventListener('touchstart', onInteract);
+    };
   }, []);
 
   if (!isVisible) return null;

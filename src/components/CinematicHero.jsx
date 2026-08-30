@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { motion, useMotionValue, useTransform, useReducedMotion, easeOut } from 'framer-motion';
 
 // The exact hero film + poster from the previous Vento site, self-hosted so the
@@ -19,6 +19,19 @@ export default function CinematicHero() {
   const containerRef = useRef(null);
   const videoRef = useRef(null);
   const reduce = useReducedMotion();
+  const REVIEWS = [
+    { text: '“Aromatic and truly kadak — the best chai we’ve had at home.”', author: '— Priya S., Mumbai • Verified buyer', rating: '4.8' },
+    { text: '“Whole leaves unfurl beautifully. Malt and honey in every cup.”', author: '— Arjun K., Delhi • Verified buyer', rating: '4.9' },
+    { text: '“Cardamom opens first, then ginger bites gently. Perfect masala.”', author: '— Neha R., Pune • Verified buyer', rating: '4.8' },
+    { text: '“Bold, dark, unapologetic. My morning ritual now.”', author: '— Rohit M., Bangalore • Verified buyer', rating: '4.9' },
+  ];
+  const [review] = useState(() => REVIEWS[Math.floor(Math.random() * REVIEWS.length)]);
+  const [showReview, setShowReview] = useState(false);
+  useEffect(() => {
+    const show = setTimeout(() => setShowReview(true), 2000);
+    const hide = setTimeout(() => setShowReview(false), 5000); // visible ~3s, one per reload
+    return () => { clearTimeout(show); clearTimeout(hide); };
+  }, []);
 
   // Progress (0..1) across the 800vh hero, computed manually from the
   // container's own position — framer's target-based useScroll was
@@ -163,6 +176,19 @@ export default function CinematicHero() {
             </p>
           </motion.div>
         </div>
+
+        {/* Tier 4: Floating review snippet */}
+        <motion.div
+          initial={{ opacity: 0, y: 20, scale: 0.96 }}
+          animate={{ opacity: showReview ? 1 : 0, y: showReview ? 0 : 20, scale: showReview ? 1 : 0.96 }}
+          transition={{ duration: 0.6, ease: easeOut }}
+          className="absolute bottom-20 right-4 md:right-8 lg:right-12 bg-white/95 backdrop-blur-md rounded-2xl shadow-xl border border-vento-gold/20 p-4 max-w-[280px] hidden md:block"
+          style={{ pointerEvents: 'none' }}
+        >
+          <div className="flex items-center gap-1 text-vento-gold text-sm mb-1">★★★★★ <span className="text-vento-forest font-bold text-xs ml-1">{review.rating}</span></div>
+          <p className="text-sm text-vento-forest leading-snug font-story italic">{review.text}</p>
+          <p className="text-[11px] text-gray-500 mt-1 font-sans">{review.author}</p>
+        </motion.div>
 
         {/* ---- Stage 2: Crafted in Every Leaf (word by word) ---- */}
         <div className="absolute inset-0 flex items-center justify-center text-center px-[6vw] pointer-events-none">

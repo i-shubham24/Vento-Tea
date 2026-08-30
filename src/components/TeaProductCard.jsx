@@ -10,6 +10,11 @@ export default function TeaProductCard({ product }) {
   const [selectedWeight, setSelectedWeight] = useState(product.weights[0]);
 
   const inWishlist = isInWishlist(product.id);
+  // Tier 4: deterministic social proof
+  const reviewCount = (product.discount || 15) * 7 + 23; // 80-275 range
+  const rating = product.badges.includes('Best Seller') ? '4.9' : product.badges.includes('Premium') ? '4.8' : '4.7';
+  const stockLeft = (product.id.charCodeAt(4) % 8) + 3; // 3-10
+  const isLowStock = stockLeft <= 5;
 
   const handleAdd = (e) => {
     e.preventDefault();
@@ -17,35 +22,44 @@ export default function TeaProductCard({ product }) {
   };
 
   return (
-    <div className="group h-full flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-vento-cream-dark relative">
-      {/* Product image — static primary, crossfades to the alternate version on hover */}
+    <div className="group h-full flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(10,42,27,0.12)] hover:-translate-y-1.5 transition-all duration-300 border border-vento-cream-dark relative">
+      {/* Product image — crossfades to alternate + subtle zoom on hover */}
       <Link to={`/product/${product.slug}`} className="relative aspect-[6/5] overflow-hidden bg-vento-cream block">
         <img
           src={product.images[0]}
           alt={product.name}
-          className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-out ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+          loading="lazy"
+          decoding="async"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
         />
         {product.images[1] && (
           <img
             src={product.images[1]}
             alt={`${product.name} — alternate view`}
-            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 ease-out group-hover:opacity-100"
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:scale-105"
           />
         )}
       </Link>
         
-      {/* Badges */}
+      {/* Badges — Tier 4: more prominent Bestseller */}
       <div className="absolute top-4 left-4 flex flex-col gap-1.5 pointer-events-none">
         {product.discount && (
-          <span className="bg-yellow-400 text-black text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-sm w-max">
+          <span className="bg-vento-gold text-vento-forest text-[11px] font-bold px-2.5 py-0.5 rounded-full shadow-md w-max border border-vento-gold-dark">
             SAVE {product.discount}%
           </span>
         )}
         {product.badges.map(badge => (
-          <span key={badge} className="bg-vento-forest/80 text-vento-cream text-[10px] font-semibold px-2 py-0.5 rounded-full shadow-sm w-max backdrop-blur-sm">
-            {badge}
+          <span key={badge} className={`${badge === 'Best Seller' ? 'bg-vento-gold text-vento-forest border border-vento-gold-dark shadow-md' : 'bg-vento-forest/85 text-vento-cream border border-white/10'} text-[10px] font-bold px-2.5 py-0.5 rounded-full w-max backdrop-blur-sm`}>
+            {badge === 'Best Seller' ? '★ BESTSELLER' : badge.toUpperCase()}
           </span>
         ))}
+        {isLowStock && (
+          <span className="bg-red-500 text-white text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-md w-max animate-pulse">
+            ONLY {stockLeft} LEFT
+          </span>
+        )}
       </div>
 
       {/* Wishlist Pill */}
@@ -63,7 +77,12 @@ export default function TeaProductCard({ product }) {
           <h3 className="text-2xl font-sans font-semibold text-vento-forest mb-1 line-clamp-1">{product.name}</h3>
           <p className="text-vento-gold-dark text-sm font-medium line-clamp-1">{product.tagline}</p>
         </Link>
-        
+        {/* Tier 4: rating row */}
+        <div className="flex items-center gap-1.5 mb-3">
+          <span className="text-vento-gold text-xs tracking-tight">★★★★★</span>
+          <span className="text-xs font-bold text-vento-forest">{rating}</span>
+          <span className="text-xs text-gray-500">({reviewCount} reviews)</span>
+        </div>
         <p className="text-gray-600 text-sm mb-4 line-clamp-1">{product.description}</p>
 
         

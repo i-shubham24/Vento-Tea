@@ -5,7 +5,7 @@ export default function BrewingGuide() {
     <section className="bg-vento-cream-dark py-20 px-4 md:px-8">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
         <div className="w-full md:w-1/2">
-          <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-6" text="The Perfect Brew" />
+          <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-6" text="How to Brew" />
           <div className="w-20 h-1 bg-vento-gold mb-6"></div>
           <p className="text-gray-600 mb-8 text-lg">
             Brewing tea is an art. Follow these simple steps to unlock the full flavor and aroma of your Vento leaves.
