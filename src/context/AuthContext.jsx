@@ -17,9 +17,9 @@ export function AuthProvider({ children }) {
     if (password && email.includes('@')) { setUser({ email, name: email.split('@')[0], role:'customer', verified:true }); setIsAuthOpen(false); return 'customer'; }
     return null;
   };
-  const verifyOtp = (phone, otp, name) => {
+  const verifyOtp = (phone, otp, name, email) => {
     if (otp.length === 6) {
-      setUser({ phone, email:`${phone}@vento-tea.com`, name: name || 'Valued Customer', role:'customer', verified: true });
+      setUser({ phone, email: email || `${phone}@vento-tea.com`, name: name || 'Valued Customer', role:'customer', verified: true });
       setIsAuthOpen(false);
       return true;
     }

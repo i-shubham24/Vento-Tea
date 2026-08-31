@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-export default function FarmerPromise() {
+export default function FarmerPromise({ hideCta = false }) {
   return (
     <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div className="w-full md:w-1/2">
@@ -37,9 +37,11 @@ export default function FarmerPromise() {
             <p className="pl-5 text-sm text-gray-500">Every purchase sustains tea-growing families and preserves generations of expertise.</p>
           </li>
         </ul>
-        <Link to="/about" className="inline-block border-2 border-vento-forest text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-semibold py-3 px-8 rounded-full transition-colors">
-          Read Our Story
-        </Link>
+        {!hideCta && (
+          <Link to="/about" className="inline-block border-2 border-vento-forest text-vento-forest hover:bg-vento-forest hover:text-vento-cream font-semibold py-3 px-8 rounded-full transition-all hover:scale-105 active:scale-95 shadow-sm hover:shadow-md">
+            Read Our Story
+          </Link>
+        )}
       </div>
     </section>
   );

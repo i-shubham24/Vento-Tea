@@ -130,7 +130,7 @@ export default function Shop() {
                 No products found matching your criteria.
               </div>
             ) : (
-              <Stagger key={`${selectedCategory}-${sortOption}`} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <Stagger key={`${selectedCategory}-${sortOption}`} className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                 {filteredAndSortedProducts.map(product => (
                   <StaggerItem key={product.id} className="h-full">
                     <TeaProductCard product={product} />

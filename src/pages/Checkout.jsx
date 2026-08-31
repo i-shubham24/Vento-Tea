@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 import { useOrder } from '../context/OrderContext';
 import { Link, useNavigate } from 'react-router-dom';
 import { MapPin, Truck, CreditCard, ShieldCheck } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 export default function Checkout() {
   const { items, subtotal, clearCart } = useCart();

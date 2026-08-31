@@ -34,7 +34,7 @@ export default function About() {
       </ScrollReveal>
 
       <ScrollReveal>
-        <FarmerPromise />
+        <FarmerPromise hideCta />
       </ScrollReveal>
 
       <NewsletterBanner />

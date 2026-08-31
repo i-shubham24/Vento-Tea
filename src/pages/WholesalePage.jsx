@@ -159,7 +159,7 @@ export default function WholesalePage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Email Address" 
-                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    className="w-full mb-4 p-4 border border-gray-300 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-white text-gray-900 placeholder-gray-500 font-medium transition-all rounded-full"
                     required
                   />
                   <input 
@@ -167,7 +167,7 @@ export default function WholesalePage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="Password" 
-                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    className="w-full mb-4 p-4 border border-gray-300 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-white text-gray-900 placeholder-gray-500 font-medium transition-all rounded-full"
                     required
                   />
                   
@@ -177,7 +177,7 @@ export default function WholesalePage() {
                   
                   <button 
                     type="submit"
-                    className="w-full bg-vento-forest text-vento-cream py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                    className="w-1/2 min-w-[200px] mx-auto block bg-vento-forest text-vento-cream py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
                   >
                     Log In
                   </button>
@@ -188,10 +188,10 @@ export default function WholesalePage() {
                     New to Vento Wholesale? Apply for an account below.
                   </p>
                   
-                  <div className="flex flex-col sm:flex-row gap-4">
+                  <div className="flex justify-center">
                     <button 
                       onClick={() => setIsLoginView(false)}
-                      className="w-full border-2 border-vento-gold text-vento-forest py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 rounded-full"
+                      className="w-1/2 min-w-[200px] border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 rounded-full"
                     >
                       Create Account
                     </button>
@@ -211,7 +211,7 @@ export default function WholesalePage() {
                     value={bizName}
                     onChange={(e) => setBizName(e.target.value)}
                     placeholder="Business Name" 
-                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    className="w-full mb-4 p-4 border border-gray-300 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-white text-gray-900 placeholder-gray-500 font-medium transition-all rounded-full"
                     required
                   />
                   <input 
@@ -219,7 +219,7 @@ export default function WholesalePage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Business Email" 
-                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    className="w-full mb-4 p-4 border border-gray-300 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-white text-gray-900 placeholder-gray-500 font-medium transition-all rounded-full"
                     required
                   />
                   <input 
@@ -227,13 +227,13 @@ export default function WholesalePage() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="Phone Number" 
-                    className="w-full mb-6 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    className="w-full mb-6 p-4 border border-gray-300 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-white text-gray-900 placeholder-gray-500 font-medium transition-all rounded-full"
                     required
                   />
                   
                   <button 
                     type="submit"
-                    className="w-full bg-vento-forest text-vento-cream py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                    className="w-1/2 min-w-[200px] mx-auto block bg-vento-forest text-vento-cream py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
                   >
                     Submit Application
                   </button>
