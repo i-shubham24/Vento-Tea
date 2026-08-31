@@ -135,7 +135,7 @@ export default function AdminPortal(){
                       {orders.slice(0,5).map(o=>(
                         <tr key={o.id} className="border-t"><td className="py-3 font-mono text-xs">{o.id}</td><td>{o.customer.name}</td><td>{new Date(o.createdAt).toLocaleDateString()}</td><td><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{o.orderStatus.toUpperCase()}</span></td></tr>
                       ))}
-                      {orders.length===0 && <tr><td colSpan={4} className="py-6 text-center text-gray-400 text-sm">No orders yet. Place an order as demo@vento.com.</td></tr>}
+                      {orders.length===0 && <tr><td colSpan={4} className="py-6 text-center text-gray-400 text-sm">No orders yet. Place an order to see it here.</td></tr>}
                     </tbody>
                   </table>
                 </div>

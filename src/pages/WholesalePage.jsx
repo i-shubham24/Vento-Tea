@@ -3,14 +3,21 @@ import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import { motion } from 'framer-motion';
 import { Leaf, ArrowRight } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 export default function WholesalePage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogin = (e) => {
     e.preventDefault();
-    alert("Logging you in... (Demo)");
+    const role = login(email, password);
+    if (role === 'admin') navigate('/admin');
+    else if (role) navigate('/shop');
+    else alert('Invalid credentials. For wholesale access, use registered email.');
   };
 
   const scrollToSection = (id) => {

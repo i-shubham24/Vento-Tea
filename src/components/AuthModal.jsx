@@ -86,7 +86,7 @@ export default function AuthModal() {
         {step === 1 ? (
           <>
           <form onSubmit={handleEmailLogin} className="space-y-3 mb-4 pb-4 border-b border-gray-100">
-            <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Email + Password (demo/admin)</p>
+            <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Email + Password</p>
             <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
             <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
             <button type="submit" className="w-full bg-vento-forest text-white font-bold py-2 rounded-full text-sm transition-all hover:scale-105 active:scale-95 hover:bg-vento-forest-light shadow-md">Login with Email</button>

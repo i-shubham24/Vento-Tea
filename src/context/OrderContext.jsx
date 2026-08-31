@@ -3,8 +3,6 @@ import { createContext, useContext, useState, useEffect } from 'react';
 const OrderContext = createContext();
 const STORAGE_KEY = 'vento_orders';
 
-// Demo credentials: demo@vento.com / VentoDemo@2026
-// Admin: admin@vento.com / VentoAdmin@2026
 // Status flow: pending → confirmed → packed → shipped → delivered → review
 export const ORDER_STATUSES = ['pending','confirmed','packed','shipped','delivered','cancelled'];
 
@@ -23,7 +21,7 @@ export function OrderProvider({ children }){
     const courier = ['Delhivery','Shiprocket','BlueDart','DTDC'][Math.floor(Math.random()*4)];
     const order = {
       id, awb, courier,
-      customer: { name: user?.name || 'Demo Customer', email: user?.email || 'demo@vento.com', phone: user?.phone || '9999999999' },
+      customer: { name: user?.name || 'Guest User', email: user?.email || 'guest@example.com', phone: user?.phone || '9999999999' },
       items: items.map(i=>({ productId:i.productId, name:i.product.name, image:i.product.images[0], weight:i.weight, quantity:i.quantity, unitPrice:i.weight.priceInr })),
       subtotal, coupon, shippingAddress, paymentMode,
       paymentStatus: 'pending',
