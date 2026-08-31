@@ -4,7 +4,7 @@ import { mockProducts } from '../data/mockData';
 import { Stagger, StaggerItem } from './Stagger';
 import SplitReveal from './SplitReveal';
 
-export default function ProductCatalog({ limit }) {
+export default function ProductCatalog({ limit, singleImage = false, eager = false }) {
   const displayProducts = limit ? mockProducts.slice(0, limit) : mockProducts;
 
   return (
@@ -18,9 +18,9 @@ export default function ProductCatalog({ limit }) {
       </div>
 
       <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
-        {displayProducts.map(product => (
+        {displayProducts.map((product, idx) => (
           <StaggerItem key={product.id} className="h-full">
-            <TeaProductCard product={product} />
+            <TeaProductCard product={product} singleImage={singleImage} eager={eager && idx < 2} />
           </StaggerItem>
         ))}
       </Stagger>

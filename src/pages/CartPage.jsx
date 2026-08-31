@@ -1,20 +1,45 @@
 import SEO from '../components/SEO';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
-import { Minus, Plus, Trash2, Tag } from 'lucide-react';
+import { Minus, Plus, Trash2, Tag, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 import CartProgressBar from '../components/CartProgressBar';
+
+const COUPONS = [
+  { code: 'NEWUSER15', label: 'Save ₹75', desc: 'Best deal', discount: 75, min: 299 },
+  { code: 'VENTO10', label: 'Save ₹50', desc: 'On orders ₹499+', discount: 50, min: 499 },
+  { code: 'FREESHIP', label: 'Free Ship', desc: 'Extra free delivery', discount: 40, min: 199 },
+  { code: 'FESTIVE20', label: 'Save 20%', desc: 'Up to ₹120', discount: 120, min: 699 },
+  { code: 'WELCOME5', label: 'Save ₹30', desc: 'First order', discount: 30, min: 199 },
+];
 
 export default function CartPage() {
   const { items, updateQty, removeItem, subtotal, cartCount } = useCart();
   const { user, openAuth } = useAuth();
+  const [couponInput, setCouponInput] = useState('');
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [showCoupons, setShowCoupons] = useState(false);
+  const [couponError, setCouponError] = useState('');
 
-  const totalMRP = items.reduce((sum, item) => sum + (Math.round(item.weight.priceInr * 1.3) * item.quantity), 0); // Mock 30% markup for MRP
+  const totalMRP = items.reduce((sum, item) => sum + (Math.round(item.weight.priceInr / (1 - (item.product.discount || 0)/100)) * item.quantity), 0);
   const discountOnMRP = totalMRP - subtotal;
-  const promoDiscount = 50; // Mock promo discount
-  const shipping = 0; // Free shipping
-  const finalTotal = subtotal - promoDiscount + shipping;
+  const promoDiscount = appliedCoupon ? appliedCoupon.discount : 0;
+  const shipping = 0;
+  const finalTotal = Math.max(0, subtotal - promoDiscount + shipping);
   const totalSavings = discountOnMRP + promoDiscount;
+
+  const handleApply = (code) => {
+    const upper = code.trim().toUpperCase();
+    const found = COUPONS.find(c => c.code === upper);
+    if (!found) { setCouponError('Invalid coupon'); return; }
+    if (subtotal < found.min) { setCouponError(`Min order ₹${found.min} required`); return; }
+    setAppliedCoupon(found);
+    setCouponInput(upper);
+    setCouponError('');
+    setShowCoupons(false);
+  };
+  const handleRemoveCoupon = () => { setAppliedCoupon(null); setCouponInput(''); setCouponError(''); };
 
   if (items.length === 0) {
     return (
@@ -89,36 +114,59 @@ export default function CartPage() {
             <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 sticky top-28">
               <h2 className="text-xl font-serif text-vento-forest font-semibold mb-6">Order summary</h2>
 
-              {/* Coupon Highlight */}
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="bg-vento-cream px-3 py-1 rounded border border-vento-gold/30 text-xs font-bold text-vento-forest">
-                    NEWUSER15
+              {/* Coupon Highlight — only interactive, no auto-apply */}
+              {appliedCoupon ? (
+                <div className="bg-green-50 border border-green-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white px-3 py-1 rounded border border-green-300 text-xs font-bold text-green-700">{appliedCoupon.code}</div>
+                    <div>
+                      <p className="font-semibold text-sm text-green-700">Save ₹{appliedCoupon.discount} applied</p>
+                      <p className="text-xs text-green-600">{appliedCoupon.desc}</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="font-semibold text-sm text-vento-forest">Save ₹75</p>
-                    <p className="text-xs text-gray-500">Best deal</p>
-                  </div>
+                  <button onClick={handleRemoveCoupon} className="text-xs font-bold px-3 py-1.5 rounded-full bg-white border border-green-300 text-green-700 hover:bg-green-100 flex items-center gap-1"><X size={12} />Remove</button>
                 </div>
-                <button className="bg-vento-forest text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-vento-forest-light">
-                  APPLY
-                </button>
-              </div>
+              ) : (
+                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-vento-cream px-3 py-1 rounded border border-vento-gold/30 text-xs font-bold text-vento-forest">NEWUSER15</div>
+                    <div>
+                      <p className="font-semibold text-sm text-vento-forest">Save ₹75</p>
+                      <p className="text-xs text-gray-500">Best deal</p>
+                    </div>
+                  </div>
+                  <button onClick={() => handleApply('NEWUSER15')} className="bg-vento-forest text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-vento-forest-light">APPLY</button>
+                </div>
+              )}
 
               {/* Coupon Input */}
-              <div className="flex gap-2 mb-4">
+              <div className="flex gap-2 mb-2">
                 <input 
                   type="text" 
+                  value={couponInput}
+                  onChange={(e) => { setCouponInput(e.target.value.toUpperCase()); setCouponError(''); }}
                   placeholder="ENTER COUPON CODE" 
                   className="flex-1 border border-gray-200 rounded-full px-4 text-sm outline-none focus:border-vento-gold uppercase"
                 />
-                <button className="border border-gray-200 text-vento-forest font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors text-sm">
-                  Apply
-                </button>
+                <button onClick={() => handleApply(couponInput)} className="border border-gray-200 text-vento-forest font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors text-sm">Apply</button>
               </div>
-              <button className="text-vento-forest text-sm font-semibold flex items-center gap-2 mb-8 hover:underline">
-                <Tag size={16} /> View all available coupons (5) &rarr;
+              {couponError && <p className="text-xs text-red-500 mb-3 px-1">{couponError}</p>}
+              <button onClick={() => setShowCoupons(v => !v)} className="text-vento-forest text-sm font-semibold flex items-center gap-2 mb-2 hover:underline">
+                <Tag size={16} /> View all available coupons ({COUPONS.length}) {showCoupons ? '↑' : '→'}
               </button>
+              {showCoupons && (
+                <div className="mb-6 border border-gray-100 rounded-2xl overflow-hidden divide-y divide-gray-100 bg-gray-50">
+                  {COUPONS.map(c => (
+                    <div key={c.code} className="flex items-center justify-between p-3 bg-white">
+                      <div>
+                        <p className="text-xs font-bold text-vento-forest tracking-widest">{c.code}</p>
+                        <p className="text-xs text-gray-500">{c.label} • {c.desc} • Min ₹{c.min}</p>
+                      </div>
+                      <button onClick={() => handleApply(c.code)} className={`text-xs font-bold px-3 py-1.5 rounded-full border ${appliedCoupon?.code === c.code ? 'bg-green-600 text-white border-green-600' : 'bg-vento-cream border-vento-gold/30 text-vento-forest hover:bg-vento-gold hover:text-white'}`}>{appliedCoupon?.code === c.code ? 'Applied' : 'Apply'}</button>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               {/* Pricing Breakdown */}
               <div className="space-y-3 text-sm mb-6 border-b border-gray-100 pb-6">
@@ -131,10 +179,12 @@ export default function CartPage() {
                   <span>Discount on MRP</span>
                   <span>-₹{discountOnMRP}</span>
                 </div>
-                <div className="flex justify-between text-green-600">
-                  <span>Promo (Welcome Special)</span>
-                  <span>-₹{promoDiscount}</span>
-                </div>
+                {appliedCoupon && (
+                  <div className="flex justify-between text-green-600">
+                    <span>Promo ({appliedCoupon.code})</span>
+                    <span>-₹{promoDiscount}</span>
+                  </div>
+                )}
                 <div className="flex justify-between text-gray-600">
                   <span>Shipping</span>
                   <span className="text-green-600 font-semibold">Free</span>

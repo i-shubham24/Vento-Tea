@@ -4,7 +4,7 @@ import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { ShoppingBag, Heart, Leaf } from 'lucide-react';
 
-export default function TeaProductCard({ product }) {
+export default function TeaProductCard({ product, singleImage = false, eager = false }) {
   const { addItem } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();
   const [selectedWeight, setSelectedWeight] = useState(product.weights[0]);
@@ -23,21 +23,26 @@ export default function TeaProductCard({ product }) {
 
   return (
     <div className="group h-full flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(10,42,27,0.12)] hover:-translate-y-1.5 transition-all duration-300 border border-vento-cream-dark relative">
-      {/* Product image — crossfades to alternate + subtle zoom on hover */}
+      {/* Product image — single image when singleImage (faster LCP), else crossfade */}
       <Link to={`/product/${product.slug}`} className="relative aspect-[6/5] overflow-hidden bg-vento-cream block">
         <img
           src={product.images[0]}
           alt={product.name}
-          loading="lazy"
+          loading={eager ? "eager" : "lazy"}
+          fetchPriority={eager ? "high" : "auto"}
           decoding="async"
-          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out group-hover:scale-105 ${product.images[1] ? 'group-hover:opacity-0' : ''}`}
+          width="400"
+          height="333"
+          className={`absolute inset-0 w-full h-full object-cover transition-all duration-700 ease-out ${!singleImage && product.images[1] ? 'group-hover:opacity-0 group-hover:scale-105' : 'group-hover:scale-105'}`}
         />
-        {product.images[1] && (
+        {!singleImage && product.images[1] && (
           <img
             src={product.images[1]}
             alt={`${product.name} — alternate view`}
             loading="lazy"
             decoding="async"
+            width="400"
+            height="333"
             className="absolute inset-0 w-full h-full object-cover opacity-0 transition-all duration-700 ease-out group-hover:opacity-100 group-hover:scale-105"
           />
         )}
@@ -108,8 +113,9 @@ export default function TeaProductCard({ product }) {
         <div className="flex items-center justify-between mt-auto">
           <div className="flex flex-col">
             {product.discount && (
-              <span className="text-sm text-gray-400 line-through">
-                ₹{Math.round(selectedWeight.priceInr / (1 - product.discount / 100))}
+              <span className="text-sm">
+                <span className="text-gray-400 line-through">₹{Math.round(selectedWeight.priceInr / (1 - product.discount / 100))}</span>
+                <span className="text-green-600 font-bold ml-1">{product.discount}% OFF</span>
               </span>
             )}
             <span className="text-2xl font-semibold text-vento-forest">

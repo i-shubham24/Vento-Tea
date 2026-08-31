@@ -26,7 +26,7 @@ export default function LivePurchaseToast() {
   }, []);
 
   return (
-    <div className="fixed bottom-6 left-4 md:left-8 z-40 pointer-events-none">
+    <div className="hidden md:block fixed bottom-6 left-8 z-40 pointer-events-none">
       <AnimatePresence>
         {visible && (
           <motion.div

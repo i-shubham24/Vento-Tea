@@ -56,12 +56,7 @@ export default function Home() {
       </ScrollReveal>
       
       <ScrollReveal>
-        <div className="bg-vento-cream pt-10">
-          <div className="text-center mb-[-2rem] relative z-10">
-            <h2 className="text-sm tracking-[0.2em] text-vento-gold font-bold uppercase mb-2">Vento Favorites</h2>
-          </div>
-          <ProductCatalog limit={4} />
-        </div>
+        <ProductCatalog limit={4} singleImage eager />
       </ScrollReveal>
 
       <ScrollReveal>

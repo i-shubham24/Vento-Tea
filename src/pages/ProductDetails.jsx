@@ -72,8 +72,8 @@ export default function ProductDetails() {
   }, []);
 
   
-  // Random stock number for demo purposes
-  const [stockLeft] = useState(() => Math.floor(Math.random() * 8) + 3);
+  // Deterministic stock so card badge and PDP match
+  const stockLeft = (product.id.charCodeAt(4) % 8) + 3;
   
   useEffect(() => {
     setSelectedWeight(product.weights[0]);
