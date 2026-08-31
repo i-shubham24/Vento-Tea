@@ -4,11 +4,12 @@ import { useSearchParams } from 'react-router-dom';
 import PageBanner from '../components/PageBanner';
 import TeaProductCard from '../components/TeaProductCard';
 import { Stagger, StaggerItem } from '../components/Stagger';
-import { mockProducts } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 import { ChevronDown } from 'lucide-react';
 import NewsletterBanner from '../components/NewsletterBanner';
 
 export default function Shop() {
+  const mockProducts = useProducts();
   const [searchParams] = useSearchParams();
   const initialSearch = searchParams.get('search') || '';
   

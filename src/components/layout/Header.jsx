@@ -5,10 +5,11 @@ import { useWishlist } from '../../context/WishlistContext';
 import { ShoppingBag, User, Heart, Search, X } from 'lucide-react';
 import { useState, useEffect, useCallback } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { mockProducts } from '../../data/mockData';
+import { useProducts } from '../../hooks/useProducts';
 import MobileMenu from '../MobileMenu';
 
 export default function Header() {
+  const mockProducts = useProducts();
   const { cartCount, setIsOpen } = useCart();
   const { user, openAuth, logout } = useAuth();
   const { wishlist, setIsWishlistOpen } = useWishlist();

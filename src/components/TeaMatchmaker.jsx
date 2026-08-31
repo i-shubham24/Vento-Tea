@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Sparkles, X, ArrowRight, Check } from 'lucide-react';
-import { mockProducts } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import { Link } from 'react-router-dom';
 
@@ -27,6 +27,7 @@ const QUESTIONS = [
 ];
 
 export default function TeaMatchmaker() {
+  const mockProducts = useProducts();
   const [isOpen, setIsOpen] = useState(false);
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState({});

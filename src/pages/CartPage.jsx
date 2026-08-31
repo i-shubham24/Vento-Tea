@@ -127,16 +127,22 @@ export default function CartPage() {
                   <button onClick={handleRemoveCoupon} className="text-xs font-bold px-3 py-1.5 rounded-full bg-white border border-green-300 text-green-700 hover:bg-green-100 flex items-center gap-1"><X size={12} />Remove</button>
                 </div>
               ) : (
-                <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="bg-vento-cream px-3 py-1 rounded border border-vento-gold/30 text-xs font-bold text-vento-forest">NEWUSER15</div>
-                    <div>
-                      <p className="font-semibold text-sm text-vento-forest">Save ₹75</p>
-                      <p className="text-xs text-gray-500">Best deal</p>
+                {(() => {
+                  const available = COUPONS.filter(c => subtotal >= c.min).sort((a,b) => b.discount - a.discount);
+                  const best = available[0] || COUPONS[0];
+                  return (
+                    <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="bg-vento-cream px-3 py-1 rounded border border-vento-gold/30 text-xs font-bold text-vento-forest">{best.code}</div>
+                        <div>
+                          <p className="font-semibold text-sm text-vento-forest">Save ₹{best.discount}</p>
+                          <p className="text-xs text-gray-500">{subtotal >= best.min ? 'Best deal for you' : `Add ₹${best.min - subtotal} more to unlock`}</p>
+                        </div>
+                      </div>
+                      <button disabled={subtotal < best.min} onClick={() => handleApply(best.code)} className={`text-xs font-bold px-4 py-2 rounded-full transition-colors ${subtotal >= best.min ? 'bg-vento-forest text-white hover:bg-vento-forest-light' : 'bg-gray-200 text-gray-400 cursor-not-allowed'}`}>APPLY</button>
                     </div>
-                  </div>
-                  <button onClick={() => handleApply('NEWUSER15')} className="bg-vento-forest text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-vento-forest-light">APPLY</button>
-                </div>
+                  );
+                })()}
               )}
 
               {/* Coupon Input */}
@@ -148,7 +154,7 @@ export default function CartPage() {
                   placeholder="ENTER COUPON CODE" 
                   className="flex-1 border border-gray-200 rounded-full px-4 text-sm outline-none focus:border-vento-gold uppercase"
                 />
-                <button onClick={() => handleApply(couponInput)} className="border border-gray-200 text-vento-forest font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors text-sm">Apply</button>
+                <button disabled={!couponInput || appliedCoupon?.code === couponInput} onClick={() => handleApply(couponInput)} className="border border-gray-200 text-vento-forest font-semibold px-6 py-2.5 rounded-full hover:bg-gray-50 transition-colors text-sm">Apply</button>
               </div>
               {couponError && <p className="text-xs text-red-500 mb-3 px-1">{couponError}</p>}
               <button onClick={() => setShowCoupons(v => !v)} className="text-vento-forest text-sm font-semibold flex items-center gap-2 mb-2 hover:underline">
@@ -162,7 +168,7 @@ export default function CartPage() {
                         <p className="text-xs font-bold text-vento-forest tracking-widest">{c.code}</p>
                         <p className="text-xs text-gray-500">{c.label} • {c.desc} • Min ₹{c.min}</p>
                       </div>
-                      <button onClick={() => handleApply(c.code)} className={`text-xs font-bold px-3 py-1.5 rounded-full border ${appliedCoupon?.code === c.code ? 'bg-green-600 text-white border-green-600' : 'bg-vento-cream border-vento-gold/30 text-vento-forest hover:bg-vento-gold hover:text-white'}`}>{appliedCoupon?.code === c.code ? 'Applied' : 'Apply'}</button>
+                      <button disabled={appliedCoupon?.code === c.code} onClick={() => handleApply(c.code)} className={`text-xs font-bold px-3 py-1.5 rounded-full border ${appliedCoupon?.code === c.code ? 'bg-green-600 text-white border-green-600' : 'bg-vento-cream border-vento-gold/30 text-vento-forest hover:bg-vento-gold hover:text-white'}`}>{appliedCoupon?.code === c.code ? 'Applied' : 'Apply'}</button>
                     </div>
                   ))}
                 </div>

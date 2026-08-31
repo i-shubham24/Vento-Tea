@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { mockProducts } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 import { useCart } from '../context/CartContext';
 import { useWishlist } from '../context/WishlistContext';
 import { Heart, Plus, Leaf, Droplet, UserCheck, MapPin, AlertCircle, ShoppingBag, X } from 'lucide-react';
@@ -40,6 +40,7 @@ function BrewStep({ num, text }) {
 }
 
 export default function ProductDetails() {
+  const mockProducts = useProducts();
   const { slug } = useParams();
   const { addItem } = useCart();
   const { toggleWishlist, isInWishlist } = useWishlist();

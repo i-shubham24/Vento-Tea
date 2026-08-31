@@ -3,6 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import { useOrder } from '../context/OrderContext';
 import { mockProducts } from '../data/mockData';
 import AdminLogin from './AdminLogin';
+import OrderDetailsDrawer from '../components/OrderDetailsDrawer';
+import CategoryForm from '../components/CategoryForm';
 import { LayoutDashboard, Package, Tag, ShoppingCart, Users, Star, BookOpen, Images, Megaphone, Ticket, Sparkles, ClipboardList, LogOut, Bell, Menu, X } from 'lucide-react';
 
 const MENU = [
@@ -30,6 +32,7 @@ export default function AdminPortal(){
   });
   const [editingProduct, setEditingProduct] = useState(null);
   const [showProductModal, setShowProductModal] = useState(false);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [orderSearch, setOrderSearch] = useState('');
   const [orderStatusFilter, setOrderStatusFilter] = useState('all');
   const [productSearch, setProductSearch] = useState('');
@@ -157,7 +160,24 @@ export default function AdminPortal(){
                   ))}</tbody>
                 </table>
               </div>
-              {showProductModal && (
+              {showCategoryModal && (
+          <CategoryForm 
+            category={editingCategory} 
+            onSave={(cat) => {
+              let nc;
+              if (editingCategory) {
+                nc = categories.map(c => c.id === cat.id ? cat : c);
+              } else {
+                nc = [...categories, cat];
+              }
+              setCategories(nc);
+              localStorage.setItem('vento_categories', JSON.stringify(nc));
+              setShowCategoryModal(false);
+            }}
+            onCancel={() => setShowCategoryModal(false)}
+          />
+        )}
+        {showProductModal && (
                 <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
                   <div className="absolute inset-0 bg-black/40" onClick={()=> setShowProductModal(false)}></div>
                   <div className="relative bg-[#F8FFFB] rounded-xl w-full max-w-5xl shadow-xl max-h-[90vh] overflow-auto">
@@ -178,7 +198,7 @@ export default function AdminPortal(){
                   <h2 className="text-2xl font-bold text-vento-forest">Categories</h2>
                   <p className="text-sm text-gray-500">Organize your products into categories ({categories.length} total).</p>
                 </div>
-                <button onClick={()=> { const name=prompt('Category name?'); if(name){ const slug=name.toLowerCase().replace(/[^a-z0-9]+/g,'-'); const c={id:Date.now().toString(), name, slug, products:0, featured:false, status:'Active'}; const nc=[...categories,c]; setCategories(nc); localStorage.setItem('vento_categories', JSON.stringify(nc)); } }} className="bg-vento-forest text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-vento-gold hover:text-vento-forest transition-colors">+ Add Category</button>
+                <button onClick={() => { setEditingCategory(null); setShowCategoryModal(true); }} className="bg-vento-forest text-white px-5 py-2 rounded-full text-sm font-bold hover:bg-vento-gold hover:text-vento-forest transition-colors">+ Add Category</button>
               </div>
               <div className="mb-4">
                 <input placeholder="Search categories by name, slug..." className="w-full sm:w-80 border rounded-full px-4 py-2 text-sm outline-none focus:border-vento-forest" />
@@ -205,10 +225,7 @@ export default function AdminPortal(){
                       <div className="col-span-4 sm:col-span-2 text-center text-sm text-gray-500">{cat.featured ? '★' : '-'}</div>
                       <div className="col-span-2 sm:col-span-2 text-center"><span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">Active</span></div>
                       <div className="col-span-2 sm:col-span-1 text-right">
-                        <button onClick={()=>{
-                          const nn=prompt('Edit name', cat.name);
-                          if(nn){ const nc=categories.map(c=> c.id===cat.id ? {...c, name:nn, slug:nn.toLowerCase().replace(/[^a-z0-9]+/g,'-')}:c); setCategories(nc); localStorage.setItem('vento_categories', JSON.stringify(nc)); }
-                        }} className="text-vento-forest border border-vento-forest/20 p-1.5 rounded hover:bg-vento-forest hover:text-white transition-colors">✎</button>
+                        <button onClick={() => { setEditingCategory(cat); setShowCategoryModal(true); }} className="text-vento-forest border border-vento-forest/20 px-2 py-1 rounded text-xs hover:bg-vento-forest hover:text-white transition-colors">Edit</button>
                       </div>
                     </div>
                   ))}
@@ -221,11 +238,23 @@ export default function AdminPortal(){
               <div className="flex flex-col sm:flex-row gap-3 justify-between items-start sm:items-center mb-4">
                 <h2 className="text-xl font-bold text-vento-forest">Orders ({orders.length})</h2>
                 <input value={orderSearch} onChange={e=> setOrderSearch(e.target.value)} placeholder="Search orders by ID, customer..." className="border rounded-full px-4 py-2 text-sm w-full sm:w-80 outline-none focus:border-vento-forest" />
+              <div className="flex gap-2 overflow-x-auto pb-2 mb-2 hide-scrollbar">
+                  {['all', 'pending', 'confirmed', 'packed', 'shipped', 'delivered', 'cancelled'].map(status => (
+                    <button 
+                      key={status} 
+                      onClick={() => setOrderStatusFilter(status)}
+                      className={`shrink-0 px-4 py-1.5 rounded-full text-xs font-bold transition-colors ${orderStatusFilter === status ? 'bg-vento-forest text-white' : 'bg-gray-100 text-gray-500 hover:bg-gray-200'}`}
+                    >
+                      {status === 'all' ? 'All Orders' : status.charAt(0).toUpperCase() + status.slice(1)} 
+                      ({status === 'all' ? orders.length : orders.filter(o => o.orderStatus === status).length})
+                    </button>
+                  ))}
+                </div>
               </div>
-              <div className="bg-white rounded-lg border border-vento-cream-dark overflow-x-auto">
+              <div className="bg-white rounded-lg border
                 <table className="w-full text-sm min-w-[700px]">
                   <thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">Order Number</th><th>Customer</th><th>Date</th><th>Total</th><th>Payment</th><th>Status</th></tr></thead>
-                  <tbody>{orders.filter(o=> o.id.toLowerCase().includes(orderSearch.toLowerCase()) || o.customer.name.toLowerCase().includes(orderSearch.toLowerCase())).map(o=>(
+                  <tbody>{orders.filter(o=> (orderStatusFilter === 'all' || o.orderStatus === orderStatusFilter) && (o.id.toLowerCase().includes(orderSearch.toLowerCase()) || o.customer.name.toLowerCase().includes(orderSearch.toLowerCase()))).map(o=>(
                     <tr key={o.id} className="border-t hover:bg-vento-mint/30 cursor-pointer" onClick={()=> setSelectedOrder(o)}><td className="p-3 font-mono text-xs">{o.id}</td><td>{o.customer.name}<br/><span className="text-xs text-gray-400">{o.customer.email}</span></td><td>{new Date(o.createdAt).toLocaleDateString()}</td><td>₹{o.subtotal}</td><td><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{o.paymentStatus.toUpperCase()}</span></td>
                     <td><select value={o.orderStatus} onClick={e=> e.stopPropagation()} onChange={e=> updateOrderStatus(o.id, e.target.value)} className="bg-vento-mint border rounded-full px-2 py-1 text-xs font-bold text-vento-forest outline-none">
                       <option value="pending">PENDING</option><option value="confirmed">CONFIRMED</option><option value="packed">PACKED</option><option value="shipped">SHIPPED</option><option value="delivered">DELIVERED</option><option value="cancelled">CANCELLED</option>
@@ -274,7 +303,7 @@ export default function AdminPortal(){
                 <table className="w-full text-sm">
                   <thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">ARTICLE</th><th>CATEGORY</th><th>STATUS</th><th></th></tr></thead>
                   <tbody>{blogs.map(b=>(
-                    <tr key={b.id} className="border-t"><td className="p-3 font-semibold">{b.title}</td><td className="p-3 text-xs"><span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full">{b.category}</span></td><td className="p-3"><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{b.status}</span></td><td className="p-3"><button onClick={()=>{const nb=blogs.filter(x=> x.id!==b.id); setBlogs(nb); localStorage.setItem('vento_blogs', JSON.stringify(nb));}} className="text-red-500 text-xs border px-2 py-1 rounded">Delete</button></td></tr>
+                    <tr key={b.id} className="border-t"><td className="p-3 font-semibold">{b.title}</td><td className="p-3 text-xs"><span className="bg-blue-50 text-blue-700 px-2 py-1 rounded-full">{b.category}</span></td><td className="p-3"><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{b.status}</span></td><td className="p-3"><button onClick={()=>{const nb=blogs.filter(x=> x.id!==b.id); setBlogs(nb); localStorage.setItem('vento_blogs', JSON.stringify(nb));}} className="text-red-600 border border-red-200 px-2 py-1 rounded text-xs hover:bg-red-50 hover:border-red-300 transition-colors">Delete</button></td></tr>
                   ))}</tbody>
                 </table>
               </div>
@@ -288,7 +317,7 @@ export default function AdminPortal(){
               <div className="bg-white rounded-lg border overflow-hidden">
                 <table className="w-full text-sm"><thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">Headline</th><th>Subtitle</th><th>Link</th><th></th></tr></thead>
                 <tbody>{carousel.map(s=>(
-                  <tr key={s.id} className="border-t"><td className="p-3 font-semibold">{s.headline}</td><td className="p-3 text-xs">{s.subtitle}</td><td className="p-3 font-mono text-xs">{s.link}</td><td className="p-3"><button onClick={()=>{const nc=carousel.filter(x=> x.id!==s.id); setCarousel(nc); localStorage.setItem('vento_carousel', JSON.stringify(nc));}} className="text-red-500 text-xs border px-2 py-1 rounded">Delete</button></td></tr>
+                  <tr key={s.id} className="border-t"><td className="p-3 font-semibold">{s.headline}</td><td className="p-3 text-xs">{s.subtitle}</td><td className="p-3 font-mono text-xs">{s.link}</td><td className="p-3"><button onClick={()=>{const nc=carousel.filter(x=> x.id!==s.id); setCarousel(nc); localStorage.setItem('vento_carousel', JSON.stringify(nc));}} className="text-red-600 border border-red-200 px-2 py-1 rounded text-xs hover:bg-red-50 hover:border-red-300 transition-colors">Delete</button></td></tr>
                 ))}</tbody></table>
               </div>
             </div>
@@ -303,7 +332,7 @@ export default function AdminPortal(){
                   <div><p className="font-semibold">{c.name}</p><p className="text-xs text-gray-500">{c.banner}</p></div>
                   <div className="flex items-center gap-2">
                     <button onClick={()=>{const nc=campaigns.map(x=> x.id===c.id ? {...x, active:!x.active}:x); setCampaigns(nc); localStorage.setItem('vento_campaigns', JSON.stringify(nc));}} className={`w-10 h-6 rounded-full relative ${c.active ? 'bg-vento-forest' : 'bg-gray-300'}`}><span className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-all ${c.active ? 'right-1' : 'left-1'}`}></span></button>
-                    <button onClick={()=>{const nc=campaigns.filter(x=> x.id!==c.id); setCampaigns(nc); localStorage.setItem('vento_campaigns', JSON.stringify(nc));}} className="text-red-500 text-xs border px-2 py-1 rounded">Delete</button>
+                    <button onClick={()=>{const nc=campaigns.filter(x=> x.id!==c.id); setCampaigns(nc); localStorage.setItem('vento_campaigns', JSON.stringify(nc));}} className="text-red-600 border border-red-200 px-2 py-1 rounded text-xs hover:bg-red-50 hover:border-red-300 transition-colors">Delete</button>
                   </div>
                 </div>
               ))}</div>
@@ -322,7 +351,7 @@ export default function AdminPortal(){
                 <tbody>{coupons.map((co,i)=>(
                   <tr key={i} className="border-t"><td className="p-3 font-mono">{co.code}</td><td className="p-3"><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{co.discount}</span></td><td className="p-3">{co.minOrder}</td>
                   <td><button onClick={()=>{const nc=coupons.map((x,idx)=> idx===i ? {...x, active:!x.active}:x); setCoupons(nc); localStorage.setItem('vento_coupons', JSON.stringify(nc));}} className={`w-10 h-6 rounded-full relative ${co.active ? 'bg-vento-forest' : 'bg-gray-300'}`}><span className={`absolute top-1 w-4 h-4 bg-white rounded-full ${co.active ? 'right-1' : 'left-1'}`}></span></button></td>
-                  <td><button onClick={()=>{const nc=coupons.filter((_,idx)=> idx!==i); setCoupons(nc); localStorage.setItem('vento_coupons', JSON.stringify(nc));}} className="text-red-500 text-xs border px-2 py-1 rounded">Delete</button></td></tr>
+                  <td><button onClick={()=>{const nc=coupons.filter((_,idx)=> idx!==i); setCoupons(nc); localStorage.setItem('vento_coupons', JSON.stringify(nc));}} className="text-red-600 border border-red-200 px-2 py-1 rounded text-xs hover:bg-red-50 hover:border-red-300 transition-colors">Delete</button></td></tr>
                 ))}</tbody></table>
               </div>
             </div>
@@ -371,6 +400,14 @@ export default function AdminPortal(){
         <button onClick={logout} className="m-3 flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-sm"><LogOut size={16}/> Logout</button>
       </aside>
       {mobileOpen && <div className="fixed inset-0 bg-black/30 md:hidden z-20" onClick={()=> setMobileOpen(false)}></div>}
+      <OrderDetailsDrawer 
+        order={selectedOrder} 
+        onClose={() => setSelectedOrder(null)} 
+        onUpdateStatus={(id, status) => {
+          updateOrderStatus(id, status);
+          setSelectedOrder({...selectedOrder, orderStatus: status});
+        }} 
+      />
     </div>
   );
 }

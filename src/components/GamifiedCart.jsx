@@ -1,5 +1,6 @@
 import { useCart } from '../context/CartContext';
-import { mockProducts, CART_REWARD_THRESHOLD, FREE_SHIPPING_THRESHOLD } from '../data/mockData';
+import { CART_REWARD_THRESHOLD, FREE_SHIPPING_THRESHOLD } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 import { X, Minus, Plus, ShoppingBag, Truck, Gift, Check } from 'lucide-react';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';

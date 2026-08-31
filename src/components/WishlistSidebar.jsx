@@ -1,6 +1,6 @@
 import { useWishlist } from '../context/WishlistContext';
 import { useCart } from '../context/CartContext';
-import { mockProducts } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 import { X, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { useEffect } from 'react';
 

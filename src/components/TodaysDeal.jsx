@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Timer, Flame } from 'lucide-react';
-import { mockProducts } from '../data/mockData';
+import { useProducts } from '../hooks/useProducts';
 
 export default function TodaysDeal() {
+  const mockProducts = useProducts();
   const product = mockProducts.find(p => p.slug === 'gold-tea') || mockProducts[0];
   const [timeLeft, setTimeLeft] = useState(() => {
     const now = new Date();
