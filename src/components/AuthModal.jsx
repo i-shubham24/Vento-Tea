@@ -3,6 +3,25 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { X, ArrowLeft, Check, Eye, EyeOff } from 'lucide-react';
 
+const InputField = ({ label, type, value, onChange, placeholder, prefix, maxLength, suffix, required }) => (
+  <div className="mb-3">
+    <label className="block text-[10px] font-bold tracking-widest text-gray-500 uppercase mb-1.5">{label}</label>
+    <div className="flex bg-white rounded-xl border border-gray-200 focus-within:border-vento-forest focus-within:ring-1 focus-within:ring-vento-forest transition-all overflow-hidden h-11 shadow-sm hover:border-gray-300">
+      {prefix && <span className="flex items-center justify-center px-3 bg-gray-50 border-r border-gray-200 text-gray-600 font-semibold text-sm">{prefix}</span>}
+      <input 
+        type={type} 
+        value={value} 
+        onChange={onChange} 
+        placeholder={placeholder} 
+        maxLength={maxLength}
+        required={required} 
+        className="flex-1 px-3 text-sm outline-none text-gray-900 placeholder-gray-400 font-medium bg-transparent" 
+      />
+      {suffix && <div className="flex items-center pr-3">{suffix}</div>}
+    </div>
+  </div>
+);
+
 export default function AuthModal() {
   const { isAuthOpen, closeAuth, login, verifyOtp } = useAuth();
   const navigate = useNavigate();
@@ -94,24 +113,6 @@ export default function AuthModal() {
     }
   };
 
-  const InputField = ({ label, type, value, onChange, placeholder, prefix, maxLength, suffix }) => (
-    <div className="mb-3">
-      <label className="block text-[10px] font-bold tracking-widest text-gray-500 uppercase mb-1.5">{label}</label>
-      <div className="flex bg-white rounded-xl border border-gray-200 focus-within:border-vento-forest focus-within:ring-1 focus-within:ring-vento-forest transition-all overflow-hidden h-11 shadow-sm hover:border-gray-300">
-        {prefix && <span className="flex items-center justify-center px-3 bg-gray-50 border-r border-gray-200 text-gray-600 font-semibold text-sm">{prefix}</span>}
-        <input 
-          type={type} 
-          value={value} 
-          onChange={onChange} 
-          placeholder={placeholder} 
-          maxLength={maxLength}
-          required 
-          className="flex-1 px-3 text-sm outline-none text-gray-900 placeholder-gray-400 font-medium bg-transparent" 
-        />
-        {suffix && <div className="flex items-center pr-3">{suffix}</div>}
-      </div>
-    </div>
-  );
 
   return (
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4 sm:p-6">
@@ -161,11 +162,11 @@ export default function AuthModal() {
                 // SIGNUP FORM
                 <form onSubmit={handleSendOtp} className="flex-1 flex flex-col">
                   <div className="flex gap-4">
-                    <div className="flex-1"><InputField label="First Name" type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="John" /></div>
-                    <div className="flex-1"><InputField label="Last Name" type="text" value={lastName} onChange={e=>setLastName(e.target.value)} placeholder="Doe" /></div>
+                    <div className="flex-1"><InputField label="First Name" type="text" value={firstName} onChange={e=>setFirstName(e.target.value)} placeholder="John" required /></div>
+                    <div className="flex-1"><InputField label="Last Name" type="text" value={lastName} onChange={e=>setLastName(e.target.value)} placeholder="Doe" required /></div>
                   </div>
-                  <InputField label="Email Address" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" />
-                  <InputField label="Mobile Number" type="tel" value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="99999 99999" prefix="IN +91" />
+                  <InputField label="Email Address" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" required />
+                  <InputField label="Mobile Number" type="tel" value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="99999 99999" prefix="IN +91" required />
                   
                   <div className="mb-3">
                     <InputField 
@@ -204,12 +205,12 @@ export default function AuthModal() {
                 <form onSubmit={loginMethod === 'otp' ? handleSendOtp : handleEmailLogin} className="flex-1 flex flex-col">
                   {loginMethod === 'otp' ? (
                     <div className="mb-6">
-                      <InputField label="Mobile Number" type="tel" value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="99999 99999" prefix="IN +91" />
+                      <InputField label="Mobile Number" type="tel" value={phone} onChange={e=>setPhone(e.target.value.replace(/\D/g, '').slice(0, 10))} placeholder="99999 99999" prefix="IN +91" required />
                       <p className="text-xs text-gray-400 mt-2">An instant 6-digit OTP will be sent via SMS.</p>
                     </div>
                   ) : (
                     <div className="mb-6 space-y-2">
-                      <InputField label="Email Address" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" />
+                      <InputField label="Email Address" type="email" value={email} onChange={e=>setEmail(e.target.value)} placeholder="you@example.com" required />
                       <InputField 
                         label="Password" 
                         type={showPassword ? "text" : "password"} 
