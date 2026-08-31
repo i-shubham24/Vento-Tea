@@ -9,10 +9,17 @@ export function AuthProvider({ children }) {
   const openAuth = () => setIsAuthOpen(true);
   const closeAuth = () => setIsAuthOpen(false);
 
+  const login = (email, password) => {
+    const isDemo = email==='demo@vento.com' && password==='VentoDemo@2026';
+    const isAdmin = email==='admin@vento.com' && password==='VentoAdmin@2026';
+    if (isDemo) { setUser({ email, name:'Demo Customer', role:'customer', verified:true }); setIsAuthOpen(false); return 'customer'; }
+    if (isAdmin) { setUser({ email, name:'Super Admin', role:'admin', verified:true }); setIsAuthOpen(false); return 'admin'; }
+    if (password && email.includes('@')) { setUser({ email, name: email.split('@')[0], role:'customer', verified:true }); setIsAuthOpen(false); return 'customer'; }
+    return null;
+  };
   const verifyOtp = (phone, otp, name) => {
-    // Mock OTP verification (accepts any 6 digits in UI)
     if (otp.length === 6) {
-      setUser({ phone, name: name || 'Valued Customer', verified: true });
+      setUser({ phone, email:`${phone}@vento.demo`, name: name || 'Valued Customer', role:'customer', verified: true });
       setIsAuthOpen(false);
       return true;
     }
@@ -30,6 +37,7 @@ export function AuthProvider({ children }) {
       openAuth,
       closeAuth,
       verifyOtp,
+      login,
       logout
     }}>
       {children}

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-vento-forest: #0A2A1B;
+  --color-vento-forest: #002418;
   --color-vento-forest-light: #1a3c34;
   --color-vento-forest-muted: #143328;
   --color-vento-cream: #F9F7F2;
@@ -12,6 +12,8 @@
   --color-vento-amber: #b45309;
   --color-vento-terracotta: #C67A3E;
   --color-vento-sage: #8B9A7E;
+  --color-vento-pale-yellow: #FFDFA0;
+  --color-vento-mint: #E7FFF3;
   
   /* Cormorant — The Showstopper: hero headlines, big section titles, pull quotes */
   --font-serif: "Cormorant", Georgia, serif;

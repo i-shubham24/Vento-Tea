@@ -52,7 +52,7 @@ export default function Contact() {
               </div>
             </div>
 
-            <div className="w-full h-64 rounded-3xl overflow-hidden shadow-md bg-gray-200 relative">
+            <div className="w-full h-64 rounded-xl overflow-hidden shadow-md bg-gray-200 relative">
               <iframe 
                 src="https://www.openstreetmap.org/export/embed.html?bbox=94.185%2C26.745%2C94.225%2C26.765&amp;layer=mapnik&amp;marker=26.755%2C94.205"
                 width="100%" 
@@ -64,7 +64,7 @@ export default function Contact() {
           </div>
 
           {/* Contact Form */}
-          <div className="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-vento-cream-dark h-fit">
+          <div className="bg-white p-8 md:p-10 rounded-xl shadow-xl border border-vento-cream-dark h-fit">
             <h2 className="text-2xl font-serif text-vento-forest font-semibold mb-6">Send us a Message</h2>
             
             <form className="space-y-6" onSubmit={(e) => { e.preventDefault(); alert('Message sent successfully!'); }}>

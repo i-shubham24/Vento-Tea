@@ -32,7 +32,7 @@ export default function WholesaleBanner() {
         >
           <Link 
             to="/wholesale" 
-            className="inline-block px-12 py-4 bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold tracking-widest text-sm uppercase transition-all duration-300 rounded-full shadow-lg"
+            className="inline-block px-12 py-4 bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold tracking-widest text-sm uppercase transition-all duration-300 rounded-full shadow-lg"
           >
             Become a Wholesaler
           </Link>
@@ -44,7 +44,7 @@ export default function WholesaleBanner() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.8 }}
-          className="relative w-full max-w-5xl mx-auto h-64 md:h-96 rounded-3xl overflow-hidden shadow-2xl bg-gray-50 flex items-center justify-center group mb-20"
+          className="relative w-full max-w-5xl mx-auto h-64 md:h-96 rounded-xl overflow-hidden shadow-2xl bg-gray-50 flex items-center justify-center group mb-20"
         >
           <img 
             src="/brand/hero-chai.jpg" 

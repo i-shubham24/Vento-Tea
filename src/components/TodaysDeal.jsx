@@ -26,7 +26,7 @@ export default function TodaysDeal() {
 
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto">
-      <div className="bg-vento-forest rounded-[2rem] overflow-hidden border border-vento-gold/20 shadow-xl flex flex-col md:flex-row">
+      <div className="bg-vento-forest rounded-xl overflow-hidden border border-vento-gold/20 shadow-xl flex flex-col md:flex-row">
         <div className="md:w-1/2 relative min-h-[320px] bg-vento-cream-dark">
           <img src={product.images[0]} alt={product.name} className="absolute inset-0 w-full h-full object-cover" loading="lazy" decoding="async" />
           <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full flex items-center gap-1.5 shadow-md">

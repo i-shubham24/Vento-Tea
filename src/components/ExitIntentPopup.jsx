@@ -32,7 +32,7 @@ export default function ExitIntentPopup() {
           {done ? <div className="bg-green-50 text-green-700 p-4 rounded-xl font-semibold">🎉 Code SENT10 sent to your inbox!</div> : (
             <form onSubmit={(e) => { e.preventDefault(); setDone(true); }} className="flex flex-col gap-3">
               <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Your email" className="w-full py-3 px-5 bg-white border border-vento-gold/30 rounded-full outline-none focus:border-vento-gold text-center" />
-              <button type="submit" className="bg-vento-forest text-vento-cream font-bold py-3 rounded-full hover:bg-vento-gold hover:text-vento-forest transition-colors">Get my 10% off</button>
+              <button type="submit" className="bg-vento-forest text-vento-cream font-bold py-3 rounded-full hover:bg-white hover:text-vento-forest transition-colors">Get my 10% off</button>
             </form>
           )}
         </motion.div>

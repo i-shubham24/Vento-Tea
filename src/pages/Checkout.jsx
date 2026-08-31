@@ -1,13 +1,18 @@
 import SEO from '../components/SEO';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
+import { useOrder } from '../context/OrderContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { MapPin, CheckCircle2 } from 'lucide-react';
+import { MapPin, Truck, CreditCard, ShieldCheck } from 'lucide-react';
+import { useState } from 'react';
 
 export default function Checkout() {
-  const { items, subtotal } = useCart();
+  const { items, subtotal, clearCart } = useCart();
   const { user } = useAuth();
+  const { createOrder, updatePayment } = useOrder();
   const navigate = useNavigate();
+  const [payMode, setPayMode] = useState('razorpay');
+  const [processing, setProcessing] = useState(false);
 
   const totalMRP = items.reduce((sum, item) => sum + (Math.round(item.weight.priceInr * 1.3) * item.quantity), 0);
   const discountOnMRP = totalMRP - subtotal;
@@ -27,124 +32,134 @@ export default function Checkout() {
     );
   }
 
-  const handlePlaceOrder = (e) => {
+  const handlePlaceOrder = async (e) => {
     e.preventDefault();
-    alert("Proceeding to Razorpay checkout...");
-    // Mock successful checkout redirection could go here
+    if (processing) return;
+    setProcessing(true);
+    // Create order (localStorage, ready for Node/Mongo POST /api/orders)
+    const order = createOrder({ user, items, subtotal, coupon: 'NEWUSER15', shippingAddress: { city:'New Delhi', state:'Delhi', pin:'110001' }, paymentMode: payMode });
+    // Mock Razorpay: simulate payment sheet then verify
+    if (payMode === 'cod') {
+      updatePayment(order.id, 'success');
+      if (clearCart) clearCart();
+      navigate(`/order/${order.id}`);
+      return;
+    }
+    // Simulate Razorpay checkout 1.2s
+    setTimeout(()=>{
+      const success = Math.random() > 0.08;
+      updatePayment(order.id, success ? 'success' : 'failed');
+      if (success && clearCart) clearCart();
+      navigate(success ? `/order/${order.id}` : `/order/${order.id}?payment=failed`);
+      setProcessing(false);
+    }, 1200);
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pt-32 pb-20 px-4 md:px-8">
+    <div className="min-h-screen bg-vento-cream pt-28 pb-20 px-4 md:px-8">
       <div className="max-w-6xl mx-auto">
-        <h1 className="text-3xl font-serif text-vento-forest mb-8">Secure Checkout</h1>
+        <div className="mb-8">
+          <h1 className="text-3xl font-serif text-vento-forest">Checkout</h1>
+          <p className="text-sm text-gray-500 mt-1">Complete your order securely.</p>
+        </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Checkout Forms */}
           <div className="lg:col-span-2 space-y-6">
             
-            {/* Contact Information */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <div className="flex justify-between items-center mb-6">
-                <h2 className="text-xl font-serif text-vento-forest font-semibold">Contact Information</h2>
-                {user && <span className="text-xs bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-medium">Logged in as {user.name}</span>}
+            {/* Step 1: Contact — Figma corner:8 */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-vento-cream-dark">
+              <div className="flex justify-between items-center mb-5">
+                <h2 className="text-lg font-serif text-vento-forest font-semibold">Contact</h2>
+                {user && <span className="text-xs bg-vento-mint text-vento-forest px-3 py-1 rounded-full font-medium">Logged in as {user.name}</span>}
               </div>
               <div className="space-y-2">
-                <label className="block text-sm text-gray-600">Email Address</label>
+                <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500">Email</label>
                 <input 
                   type="email" 
                   defaultValue={user?.email || "customer@example.com"}
-                  className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors"
+                  className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm"
                 />
-                <p className="text-xs text-gray-400 mt-2">Order confirmation and invoice will be sent here.</p>
+                <p className="text-xs text-gray-400 mt-1">Order confirmation and invoice will be sent here.</p>
               </div>
             </div>
 
-            {/* Shipping Address */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <h2 className="text-xl font-serif text-vento-forest font-semibold mb-6 flex items-center gap-2">
-                <MapPin size={20} className="text-vento-gold" /> Shipping Address
+            {/* Step 2: Delivery — Figma */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-vento-cream-dark">
+              <h2 className="text-lg font-serif text-vento-forest font-semibold mb-5 flex items-center gap-2">
+                <MapPin size={18} className="text-vento-forest" /> Delivery
               </h2>
               <form className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">First Name <span className="text-red-500">*</span></label>
+                    <input type="text" defaultValue={user?.name?.split(' ')[0] || ""} placeholder="First Name" className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">Last Name</label>
+                    <input type="text" placeholder="Last Name" className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm" />
+                  </div>
+                </div>
                 <div>
-                  <label className="block text-xs text-gray-500 mb-1">Country / Region</label>
-                  <select className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors text-gray-700">
-                    <option>India</option>
-                  </select>
+                  <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">Address <span className="text-red-500">*</span></label>
+                  <input type="text" placeholder="Apartment, suite, etc." className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm" />
                 </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">Full Name <span className="text-red-500">*</span></label>
-                    <input type="text" defaultValue={user?.name || ""} className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
+                <div className="grid grid-cols-3 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">City <span className="text-red-500">*</span></label>
+                    <input type="text" placeholder="City" className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm" />
                   </div>
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">Phone Number <span className="text-red-500">*</span></label>
-                    <input type="tel" defaultValue={user?.phone || ""} className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
+                  <div>
+                    <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">State</label>
+                    <select className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm"><option>Assam</option><option>Delhi</option><option>Maharashtra</option></select>
                   </div>
-                </div>
-
-                <div>
-                  <label className="block text-xs text-gray-500 mb-1">Street Address / House No. / Flat <span className="text-red-500">*</span></label>
-                  <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">Apartment / Suite (Optional)</label>
-                    <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">Landmark (Optional)</label>
-                    <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">City <span className="text-red-500">*</span></label>
-                    <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">State <span className="text-red-500">*</span></label>
-                    <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                  </div>
-                  <div className="flex-1">
-                    <label className="block text-xs text-gray-500 mb-1">PIN Code <span className="text-red-500">*</span></label>
-                    <input type="text" className="w-full py-2.5 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
+                  <div>
+                    <label className="block text-xs font-semibold tracking-widest uppercase text-gray-500 mb-1">PIN Code <span className="text-red-500">*</span></label>
+                    <input type="text" placeholder="000000" className="w-full py-3 px-4 bg-white rounded-lg border border-gray-200 outline-none focus:border-vento-forest transition-colors text-sm" />
                   </div>
                 </div>
               </form>
             </div>
 
-            {/* Payment Info */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <h2 className="text-xl font-serif text-vento-forest font-semibold mb-6">Payment Method</h2>
-              <div className="border border-vento-gold bg-vento-cream/20 rounded-xl p-4 flex items-center gap-3 cursor-pointer">
-                <div className="w-5 h-5 rounded-full border-4 border-vento-gold bg-white shrink-0"></div>
-                <div className="flex-1">
-                  <span className="font-semibold text-vento-forest block">Razorpay (Cards, UPI, NetBanking)</span>
-                  <span className="text-xs text-gray-500">Secure payment gateway</span>
-                </div>
-                <CheckCircle2 size={24} className="text-vento-gold" />
+            {/* Payment — Figma + logos */}
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-vento-cream-dark">
+              <h2 className="text-lg font-serif text-vento-forest font-semibold mb-5">Payment</h2>
+              <div className="space-y-3">
+                <label className={`flex items-center gap-3 p-4 rounded-lg border cursor-pointer ${payMode==='razorpay' ? 'border-vento-forest bg-vento-mint/40' : 'border-gray-200 bg-white'}`} onClick={()=> setPayMode('razorpay')}>
+                  <input type="radio" name="pay" checked={payMode==='razorpay'} onChange={()=> setPayMode('razorpay')} className="accent-vento-forest w-4 h-4" />
+                  <span className="text-sm font-semibold text-vento-forest flex-1 flex items-center gap-2"><CreditCard size={16}/> Razorpay</span>
+                  <span className="text-xs text-gray-500">Cards, UPI, NetBanking</span>
+                </label>
+                <label className={`flex items-center gap-3 p-4 rounded-lg border cursor-pointer ${payMode==='cod' ? 'border-vento-forest bg-vento-mint/40' : 'border-gray-200 bg-white'}`} onClick={()=> setPayMode('cod')}>
+                  <input type="radio" name="pay" checked={payMode==='cod'} onChange={()=> setPayMode('cod')} className="accent-vento-forest w-4 h-4" />
+                  <span className="text-sm font-semibold text-vento-forest flex-1">Cash on Delivery</span>
+                  <span className="text-xs text-gray-500">Pay on arrival</span>
+                </label>
               </div>
-            </div>
-
-            {/* Additional Info */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100">
-              <h2 className="text-xl font-serif text-vento-forest font-semibold mb-4">Additional Information</h2>
-              <textarea 
-                rows="3"
-                placeholder="Any special notes for delivery? (Optional)"
-                className="w-full py-3 px-4 bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors resize-none"
-              ></textarea>
+              {/* Payment logos */}
+              <div className="flex items-center gap-2 mt-4 flex-wrap">
+                <span className="text-xs text-gray-500 flex items-center gap-1"><ShieldCheck size={14}/> Secure:</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-bold">Razorpay</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-bold">UPI</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-bold">VISA</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-bold">Mastercard</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-bold">COD</span>
+              </div>
+              {/* Vehicle logos */}
+              <div className="flex items-center gap-2 mt-3 flex-wrap">
+                <span className="text-xs text-gray-500 flex items-center gap-1"><Truck size={14}/> Ships via:</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-semibold">Delhivery</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-semibold">Shiprocket</span>
+                <span className="bg-white border rounded px-2 py-1 text-xs font-semibold">BlueDart</span>
+              </div>
             </div>
 
           </div>
 
-          {/* Order Summary Column */}
+          {/* Order Summary — Figma Aside */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 sticky top-28">
+            <div className="bg-white rounded-lg p-6 shadow-sm border border-vento-cream-dark sticky top-28">
               <div className="flex justify-between items-end mb-6 border-b border-gray-100 pb-4">
                 <h2 className="text-xl font-serif text-vento-forest font-semibold">Order Summary</h2>
                 <span className="text-sm text-gray-400">{items.length} item(s)</span>
@@ -172,21 +187,8 @@ export default function Checkout() {
                 ))}
               </div>
 
-              {/* Coupon Highlight */}
-              <div className="bg-gray-50 border border-gray-200 rounded-2xl p-4 mb-6 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <div className="bg-vento-cream px-3 py-1 rounded border border-vento-gold/30 text-xs font-bold text-vento-forest">
-                    NEWUSER15
-                  </div>
-                  <div>
-                    <p className="font-semibold text-sm text-vento-forest">Save ₹75</p>
-                    <p className="text-xs text-gray-500">Best deal</p>
-                  </div>
-                </div>
-                <button className="bg-vento-forest text-white text-xs font-bold px-4 py-2 rounded-full hover:bg-vento-forest-light">
-                  APPLY
-                </button>
-              </div>
+              {/* Coupon applied earlier in cart — checkout is just fill details and pay */}
+              {false && <div className="hidden"></div>}
 
               {/* Pricing Breakdown */}
               <div className="space-y-3 text-sm mb-6 border-b border-gray-100 pb-6">
@@ -221,9 +223,10 @@ export default function Checkout() {
               </div>
 
               {/* Checkout Action */}
-              <button onClick={handlePlaceOrder} className="w-full bg-vento-forest hover:bg-vento-forest-light text-white font-bold py-4 rounded-full transition-colors shadow-md text-lg">
-                Place Order · ₹{finalTotal}
+              <button onClick={handlePlaceOrder} disabled={processing} className="w-full bg-vento-forest text-white hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-colors shadow-md text-lg disabled:opacity-60">
+                {processing ? 'Processing Razorpay...' : `Place Order · ₹${finalTotal}`}
               </button>
+              <p className="text-xs text-center text-gray-400 mt-2">Demo: Razorpay is mocked, no real charge. Use demo@vento.com to test.</p>
 
             </div>
           </div>

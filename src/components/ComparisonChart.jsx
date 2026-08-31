@@ -12,43 +12,36 @@ export default function ComparisonChart() {
   ];
 
   return (
-    <section className="py-20 px-4 max-w-3xl mx-auto">
-      <div className="text-center mb-12">
-        <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="Why Choose Vento" />
-        <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
-        <p className="text-gray-600">See why connoisseurs choose Vento over ordinary tea brands.</p>
+    <section className="py-14 px-4 max-w-2xl mx-auto">
+      <div className="text-center mb-8">
+        <SplitReveal as="h2" className="text-3xl font-serif text-vento-forest mb-2" text="Why Choose Vento" />
+        <div className="w-12 h-0.5 bg-vento-gold mx-auto mb-3"></div>
+        <p className="text-sm text-gray-500">Vento vs ordinary — at a glance.</p>
       </div>
 
-      <div className="bg-white rounded-3xl shadow-xl border border-vento-cream-dark overflow-hidden">
-        
-        {/* Table Header */}
-        <div className="grid grid-cols-3 bg-vento-cream-dark p-4 md:p-5 border-b border-gray-200">
-          <div className="font-semibold text-gray-500 uppercase tracking-wider text-sm flex items-center">Feature</div>
-          <div className="font-serif font-bold text-xl md:text-2xl text-vento-forest text-center flex items-center justify-center gap-2">
-            <span className="text-vento-gold">★</span> Vento Tea
-          </div>
-          <div className="font-serif font-bold text-xl md:text-2xl text-gray-400 text-center flex items-center justify-center">Ordinary Tea</div>
+      <div className="bg-white rounded-lg shadow-md border border-vento-cream-dark overflow-hidden">
+        {/* Header */}
+        <div className="grid grid-cols-3 bg-vento-cream-dark px-3 py-3 border-b border-gray-200 text-xs">
+          <div className="font-semibold text-gray-500 uppercase tracking-widest flex items-center">Feature</div>
+          <div className="font-bold text-sm text-vento-forest text-center flex items-center justify-center gap-1"><span className="text-vento-gold">★</span> Vento</div>
+          <div className="font-bold text-sm text-gray-400 text-center">Ordinary</div>
         </div>
-
-        {/* Table Body */}
+        {/* Body compact */}
         <div className="divide-y divide-gray-100">
           {comparison.map((item, idx) => (
-            <div key={idx} className="grid grid-cols-3 p-4 md:p-5 items-center hover:bg-gray-50 transition-colors">
-              <div className="font-medium text-vento-forest">{item.feature}</div>
-              
-              <div className="flex flex-col md:flex-row items-center justify-center gap-3 text-center md:text-left text-green-700 font-semibold bg-green-50 p-3 rounded-xl border border-green-100">
-                <CheckCircle2 size={20} className="text-green-600 shrink-0" />
-                <span className="text-sm md:text-base">{item.vento}</span>
+            <div key={idx} className="grid grid-cols-3 px-3 py-2.5 items-center hover:bg-gray-50/60 transition-colors">
+              <div className="text-xs font-semibold text-vento-forest">{item.feature}</div>
+              <div className="flex items-center justify-center gap-1.5 text-xs font-semibold text-green-700 bg-green-50 px-2 py-1.5 rounded-lg border border-green-100 mx-1">
+                <CheckCircle2 size={14} className="text-green-600 shrink-0" />
+                <span className="truncate">{item.vento}</span>
               </div>
-              
-              <div className="flex flex-col md:flex-row items-center justify-center gap-3 text-center md:text-left text-gray-500 p-3">
-                <XCircle size={20} className="text-red-400 shrink-0" />
-                <span className="text-sm md:text-base">{item.ordinary}</span>
+              <div className="flex items-center justify-center gap-1.5 text-xs text-gray-500 px-2 py-1.5 mx-1">
+                <XCircle size={14} className="text-red-300 shrink-0" />
+                <span className="truncate">{item.ordinary}</span>
               </div>
             </div>
           ))}
         </div>
-
       </div>
     </section>
   );

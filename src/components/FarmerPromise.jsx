@@ -4,7 +4,7 @@ export default function FarmerPromise() {
   return (
     <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row items-center gap-12">
       <div className="w-full md:w-1/2">
-        <div className="aspect-square md:aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl relative bg-vento-forest/5">
+        <div className="aspect-square md:aspect-[4/3] rounded-xl overflow-hidden shadow-2xl relative bg-vento-forest/5">
           <div className="absolute inset-0 bg-vento-forest/10 mix-blend-overlay"></div>
           <img src="https://teawebsite-b65ea.web.app/images/web/range-family.webp" alt="Tea farmers" className="w-full h-full object-cover" />
         </div>

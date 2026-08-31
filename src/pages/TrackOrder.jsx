@@ -36,11 +36,12 @@ export default function TrackOrder() {
         title="Track Order"
         subtitle="Follow your fresh tea's journey from our estate to your doorstep."
         imagePath="/brand/media_1787994118797.png"
+        compact
       />
 
       <div className="max-w-3xl mx-auto px-4 mt-16">
         <ScrollReveal>
-          <div className="bg-white p-8 md:p-12 rounded-[2rem] shadow-sm border border-vento-cream-dark">
+          <div className="bg-white p-8 md:p-12 rounded-xl shadow-sm border border-vento-cream-dark">
             
             {!showResult ? (
               <form onSubmit={handleTrack} className="flex flex-col gap-6">

@@ -10,7 +10,7 @@ import MobileMenu from '../MobileMenu';
 
 export default function Header() {
   const { cartCount, setIsOpen } = useCart();
-  const { user, openAuth } = useAuth();
+  const { user, openAuth, logout } = useAuth();
   const { wishlist, setIsWishlistOpen } = useWishlist();
   const [isScrolled, setIsScrolled] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -72,9 +72,9 @@ export default function Header() {
               { name: 'Blogs', path: '/blogs' },
               { name: 'Contact', path: '/contact' }
             ].map((link) => (
-              <Link key={link.name} to={link.path} className="group relative text-vento-cream hover:text-vento-gold font-medium pb-1 transition-colors duration-300">
+              <Link key={link.name} to={link.path} className="group relative text-vento-cream hover:text-vento-pale-yellow font-medium pb-1 transition-colors duration-300">
                 {link.name}
-                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-vento-gold scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
+                <span className="absolute left-0 bottom-0 w-full h-[2px] bg-vento-pale-yellow scale-x-0 origin-left transition-transform duration-300 ease-out group-hover:scale-x-100"></span>
               </Link>
             ))}
           </nav>
@@ -94,9 +94,9 @@ export default function Header() {
                   }}
                   onFocus={() => setShowSearch(true)}
                   placeholder="Search teas..." 
-                  className="bg-white/15 border border-vento-gold/30 text-vento-cream text-sm rounded-full pl-4 pr-10 py-2 outline-none focus:border-vento-gold transition-colors w-40 lg:w-60 placeholder:text-vento-cream/50"
+                  className="bg-white/15 border border-vento-pale-yellow/30 text-vento-cream text-sm rounded-full pl-4 pr-10 py-2 outline-none focus:border-vento-pale-yellow transition-colors w-40 lg:w-60 placeholder:text-vento-cream/50"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-cream hover:text-vento-gold transition-colors">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-cream hover:text-vento-pale-yellow transition-colors">
                   <Search size={18} />
                 </button>
               </form>
@@ -135,11 +135,21 @@ export default function Header() {
             </div>
 
             {user ? (
-              <Link to="/account" className="p-2 text-vento-cream hover:text-vento-gold transition-colors">
-                <User size={24} />
-              </Link>
+              <div className="relative group">
+                <Link to="/account" className="flex items-center gap-2 bg-vento-forest border border-vento-gold/30 text-vento-gold px-3 py-1.5 rounded-full font-semibold text-sm hover:bg-vento-forest/90 hover:text-vento-pale-yellow transition-colors">
+                  <span className="w-6 h-6 rounded-full bg-vento-gold text-vento-forest flex items-center justify-center text-xs font-bold">{(user.name || user.email || 'U').charAt(0).toUpperCase()}</span>
+                  <span className="hidden md:inline max-w-[100px] truncate">{user.name || 'My Account'}</span>
+                </Link>
+                <div className="absolute right-0 top-full pt-2 hidden group-hover:block z-50">
+                  <div className="w-48 bg-white rounded-xl shadow-xl border border-vento-cream-dark overflow-hidden">
+                    <Link to="/account" className="block px-4 py-2 text-sm text-vento-forest hover:bg-vento-mint">My Account</Link>
+                    <Link to="/track-order" className="block px-4 py-2 text-sm text-vento-forest hover:bg-vento-mint">Track Order</Link>
+                    <button onClick={logout} className="w-full text-left px-4 py-2 text-sm text-red-600 hover:bg-red-50">Sign Out</button>
+                  </div>
+                </div>
+              </div>
             ) : (
-              <button onClick={openAuth} className="hidden lg:block text-sm font-semibold text-vento-cream hover:text-vento-gold transition-colors mx-2 cursor-pointer">
+              <button onClick={openAuth} className="hidden lg:block text-sm font-semibold text-vento-cream hover:text-vento-pale-yellow transition-colors mx-2 cursor-pointer">
                 Login
               </button>
             )}

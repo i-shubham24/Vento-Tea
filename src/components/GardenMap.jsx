@@ -82,7 +82,7 @@ export default function GardenMap() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="bg-white p-6 rounded-3xl shadow-xl border border-vento-gold/20"
+                className="bg-white p-6 rounded-xl shadow-xl border border-vento-gold/20"
               >
                 <div className="aspect-[2/1] rounded-2xl overflow-hidden mb-6 bg-vento-cream">
                   <img src={activeRegion.image} alt={activeRegion.name} className="w-full h-full object-cover" />

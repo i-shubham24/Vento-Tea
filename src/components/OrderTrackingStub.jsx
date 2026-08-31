@@ -9,7 +9,7 @@ export default function OrderTrackingStub() {
   ];
 
   return (
-    <div className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 max-w-lg mx-auto">
+    <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 max-w-lg mx-auto">
       <h3 className="text-2xl font-serif text-vento-forest mb-2">Order #VT-84729</h3>
       <p className="text-gray-500 mb-8 text-sm">Arriving in 2-4 days</p>
 

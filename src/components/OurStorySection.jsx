@@ -3,7 +3,7 @@ import SplitReveal from './SplitReveal';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-export default function OurStorySection() {
+export default function OurStorySection({ hideCta = false }) {
   const ref = useRef(null);
   
   // Create a parallax scroll effect
@@ -20,7 +20,7 @@ export default function OurStorySection() {
   return (
     <section ref={ref} className="py-16 px-4 md:px-8 max-w-7xl mx-auto flex flex-col md:flex-row-reverse items-center gap-16 relative overflow-hidden">
       <div className="w-full md:w-1/2 relative">
-        <div className="w-full max-w-sm mx-auto lg:max-w-md aspect-square lg:aspect-[4/5] rounded-[2rem] overflow-hidden shadow-2xl relative bg-vento-forest/5 group">
+        <div className="w-full max-w-sm mx-auto lg:max-w-md aspect-square lg:aspect-[4/5] rounded-xl overflow-hidden shadow-2xl relative bg-vento-forest/5 group">
           <motion.img 
             style={{ y: yParallax, scale: scaleParallax }}
             src="https://teawebsite-b65ea.web.app/images/web/craft-pickers.webp" 
@@ -51,9 +51,11 @@ export default function OurStorySection() {
         <p className="text-vento-forest/90 mb-10 text-lg leading-relaxed">
           From the everyday kadak cup to whole gold long leaf, every Vento pack is sealed at origin and built on the same promise: the kadak, honest flavour India grew up on.
         </p>
-        <Link to="/about" className="inline-block bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 px-10 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-xl">
-          Discover Our Heritage
-        </Link>
+        {!hideCta && (
+          <Link to="/about" className="inline-block bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest hover:text-vento-forest hover:border-vento-gold font-bold py-4 px-10 rounded-lg transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-md hover:shadow-xl">
+            Discover Our Heritage
+          </Link>
+        )}
       </div>
     </section>
   );

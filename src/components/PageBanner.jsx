@@ -7,7 +7,7 @@ import { EASE_OUT_SINE } from '../lib/motion';
  * Parallax estate photograph, a gold eyebrow + rule, and a staggered
  * headline entrance. `eyebrow` is optional — omit for a bare title.
  */
-export default function PageBanner({ title, subtitle, imagePath, eyebrow }) {
+export default function PageBanner({ title, subtitle, imagePath, eyebrow, compact = false }) {
   const ref = useRef(null);
   const reduce = useReducedMotion();
 
@@ -20,7 +20,7 @@ export default function PageBanner({ title, subtitle, imagePath, eyebrow }) {
   const bgScale = useTransform(scrollYProgress, [0, 1], reduce ? [1, 1] : [1.1, 1.28]);
 
   return (
-    <div ref={ref} className="relative w-full h-[65vh] md:h-[80vh] overflow-hidden mb-12 shadow-md bg-vento-forest">
+    <div ref={ref} className={`relative w-full overflow-hidden mb-12 shadow-md bg-vento-forest ${compact ? 'h-[38vh] md:h-[44vh]' : 'h-[65vh] md:h-[80vh]'}`}>
       {/* Parallax background */}
       <motion.div
         style={{ y: bgY, scale: bgScale }}

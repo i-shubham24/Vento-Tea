@@ -51,6 +51,7 @@ export function CartProvider({ children }) {
 
   const rewardRemaining = Math.max(0, CART_REWARD_THRESHOLD - subtotal);
   const cartCount = items.reduce((sum, item) => sum + item.quantity, 0);
+  const clearCart = () => setItems([]);
 
   return (
     <CartContext.Provider value={{
@@ -62,7 +63,8 @@ export function CartProvider({ children }) {
       removeItem,
       subtotal,
       rewardRemaining,
-      cartCount
+      cartCount,
+      clearCart
     }}>
       {children}
     </CartContext.Provider>

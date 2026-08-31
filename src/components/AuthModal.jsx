@@ -3,18 +3,25 @@ import { useAuth } from '../context/AuthContext';
 import { X } from 'lucide-react';
 
 export default function AuthModal() {
-  const { isAuthOpen, closeAuth, verifyOtp } = useAuth();
+  const { isAuthOpen, closeAuth, verifyOtp, login } = useAuth();
   const [step, setStep] = useState(1); // 1: Details, 2: OTP
   const [isLogin, setIsLogin] = useState(true);
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [password, setPassword] = useState('');
   const [otp, setOtp] = useState('');
   const [error, setError] = useState('');
 
   if (!isAuthOpen) return null;
 
+  const handleEmailLogin = (e) => {
+    e.preventDefault();
+    const role = login(email, password);
+    if (!role) { setError("Invalid email/password"); return; }
+    setError('');
+  };
   const handleSendOtp = (e) => {
     e.preventDefault();
     if (!isLogin) {
@@ -60,7 +67,7 @@ export default function AuthModal() {
     <div className="fixed inset-0 z-[110] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-vento-forest/60 backdrop-blur-sm" onClick={handleClose}></div>
       
-      <div className="relative bg-vento-cream w-full max-w-md rounded-3xl shadow-2xl p-6 md:p-8 transform transition-all max-h-[95vh] overflow-hidden">
+      <div className="relative bg-vento-cream w-full max-w-md rounded-xl shadow-2xl p-6 md:p-8 transform transition-all max-h-[95vh] overflow-hidden">
         <button onClick={handleClose} className="absolute top-4 right-4 p-2 text-gray-400 hover:text-vento-forest transition-colors">
           <X className="hover:rotate-90 transition-transform duration-300" size={20} />
         </button>
@@ -77,7 +84,15 @@ export default function AuthModal() {
         </div>
 
         {step === 1 ? (
+          <>
+          <form onSubmit={handleEmailLogin} className="space-y-3 mb-4 pb-4 border-b border-gray-100">
+            <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Email + Password (demo/admin)</p>
+            <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
+            <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
+            <button type="submit" className="w-full bg-vento-forest text-white font-bold py-2 rounded-full text-sm">Login with Email</button>
+          </form>
           <form onSubmit={handleSendOtp} className="space-y-3 md:space-y-4">
+            <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Or Phone OTP</p>
             {!isLogin && (
               <>
                 <div className="flex gap-3">
@@ -90,10 +105,6 @@ export default function AuthModal() {
                     <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Doe" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
                   </div>
                 </div>
-                <div>
-                  <label className="block text-xs font-medium text-vento-forest mb-1">Email Address</label>
-                  <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="john@example.com" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold transition-colors" />
-                </div>
               </>
             )}
             <div>
@@ -104,7 +115,7 @@ export default function AuthModal() {
               </div>
             </div>
             {error && <p className="text-red-500 text-xs">{error}</p>}
-            <button type="submit" className="w-full bg-vento-forest hover:bg-vento-forest-light text-vento-cream font-bold py-2.5 rounded-full transition-colors shadow-md text-sm mt-2">
+            <button type="submit" className="w-full bg-white border border-vento-forest text-vento-forest hover:bg-vento-cream font-bold py-2.5 rounded-full transition-colors shadow-md text-sm mt-2">
               Send OTP
             </button>
             <div className="text-center text-xs text-gray-600 mt-3">
@@ -115,6 +126,7 @@ export default function AuthModal() {
               )}
             </div>
           </form>
+          </>
         ) : (
           <form onSubmit={handleVerify} className="space-y-4">
             <div>

@@ -37,7 +37,7 @@ export default function WeeklyOffers() {
           <p className="text-gray-300 text-lg max-w-lg">Stock up on your favorite blends. Add any 3 items to your cart, and the lowest priced item is absolutely free.</p>
         </div>
         
-        <div className="bg-white/10 backdrop-blur-md p-6 rounded-3xl border border-vento-gold/30 flex flex-col items-center min-w-[300px]">
+        <div className="bg-white/10 backdrop-blur-md p-6 rounded-xl border border-vento-gold/30 flex flex-col items-center min-w-[300px]">
           <p className="text-vento-gold font-semibold mb-4">Offer Ends In:</p>
           <div className="flex gap-4 text-center">
             <div className="flex flex-col">

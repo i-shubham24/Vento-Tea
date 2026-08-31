@@ -22,7 +22,7 @@ export default function TeaProductCard({ product, singleImage = false, eager = f
   };
 
   return (
-    <div className="group h-full flex flex-col bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-[0_20px_40px_rgba(10,42,27,0.12)] hover:-translate-y-1.5 transition-all duration-300 border border-vento-cream-dark relative">
+    <div className="group h-full flex flex-col bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-[0_16px_30px_rgba(0,36,24,0.12)] hover:-translate-y-1 transition-all duration-300 border border-vento-cream-dark relative">
       {/* Product image — single image when singleImage (faster LCP), else crossfade */}
       <Link to={`/product/${product.slug}`} className="relative aspect-[6/5] overflow-hidden bg-vento-cream block">
         <img

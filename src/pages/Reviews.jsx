@@ -74,7 +74,7 @@ export default function Reviews() {
         <Stagger className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {reviews.map((review) => (
             <StaggerItem key={review.id} className="h-full">
-              <div className="relative bg-white p-8 rounded-3xl shadow-sm border border-vento-cream-dark h-full flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300">
+              <div className="relative bg-white p-8 rounded-xl shadow-sm border border-vento-cream-dark h-full flex flex-col hover:shadow-md hover:-translate-y-1 transition-all duration-300">
                 <Quote size={40} className="absolute top-6 right-6 text-vento-gold/15" fill="currentColor" />
                 <div className="flex text-vento-gold mb-4">
                   {[...Array(5)].map((_, i) => (

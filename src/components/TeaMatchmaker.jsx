@@ -106,7 +106,7 @@ export default function TeaMatchmaker() {
               initial={{ opacity: 0, y: 100, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 100, scale: 0.95 }}
-              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-vento-cream rounded-3xl shadow-2xl z-[101] overflow-hidden border border-vento-gold/20"
+              className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-md bg-vento-cream rounded-xl shadow-2xl z-[101] overflow-hidden border border-vento-gold/20"
             >
               <div className="bg-vento-forest p-5 text-center relative shrink-0">
                 {step > 0 && (

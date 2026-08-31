@@ -179,7 +179,7 @@ export default function WholesalePage() {
                 </button>
                 <button 
                   onClick={alertFeature}
-                  className="w-full sm:w-fit min-w-[200px] border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest transition-all duration-300 rounded-full"
+                  className="w-full sm:w-fit min-w-[200px] border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-vento-forest transition-all duration-300 rounded-full"
                 >
                   Create Account
                 </button>

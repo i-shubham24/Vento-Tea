@@ -9,20 +9,21 @@ export default function Categories() {
   ];
 
   return (
-    <section className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-serif text-vento-forest mb-4">Shop by Category</h2>
-        <div className="w-20 h-1 bg-vento-gold mx-auto"></div>
+    <section className="py-16 px-4 md:px-8 max-w-7xl mx-auto">
+      <div className="text-center mb-10">
+        <h2 className="text-3xl md:text-4xl font-serif text-vento-forest mb-2">Curated Collection</h2>
+        <p className="text-sm text-gray-500 mb-4">Hand-picked from our estates</p>
+        <div className="w-16 h-1 bg-vento-gold mx-auto"></div>
       </div>
       
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
         {categories.map((cat, idx) => (
-          <Link to={cat.link} key={idx} className="group flex flex-col items-center">
-            <div className="w-32 md:w-48 aspect-square mx-auto rounded-full overflow-hidden shadow-md border-4 border-vento-cream transition-transform duration-500 group-hover:scale-105 group-hover:border-vento-gold relative mb-4">
-              <div className="absolute inset-0 bg-vento-forest/10 group-hover:bg-transparent transition-colors z-10"></div>
-              <img src={cat.image} alt={cat.name} className="w-full h-full object-cover" />
+          <Link to={cat.link} key={idx} className="group relative rounded-xl overflow-hidden shadow-sm border border-vento-cream-dark bg-white hover:shadow-md transition-all">
+            <div className="aspect-[4/3] overflow-hidden relative">
+              <img src={cat.image} alt={cat.name} loading="lazy" decoding="async" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className="absolute inset-0 bg-black/45 group-hover:bg-black/55 transition-colors"></div>
+              <h3 className="absolute bottom-4 left-4 right-4 text-white font-serif font-bold text-xl md:text-2xl leading-tight drop-shadow">{cat.name}</h3>
             </div>
-            <h3 className="text-lg font-serif font-semibold text-vento-forest group-hover:text-vento-gold-dark transition-colors text-center">{cat.name}</h3>
           </Link>
         ))}
       </div>

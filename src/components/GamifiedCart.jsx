@@ -169,7 +169,7 @@ export default function GamifiedCart() {
                   <span className="text-lg text-gray-600">Subtotal</span>
                   <span className="text-2xl font-bold text-vento-forest">₹{subtotal}</span>
                 </div>
-                <button onClick={handleCheckout} className="w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold text-lg py-4 rounded-full transition-all duration-300 shadow-lg">
+                <button onClick={handleCheckout} className="w-full bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold text-lg py-4 rounded-full transition-all duration-300 shadow-lg">
                   View Cart
                 </button>
               </div>

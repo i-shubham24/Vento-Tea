@@ -60,7 +60,7 @@ export default function Blogs() {
         {/* Featured Blog */}
         {featuredBlog && (
           <ScrollReveal>
-            <div className="bg-white rounded-[2rem] overflow-hidden shadow-lg border border-gray-100 mb-16 group cursor-pointer transition-transform hover:-translate-y-1 duration-500">
+            <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 mb-16 group cursor-pointer transition-transform hover:-translate-y-1 duration-500">
               <div className="grid grid-cols-1 md:grid-cols-2">
                 <div className="relative h-64 md:h-full overflow-hidden">
                   <img 
@@ -96,7 +96,7 @@ export default function Blogs() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {regularBlogs.map((blog) => (
             <ScrollReveal key={blog.id} delay={blog.id * 0.1}>
-              <div className="bg-white rounded-3xl overflow-hidden shadow-md border border-gray-100 group cursor-pointer h-full flex flex-col hover:-translate-y-1 transition-transform duration-500">
+              <div className="bg-white rounded-xl overflow-hidden shadow-md border border-gray-100 group cursor-pointer h-full flex flex-col hover:-translate-y-1 transition-transform duration-500">
                 <div className="relative h-56 overflow-hidden">
                   <img 
                     src={blog.image} 

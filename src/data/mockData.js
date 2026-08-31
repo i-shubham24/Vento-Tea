@@ -167,3 +167,11 @@ export const mockProducts = [
 
 export const FREE_SHIPPING_THRESHOLD = 499;
 export const CART_REWARD_THRESHOLD = 999;
+
+export function getProducts(){
+  try{
+    const v = localStorage.getItem('vento_admin_products');
+    if(v){ const p = JSON.parse(v); if(Array.isArray(p) && p.length) return p; }
+  }catch{}
+  return mockProducts;
+}

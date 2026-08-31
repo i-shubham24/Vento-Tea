@@ -66,7 +66,7 @@ export default function CartPage() {
           
           {/* Cart Items Column */}
           <div className="lg:col-span-2 space-y-4">
-            <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
               {items.map((item, index) => (
                 <div key={`${item.productId}-${item.weight.grams}`} className={`flex flex-col sm:flex-row gap-6 ${index !== 0 ? 'mt-6 pt-6 border-t border-gray-100' : ''}`}>
                   <div className="w-24 h-24 shrink-0 bg-vento-cream rounded-2xl overflow-hidden border border-gray-100">
@@ -111,7 +111,7 @@ export default function CartPage() {
 
           {/* Order Summary Column */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100 sticky top-28">
+            <div className="bg-white rounded-xl p-6 shadow-sm border border-gray-100 sticky top-28">
               <h2 className="text-xl font-serif text-vento-forest font-semibold mb-6">Order summary</h2>
 
               {/* Coupon Highlight — only interactive, no auto-apply */}
@@ -205,11 +205,11 @@ export default function CartPage() {
 
               {/* Checkout Action */}
               {user ? (
-                <Link to="/checkout" className="block text-center w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
+                <Link to="/checkout" className="block text-center w-full bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Checkout Now
                 </Link>
               ) : (
-                <button onClick={openAuth} className="w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
+                <button onClick={openAuth} className="w-full bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Login to checkout
                 </button>
               )}

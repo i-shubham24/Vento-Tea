@@ -100,7 +100,7 @@ export default function Policies({ type }) {
       />
 
       <div className="max-w-4xl mx-auto px-4 mt-16">
-        <div className="bg-white p-8 md:p-16 rounded-[2rem] shadow-sm border border-vento-cream-dark text-gray-700 leading-relaxed">
+        <div className="bg-white p-8 md:p-16 rounded-xl shadow-sm border border-vento-cream-dark text-gray-700 leading-relaxed">
           <p className="text-sm text-gray-400 mb-8 pb-4 border-b border-gray-100">Last updated: August 2026</p>
           {currentPolicy.content}
           

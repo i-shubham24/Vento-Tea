@@ -10,7 +10,7 @@ export default function ImageBand({ src, alt, maxWidth = 'max-w-7xl', className 
         src={src}
         alt={alt}
         loading="lazy"
-        className={`${maxWidth} w-full mx-auto h-auto rounded-3xl shadow-xl border border-vento-cream-dark`}
+        className={`${maxWidth} w-full mx-auto h-auto rounded-xl shadow-xl border border-vento-cream-dark`}
       />
     </div>
   );

@@ -36,7 +36,7 @@ export default function ReviewCarousel() {
 
         <div className="animate-marquee flex gap-6 px-4">
           {items.map((rev, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-3xl shadow-sm border border-gray-100 w-80 md:w-96 shrink-0 whitespace-normal">
+            <div key={idx} className="bg-white p-8 rounded-xl shadow-sm border border-gray-100 w-80 md:w-96 shrink-0 whitespace-normal">
               <div className="flex text-vento-gold mb-4">
                  {[...Array(rev.rating)].map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
               </div>

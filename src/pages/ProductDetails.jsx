@@ -128,7 +128,7 @@ export default function ProductDetails() {
           
           {/* Left: Images */}
           <div className="flex flex-col gap-6">
-            <div className="relative aspect-[4/3] md:aspect-square max-h-[500px] w-full rounded-3xl overflow-hidden bg-[#fdfbf6] shadow-sm border border-vento-gold/10 group flex items-center justify-center">
+            <div className="relative aspect-[4/3] md:aspect-square max-h-[500px] w-full rounded-xl overflow-hidden bg-[#fdfbf6] shadow-sm border border-vento-gold/10 group flex items-center justify-center">
               <img 
                 src={activeImage} 
                 alt={product.name} 
@@ -218,7 +218,7 @@ export default function ProductDetails() {
             <div ref={addToCartRef} className="flex gap-4">
               <button 
                 onClick={handleAddToCart}
-                className="flex-1 bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
+                className="flex-1 bg-vento-forest border border-vento-forest text-white hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] hover:shadow-2xl shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-sm"
               >
                 <ShoppingBag size={18} />
                 Add to cart
@@ -267,7 +267,7 @@ export default function ProductDetails() {
         </div>
 
         {/* Full-Width How To Make Perfect Cup of Tea */}
-        <div className="max-w-4xl mx-auto mb-24 bg-[#faf7f2] rounded-3xl p-8 md:p-12 border border-vento-gold/20 shadow-sm">
+        <div className="max-w-4xl mx-auto mb-24 bg-[#faf7f2] rounded-xl p-8 md:p-12 border border-vento-gold/20 shadow-sm">
           <h3 className="text-3xl md:text-4xl font-serif text-vento-forest mb-10 text-center">How To Make Perfect Cup of Tea</h3>
           <div className="flex flex-col">
             <BrewStep num={1} text='"Water is the mother of tea." Always use fresh cold tap water.' />
@@ -365,7 +365,7 @@ export default function ProductDetails() {
 
               <button 
                 onClick={handleAddToCart}
-                className="bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-xs shrink-0"
+                className="bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest hover:text-vento-forest hover:border-vento-gold font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl flex items-center justify-center gap-2 uppercase tracking-widest text-xs shrink-0"
               >
                 <ShoppingBag size={14} />
                 <span className="hidden xs:inline">Add to cart</span>
