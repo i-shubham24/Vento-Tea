@@ -9,6 +9,7 @@ import useScrollLock from '../hooks/useScrollLock';
 import { EASE_OUT_SINE, overlay, drawerRight } from '../lib/motion';
 
 export default function GamifiedCart() {
+  const mockProducts = useProducts();
   const { items, isOpen, setIsOpen, updateQty, removeItem, subtotal, rewardRemaining, addItem } = useCart();
   const navigate = useNavigate();
 

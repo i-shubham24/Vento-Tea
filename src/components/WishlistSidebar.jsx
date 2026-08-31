@@ -5,6 +5,7 @@ import { X, Heart, ShoppingBag, Trash2 } from 'lucide-react';
 import { useEffect } from 'react';
 
 export default function WishlistSidebar() {
+  const mockProducts = useProducts();
   const { wishlist, isWishlistOpen, setIsWishlistOpen, toggleWishlist } = useWishlist();
   const { addItem } = useCart();
 
