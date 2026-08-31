@@ -49,17 +49,17 @@ export default function OrderDetailsDrawer({ order, onClose, onUpdateStatus }) {
             
             <div className="flex items-center justify-between relative px-2">
               <div className="absolute left-8 right-8 top-4 h-1 bg-gray-100 -z-10 rounded-full"></div>
-              <div className={\`absolute left-8 right-8 top-4 h-1 bg-vento-forest -z-10 rounded-full transition-all duration-500\`} style={{ width: \`\${Math.max(0, (currentIdx / 4) * 100)}%\` }}></div>
+              <div className="absolute left-8 right-8 top-4 h-1 bg-vento-forest -z-10 rounded-full transition-all duration-500" style={{ width: Math.max(0, (currentIdx / 4) * 100) + '%' }}></div>
               
               {steps.map((step, idx) => {
                 const isCompleted = idx <= currentIdx;
                 const isActive = idx === currentIdx;
                 return (
                   <div key={step} className="flex flex-col items-center gap-2">
-                    <div className={\`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs transition-colors shadow-sm \${isCompleted ? 'bg-vento-forest' : 'bg-white border-2 border-gray-200 text-gray-400'}\`}>
+                    <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs transition-colors shadow-sm \${isCompleted ? 'bg-vento-forest' : 'bg-white border-2 border-gray-200 text-gray-400'}`}>
                       {isCompleted ? <CheckCircle size={16} /> : idx + 1}
                     </div>
-                    <span className={\`text-xs font-semibold uppercase tracking-wider \${isActive ? 'text-vento-forest' : 'text-gray-400'}\`}>{step}</span>
+                    <span className={`text-xs font-semibold uppercase tracking-wider \${isActive ? 'text-vento-forest' : 'text-gray-400'}`}>{step}</span>
                   </div>
                 );
               })}

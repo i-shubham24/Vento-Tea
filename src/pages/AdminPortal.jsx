@@ -251,8 +251,7 @@ export default function AdminPortal(){
                   ))}
                 </div>
               </div>
-              <div className="bg-white rounded-lg border
-                <table className="w-full text-sm min-w-[700px]">
+              <div className="bg-white rounded-lg border border-vento-cream-dark overflow-hidden overflow-x-auto"><table className="w-full text-sm min-w-[700px]">
                   <thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">Order Number</th><th>Customer</th><th>Date</th><th>Total</th><th>Payment</th><th>Status</th></tr></thead>
                   <tbody>{orders.filter(o=> (orderStatusFilter === 'all' || o.orderStatus === orderStatusFilter) && (o.id.toLowerCase().includes(orderSearch.toLowerCase()) || o.customer.name.toLowerCase().includes(orderSearch.toLowerCase()))).map(o=>(
                     <tr key={o.id} className="border-t hover:bg-vento-mint/30 cursor-pointer" onClick={()=> setSelectedOrder(o)}><td className="p-3 font-mono text-xs">{o.id}</td><td>{o.customer.name}<br/><span className="text-xs text-gray-400">{o.customer.email}</span></td><td>{new Date(o.createdAt).toLocaleDateString()}</td><td>₹{o.subtotal}</td><td><span className="bg-green-100 text-green-700 px-2 py-1 rounded-full text-xs">{o.paymentStatus.toUpperCase()}</span></td>

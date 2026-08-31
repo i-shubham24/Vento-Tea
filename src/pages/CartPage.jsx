@@ -126,8 +126,7 @@ export default function CartPage() {
                   </div>
                   <button onClick={handleRemoveCoupon} className="text-xs font-bold px-3 py-1.5 rounded-full bg-white border border-green-300 text-green-700 hover:bg-green-100 flex items-center gap-1"><X size={12} />Remove</button>
                 </div>
-              ) : (
-                {(() => {
+              ) : (() => {
                   const available = COUPONS.filter(c => subtotal >= c.min).sort((a,b) => b.discount - a.discount);
                   const best = available[0] || COUPONS[0];
                   return (
@@ -143,7 +142,6 @@ export default function CartPage() {
                     </div>
                   );
                 })()}
-              )}
 
               {/* Coupon Input */}
               <div className="flex gap-2 mb-2">
