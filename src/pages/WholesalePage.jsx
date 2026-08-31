@@ -9,9 +9,18 @@ import { useNavigate } from 'react-router-dom';
 export default function WholesalePage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoginView, setIsLoginView] = useState(true);
+  const [bizName, setBizName] = useState('');
+  const [phone, setPhone] = useState('');
   const { login } = useAuth();
   const navigate = useNavigate();
 
+  const handleRegister = (e) => {
+    e.preventDefault();
+    alert("Wholesale application submitted for " + bizName + "! Our team will review and contact you shortly.");
+    setIsLoginView(true);
+  };
+  
   const handleLogin = (e) => {
     e.preventDefault();
     const role = login(email, password);
@@ -137,62 +146,109 @@ export default function WholesalePage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-white p-8 md:p-12 lg:p-14 shadow-2xl rounded-[2.5rem] border border-gray-100 relative group"
           >
-            <h3 className="text-sm font-bold uppercase tracking-widest text-vento-forest mb-4">Login to your account</h3>
-            <p className="text-sm text-gray-500 mb-8">
-              If you have an account with us, please log in.
-            </p>
+            {isLoginView ? (
+              <>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-vento-forest mb-4">Login to your account</h3>
+                <p className="text-sm text-gray-500 mb-8">
+                  If you have an account with us, please log in.
+                </p>
 
-            <form onSubmit={handleLogin} className="mb-10">
-              <input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Email Address" 
-                className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
-                required
-              />
-              <input 
-                type="password" 
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Password" 
-                className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
-                required
-              />
-              
-              <Link to="/contact" className="text-vento-gold text-sm font-medium hover:text-vento-forest transition-colors mb-8 block ml-2">
-                Forgot your password?
-              </Link>
-              
-              <button 
-                type="submit"
-                className="w-full bg-vento-forest text-vento-cream py-4 px-12 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light transition-colors duration-300 rounded-full shadow-md"
-              >
-                Log In
-              </button>
-            </form>
+                <form onSubmit={handleLogin} className="mb-10">
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Email Address" 
+                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    required
+                  />
+                  <input 
+                    type="password" 
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    placeholder="Password" 
+                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    required
+                  />
+                  
+                  <Link to="/contact" className="text-vento-gold text-sm font-medium hover:text-vento-forest transition-colors mb-8 block ml-2">
+                    Forgot your password?
+                  </Link>
+                  
+                  <button 
+                    type="submit"
+                    className="w-full bg-vento-forest text-vento-cream py-4 px-12 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                  >
+                    Log In
+                  </button>
+                </form>
 
-            <div className="border-t border-gray-100 pt-8">
-              <p className="text-sm text-gray-500 mb-6 leading-relaxed font-medium">
-                We have a new site. Having trouble accessing your old account?
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <button 
-                  onClick={alertFeature}
-                  className="w-full sm:w-fit min-w-[200px] border-2 border-gray-200 text-gray-600 py-4 px-6 text-xs font-bold tracking-widest uppercase hover:border-vento-forest hover:text-vento-forest transition-all duration-300 rounded-full"
-                >
-                  Reactivate Old
-                </button>
-                <button 
-                  onClick={alertFeature}
-                  className="w-full sm:w-fit min-w-[200px] border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-white hover:text-vento-forest transition-all duration-300 rounded-full"
-                >
-                  Create Account
-                </button>
-              </div>
-            </div>
+                <div className="border-t border-gray-100 pt-8">
+                  <p className="text-sm text-gray-500 mb-6 leading-relaxed font-medium">
+                    New to Vento Wholesale? Apply for an account below.
+                  </p>
+                  
+                  <div className="flex flex-col sm:flex-row gap-4">
+                    <button 
+                      onClick={() => setIsLoginView(false)}
+                      className="w-full border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 rounded-full"
+                    >
+                      Create Account
+                    </button>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className="text-sm font-bold uppercase tracking-widest text-vento-forest mb-4">Wholesale Application</h3>
+                <p className="text-sm text-gray-500 mb-8">
+                  Tell us about your business and we'll get back to you within 24 hours.
+                </p>
 
+                <form onSubmit={handleRegister} className="mb-8">
+                  <input 
+                    type="text" 
+                    value={bizName}
+                    onChange={(e) => setBizName(e.target.value)}
+                    placeholder="Business Name" 
+                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    required
+                  />
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Business Email" 
+                    className="w-full mb-4 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    required
+                  />
+                  <input 
+                    type="tel" 
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    placeholder="Phone Number" 
+                    className="w-full mb-6 p-4 border border-gray-200 focus:border-vento-gold focus:ring-2 focus:ring-vento-gold/20 outline-none bg-gray-50 text-gray-800 transition-all rounded-full"
+                    required
+                  />
+                  
+                  <button 
+                    type="submit"
+                    className="w-full bg-vento-forest text-vento-cream py-4 px-12 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                  >
+                    Submit Application
+                  </button>
+                </form>
+
+                <div className="text-center">
+                  <button 
+                    onClick={() => setIsLoginView(true)}
+                    className="text-gray-500 text-sm font-medium hover:text-vento-forest transition-colors"
+                  >
+                    ← Back to Login
+                  </button>
+                </div>
+              </>
+            )}
           </motion.div>
         </div>
       </section>
