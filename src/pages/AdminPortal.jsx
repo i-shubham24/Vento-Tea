@@ -160,35 +160,8 @@ export default function AdminPortal(){
                   ))}</tbody>
                 </table>
               </div>
-              {showCategoryModal && (
-          <CategoryForm 
-            category={editingCategory} 
-            onSave={(cat) => {
-              let nc;
-              if (editingCategory) {
-                nc = categories.map(c => c.id === cat.id ? cat : c);
-              } else {
-                nc = [...categories, cat];
-              }
-              setCategories(nc);
-              localStorage.setItem('vento_categories', JSON.stringify(nc));
-              setShowCategoryModal(false);
-            }}
-            onCancel={() => setShowCategoryModal(false)}
-          />
-        )}
-        {showProductModal && (
-                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
-                  <div className="absolute inset-0 bg-black/40" onClick={()=> setShowProductModal(false)}></div>
-                  <div className="relative bg-[#F8FFFB] rounded-xl w-full max-w-5xl shadow-xl max-h-[90vh] overflow-auto">
-                    <DetailedProductForm product={editingProduct} onSave={(data)=>{
-                      if(editingProduct){ setProducts(prev=> prev.map(x=> x.id===editingProduct.id ? {...x, ...data} : x)); }
-                      else { const id='sku-'+Date.now(); setProducts(prev=> [...prev, { id, slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'), images:[data.image || '/brand/client/products/gold-tea/5.png'], badges:data.badges || ['New'], weights:[{grams:Number(data.stock) || 250,label:`${data.stock||250}g`,priceInr: Number(data.price)}], ...data, priceInr: Number(data.price) }]); }
-                      setShowProductModal(false);
-                    }} onCancel={()=> setShowProductModal(false)} />
-                  </div>
-                </div>
-              )}
+              
+        
             </div>
           )}
           {active==='categories' && (
@@ -399,6 +372,36 @@ export default function AdminPortal(){
         <button onClick={logout} className="m-3 flex items-center gap-2 px-3 py-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-sm"><LogOut size={16}/> Logout</button>
       </aside>
       {mobileOpen && <div className="fixed inset-0 bg-black/30 md:hidden z-20" onClick={()=> setMobileOpen(false)}></div>}
+      
+      {showCategoryModal && (
+          <CategoryForm 
+            category={editingCategory} 
+            onSave={(cat) => {
+              let nc;
+              if (editingCategory) {
+                nc = categories.map(c => c.id === cat.id ? cat : c);
+              } else {
+                nc = [...categories, cat];
+              }
+              setCategories(nc);
+              localStorage.setItem('vento_categories', JSON.stringify(nc));
+              setShowCategoryModal(false);
+            }}
+            onCancel={() => setShowCategoryModal(false)}
+          />
+        )}
+      {showProductModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 overflow-auto">
+                  <div className="absolute inset-0 bg-black/40" onClick={()=> setShowProductModal(false)}></div>
+                  <div className="relative bg-[#F8FFFB] rounded-xl w-full max-w-5xl shadow-xl max-h-[90vh] overflow-auto">
+                    <DetailedProductForm product={editingProduct} onSave={(data)=>{
+                      if(editingProduct){ setProducts(prev=> prev.map(x=> x.id===editingProduct.id ? {...x, ...data} : x)); }
+                      else { const id='sku-'+Date.now(); setProducts(prev=> [...prev, { id, slug: data.name.toLowerCase().replace(/[^a-z0-9]+/g,'-'), images:[data.image || '/brand/client/products/gold-tea/5.png'], badges:data.badges || ['New'], weights:[{grams:Number(data.stock) || 250,label:`${data.stock||250}g`,priceInr: Number(data.price)}], ...data, priceInr: Number(data.price) }]); }
+                      setShowProductModal(false);
+                    }} onCancel={()=> setShowProductModal(false)} />
+                  </div>
+                </div>
+              )}
       <OrderDetailsDrawer 
         order={selectedOrder} 
         onClose={() => setSelectedOrder(null)} 
