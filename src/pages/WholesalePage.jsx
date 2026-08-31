@@ -177,7 +177,7 @@ export default function WholesalePage() {
                   
                   <button 
                     type="submit"
-                    className="w-full bg-vento-forest text-vento-cream py-4 px-12 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                    className="w-full bg-vento-forest text-vento-cream py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest-light hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
                   >
                     Log In
                   </button>
@@ -191,7 +191,7 @@ export default function WholesalePage() {
                   <div className="flex flex-col sm:flex-row gap-4">
                     <button 
                       onClick={() => setIsLoginView(false)}
-                      className="w-full border-2 border-vento-gold text-vento-forest py-4 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 rounded-full"
+                      className="w-full border-2 border-vento-gold text-vento-forest py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-forest hover:text-white hover:scale-105 active:scale-95 transition-all duration-300 rounded-full"
                     >
                       Create Account
                     </button>
@@ -233,7 +233,7 @@ export default function WholesalePage() {
                   
                   <button 
                     type="submit"
-                    className="w-full bg-vento-forest text-vento-cream py-4 px-12 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
+                    className="w-full bg-vento-forest text-vento-cream py-3 px-6 text-xs font-bold tracking-widest uppercase hover:bg-vento-gold hover:text-vento-forest hover:scale-105 active:scale-95 transition-all duration-300 rounded-full shadow-md"
                   >
                     Submit Application
                   </button>
