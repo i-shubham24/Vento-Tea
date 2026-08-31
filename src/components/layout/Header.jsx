@@ -97,7 +97,7 @@ export default function Header() {
                   placeholder="Search teas..." 
                   className="bg-white/15 border border-vento-pale-yellow/30 text-vento-cream text-sm rounded-full pl-4 pr-10 py-2 outline-none focus:border-vento-pale-yellow transition-colors w-40 lg:w-60 placeholder:text-vento-cream/50"
                 />
-                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-cream hover:text-vento-pale-yellow transition-colors">
+                <button type="submit" className="absolute right-3 top-1/2 -translate-y-1/2 text-vento-cream hover:text-vento-gold hover:scale-110 active:scale-95 transition-all">
                   <Search size={18} />
                 </button>
               </form>
@@ -150,14 +150,14 @@ export default function Header() {
                 </div>
               </div>
             ) : (
-              <button onClick={openAuth} className="hidden lg:block text-sm font-semibold text-vento-cream hover:text-vento-pale-yellow transition-colors mx-2 cursor-pointer">
+              <button onClick={openAuth} className="hidden lg:block text-sm font-bold text-vento-cream hover:text-vento-gold hover:scale-105 active:scale-95 transition-all mx-2 cursor-pointer">
                 Login
               </button>
             )}
             
             <button 
               onClick={() => setIsWishlistOpen(true)}
-              className="relative p-2 text-green-500 hover:text-green-400 transition-colors flex items-center"
+              className="relative p-2 text-green-500 hover:text-green-400 hover:scale-110 active:scale-95 transition-all flex items-center"
             >
               <Heart size={24} fill="currentColor" />
               {wishlist.length > 0 && (
@@ -169,7 +169,7 @@ export default function Header() {
 
             <button 
               onClick={() => setIsOpen(true)}
-              className="relative p-2 text-vento-cream hover:text-vento-gold transition-colors flex items-center"
+              className="relative p-2 text-vento-cream hover:text-vento-gold hover:scale-110 active:scale-95 transition-all flex items-center"
             >
               <ShoppingBag size={24} />
               {cartCount > 0 && (

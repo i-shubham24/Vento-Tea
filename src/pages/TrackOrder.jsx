@@ -125,7 +125,7 @@ export default function TrackOrder() {
 
                 <button 
                   onClick={() => setShowResult(false)}
-                  className="mt-12 w-full border-2 border-vento-forest text-vento-forest font-bold py-3 rounded-full hover:bg-vento-forest hover:text-white transition-colors"
+                  className="mt-12 w-full border-2 border-vento-forest text-vento-forest font-bold py-3 rounded-full hover:bg-vento-forest hover:text-white transition-all hover:scale-105 active:scale-95"
                 >
                   Track Another Order
                 </button>

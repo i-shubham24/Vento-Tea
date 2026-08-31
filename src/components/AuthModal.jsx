@@ -89,7 +89,7 @@ export default function AuthModal() {
             <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Email + Password (demo/admin)</p>
             <input type="email" value={email} onChange={(e)=> setEmail(e.target.value)} placeholder="Email" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
             <input type="password" value={password} onChange={(e)=> setPassword(e.target.value)} placeholder="Password" className="w-full py-2 px-3 text-sm bg-white rounded-xl border border-gray-200 outline-none focus:border-vento-gold" />
-            <button type="submit" className="w-full bg-vento-forest text-white font-bold py-2 rounded-full text-sm">Login with Email</button>
+            <button type="submit" className="w-full bg-vento-forest text-white font-bold py-2 rounded-full text-sm transition-all hover:scale-105 active:scale-95 hover:bg-vento-forest-light shadow-md">Login with Email</button>
           </form>
           <form onSubmit={handleSendOtp} className="space-y-3 md:space-y-4">
             <p className="text-xs font-bold tracking-widest uppercase text-gray-400">Or Phone OTP</p>
@@ -115,7 +115,7 @@ export default function AuthModal() {
               </div>
             </div>
             {error && <p className="text-red-500 text-xs">{error}</p>}
-            <button type="submit" className="w-full bg-white border border-vento-forest text-vento-forest hover:bg-vento-cream font-bold py-2.5 rounded-full transition-colors shadow-md text-sm mt-2">
+            <button type="submit" className="w-full bg-white border border-vento-forest text-vento-forest font-bold py-2.5 rounded-full transition-all hover:scale-105 active:scale-95 hover:bg-vento-gold shadow-md text-sm mt-2">
               Send OTP
             </button>
             <div className="text-center text-xs text-gray-600 mt-3">
@@ -141,7 +141,7 @@ export default function AuthModal() {
               />
             </div>
             {error && <p className="text-red-500 text-xs">{error}</p>}
-            <button type="submit" className="w-full bg-vento-gold hover:bg-vento-gold-dark text-vento-forest font-bold py-2.5 rounded-full transition-colors shadow-md text-sm">
+            <button type="submit" className="w-full bg-vento-gold text-vento-forest font-bold py-2.5 rounded-full transition-all hover:scale-105 active:scale-95 hover:bg-vento-gold-dark shadow-md text-sm">
               Verify & {isLogin ? 'Login' : 'Sign Up'}
             </button>
           </form>

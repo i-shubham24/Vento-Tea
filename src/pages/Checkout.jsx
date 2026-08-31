@@ -11,6 +11,12 @@ export default function Checkout() {
   const { user } = useAuth();
   const { createOrder, updatePayment } = useOrder();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    if (items.length === 0) {
+      navigate('/shop', { replace: true });
+    }
+  }, [items, navigate]);
   const [payMode, setPayMode] = useState('razorpay');
   const [processing, setProcessing] = useState(false);
 
@@ -223,7 +229,7 @@ export default function Checkout() {
               </div>
 
               {/* Checkout Action */}
-              <button onClick={handlePlaceOrder} disabled={processing} className="w-full bg-vento-forest text-white hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-colors shadow-md text-lg disabled:opacity-60">
+              <button onClick={handlePlaceOrder} disabled={processing} className="w-full bg-vento-forest text-white hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all hover:scale-105 active:scale-95 shadow-md text-lg disabled:opacity-60 disabled:hover:scale-100 disabled:cursor-not-allowed">
                 {processing ? 'Processing Razorpay...' : `Place Order · ₹${finalTotal}`}
               </button>
               <p className="text-xs text-center text-gray-400 mt-2">Demo: Razorpay is mocked, no real charge. Use demo@vento.com to test.</p>

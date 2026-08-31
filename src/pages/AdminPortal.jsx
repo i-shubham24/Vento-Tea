@@ -203,7 +203,7 @@ export default function AdminPortal(){
               <div className="mb-4">
                 <input placeholder="Search categories by name, slug..." className="w-full sm:w-80 border rounded-full px-4 py-2 text-sm outline-none focus:border-vento-forest" />
               </div>
-              <div className="bg-white rounded-lg border border-vento-cream-dark overflow-hidden shadow-sm">
+              <div className="bg-white rounded-lg border border-vento-cream-dark overflow-hidden overflow-x-auto shadow-sm">
                 <div className="hidden sm:grid grid-cols-12 gap-4 px-4 py-3 bg-vento-mint/50 text-xs font-bold tracking-widest uppercase text-vento-forest">
                   <div className="col-span-5">Category Name</div>
                   <div className="col-span-2 text-center">Products</div>
@@ -280,7 +280,7 @@ export default function AdminPortal(){
           {active==='reviews' && (
             <div>
               <div className="flex justify-between items-center mb-4"><h2 className="text-xl font-bold text-vento-forest">Reviews</h2><span className="text-xs bg-vento-mint px-2 py-1 rounded-full">{orders.filter(o=>o.review).length} total</span></div>
-              <div className="bg-white rounded-lg border overflow-hidden">
+              <div className="bg-white rounded-lg border overflow-hidden overflow-x-auto">
                 {orders.filter(o=>o.review).length ? orders.filter(o=>o.review).map(o=>(
                   <div key={o.id} className="p-4 border-b flex justify-between items-start gap-4">
                     <div><p className="font-semibold text-sm">{o.customer.name} — {o.review.rating}★ on {o.items[0]?.name}</p><p className="text-sm text-gray-600">{o.review.comment}</p><p className="text-xs text-gray-400">{new Date(o.review.date).toLocaleString()}</p></div>
@@ -299,7 +299,7 @@ export default function AdminPortal(){
                   if(title){ const b={id:Date.now().toString(), title, category:'CARE GUIDE', readTime:'3 min', status:'Published'}; const nb=[...blogs,b]; setBlogs(nb); localStorage.setItem('vento_blogs', JSON.stringify(nb)); }
                 }} className="bg-vento-forest text-white px-4 py-2 rounded-full text-sm">+ New Article</button>
               </div>
-              <div className="bg-white rounded-lg border overflow-hidden">
+              <div className="bg-white rounded-lg border overflow-hidden overflow-x-auto">
                 <table className="w-full text-sm">
                   <thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">ARTICLE</th><th>CATEGORY</th><th>STATUS</th><th></th></tr></thead>
                   <tbody>{blogs.map(b=>(
@@ -314,7 +314,7 @@ export default function AdminPortal(){
               <div className="flex justify-between items-center mb-4"><h2 className="text-xl font-bold text-vento-forest">Carousel</h2><button onClick={()=>{
                 const h=prompt('Slide headline?'); if(h){ const s={id:Date.now().toString(), headline:h, subtitle:'New slide', link:'/shop'}; const nc=[...carousel,s]; setCarousel(nc); localStorage.setItem('vento_carousel', JSON.stringify(nc)); }
               }} className="bg-vento-forest text-white px-4 py-2 rounded-full text-sm">+ Add Slide</button></div>
-              <div className="bg-white rounded-lg border overflow-hidden">
+              <div className="bg-white rounded-lg border overflow-hidden overflow-x-auto">
                 <table className="w-full text-sm"><thead className="text-xs text-gray-400 bg-gray-50"><tr><th className="text-left p-3">Headline</th><th>Subtitle</th><th>Link</th><th></th></tr></thead>
                 <tbody>{carousel.map(s=>(
                   <tr key={s.id} className="border-t"><td className="p-3 font-semibold">{s.headline}</td><td className="p-3 text-xs">{s.subtitle}</td><td className="p-3 font-mono text-xs">{s.link}</td><td className="p-3"><button onClick={()=>{const nc=carousel.filter(x=> x.id!==s.id); setCarousel(nc); localStorage.setItem('vento_carousel', JSON.stringify(nc));}} className="text-red-600 border border-red-200 px-2 py-1 rounded text-xs hover:bg-red-50 hover:border-red-300 transition-colors">Delete</button></td></tr>
