@@ -209,11 +209,11 @@ export default function CartPage() {
 
               {/* Checkout Action */}
               {user ? (
-                <Link to="/checkout" className="block text-center w-full bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
+                <Link to="/checkout" className="block text-center w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Checkout Now
                 </Link>
               ) : (
-                <button onClick={openAuth} className="w-full bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
+                <button onClick={openAuth} className="w-full bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold py-4 rounded-full transition-all duration-300 shadow-md">
                   Login to checkout
                 </button>
               )}

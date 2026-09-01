@@ -31,7 +31,7 @@ export default function FirstVisitOffer() {
           {done ? <div className="bg-green-50 text-green-700 p-4 rounded-xl font-semibold">🎉 Your code WELCOME15 is ready! Check inbox.</div> : (
             <form onSubmit={(e) => { e.preventDefault(); setDone(true); localStorage.setItem('vento-first-visit-seen','1'); }} className="flex flex-col gap-3">
               <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder="Enter your email" className="w-full py-3 px-5 bg-vento-cream border border-vento-gold/30 rounded-full outline-none focus:border-vento-gold text-center" />
-              <button type="submit" className="bg-vento-forest text-vento-cream font-bold py-3 rounded-full hover:bg-white hover:text-vento-forest transition-colors">Claim welcome offer</button>
+              <button type="submit" className="bg-vento-forest text-vento-cream font-bold py-3 rounded-full hover:bg-vento-gold hover:text-vento-forest transition-colors">Claim welcome offer</button>
             </form>
           )}
           <p className="text-[11px] text-gray-400 mt-4">No spam. Unsubscribe anytime.</p>

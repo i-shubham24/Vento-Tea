@@ -32,7 +32,7 @@ export default function WholesaleBanner() {
         >
           <Link 
             to="/wholesale" 
-            className="inline-block px-12 py-4 bg-vento-forest text-vento-cream hover:bg-white hover:text-vento-forest font-bold tracking-widest text-sm uppercase transition-all duration-300 rounded-full shadow-lg"
+            className="inline-block px-12 py-4 bg-vento-forest text-vento-cream hover:bg-vento-gold hover:text-vento-forest font-bold tracking-widest text-sm uppercase transition-all duration-300 rounded-full shadow-lg"
           >
             Become a Wholesaler
           </Link>
