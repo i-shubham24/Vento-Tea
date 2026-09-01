@@ -107,14 +107,14 @@ export default function Home() {
         <FAQ />
       </ScrollReveal>
 
-      <ScrollReveal>
-        <TrustStrip />
-      </ScrollReveal>
-
       <TrustSignals />
 
       <ScrollReveal>
         <DeliveryBanner />
+      </ScrollReveal>
+
+      <ScrollReveal>
+        <TrustStrip />
       </ScrollReveal>
     </div>
   );
