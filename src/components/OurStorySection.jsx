@@ -32,18 +32,12 @@ export default function OurStorySection({ hideCta = false }) {
         </div>
         
         {/* Floating Decorative Element layered over the image */}
-        <motion.div 
-          animate={{ y: [0, -10, 0], rotate: [0, 2, -2, 0] }}
-          transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-          className="absolute -bottom-8 -left-8 bg-vento-gold text-vento-forest font-serif p-8 rounded-full shadow-xl hidden md:flex items-center justify-center h-32 w-32 z-10 border-4 border-white"
-        >
-          <span className="text-center text-sm font-bold leading-tight">Since<br/>1920</span>
-        </motion.div>
+        
       </div>
 
       <div className="w-full md:w-1/2 relative z-10">
         <SplitReveal as="h2" className="text-4xl md:text-5xl lg:text-6xl font-serif text-vento-forest mb-6 leading-tight" text="Crafted to be Savoured." />
-        <div className="w-24 h-1 bg-vento-gold mb-8"></div>
+        
         <p className="text-vento-forest mb-6 text-lg leading-relaxed font-medium">
           Every expression of one obsession. Flavour without compromise. 
           Delivered fresh from the finest gardens of Assam and Darjeeling.

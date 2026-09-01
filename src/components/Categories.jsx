@@ -13,7 +13,7 @@ export default function Categories() {
       <div className="text-center mb-10">
         <h2 className="text-3xl md:text-4xl font-serif text-vento-forest mb-2">Curated Collection</h2>
         <p className="text-sm text-gray-500 mb-4">Hand-picked from our estates</p>
-        <div className="w-16 h-1 bg-vento-gold mx-auto"></div>
+        
       </div>
       
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">

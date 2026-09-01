@@ -33,7 +33,7 @@ export default function FAQ() {
     <section className="py-24 px-4 max-w-3xl mx-auto">
       <div className="text-center mb-12">
         <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="Frequently Asked Questions" />
-        <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
+        
       </div>
 
       <div className="space-y-4">

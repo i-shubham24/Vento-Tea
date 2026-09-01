@@ -55,13 +55,7 @@ export default function PageBanner({ title, subtitle, imagePath, eyebrow, compac
             {title}
           </motion.h1>
 
-          {/* Gold rule flourish */}
-          <motion.div
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.9, ease: EASE_OUT_SINE, delay: 0.25 }}
-            className="w-24 h-[3px] bg-vento-gold origin-left mb-6"
-          ></motion.div>
+          
 
           {subtitle && (
             <motion.p

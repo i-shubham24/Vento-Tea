@@ -150,16 +150,16 @@ export default function Header() {
                 </div>
               </div>
             ) : (
-              <button onClick={openAuth} className="hidden lg:block text-sm font-bold text-vento-cream hover:text-vento-gold hover:scale-105 active:scale-95 transition-all mx-2 cursor-pointer">
-                Login
+              <button onClick={openAuth} className="relative p-2 text-vento-cream hover:text-vento-gold hover:scale-110 active:scale-95 transition-all flex items-center" aria-label="Login / Account">
+                <User size={24} strokeWidth={1.5} />
               </button>
             )}
             
             <button 
               onClick={() => setIsWishlistOpen(true)}
-              className="relative p-2 text-green-500 hover:text-green-400 hover:scale-110 active:scale-95 transition-all flex items-center"
+              className="relative p-2 text-vento-cream hover:text-vento-gold hover:scale-110 active:scale-95 transition-all flex items-center"
             >
-              <Heart size={24} fill="currentColor" />
+              <Heart size={24} strokeWidth={1.5} />
               {wishlist.length > 0 && (
                 <span className="absolute top-0 right-0 bg-vento-gold text-vento-forest text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1 -translate-y-1 shadow-sm">
                   {wishlist.length}
@@ -171,7 +171,7 @@ export default function Header() {
               onClick={() => setIsOpen(true)}
               className="relative p-2 text-vento-cream hover:text-vento-gold hover:scale-110 active:scale-95 transition-all flex items-center"
             >
-              <ShoppingBag size={24} />
+              <ShoppingBag size={24} strokeWidth={1.5} />
               {cartCount > 0 && (
                 <span className="absolute top-0 right-0 bg-vento-gold text-vento-forest text-xs font-bold w-5 h-5 flex items-center justify-center rounded-full transform translate-x-1 -translate-y-1 shadow-sm">
                   {cartCount}

@@ -72,7 +72,7 @@ export default function GardenMap() {
         {/* Info Side */}
         <div className="w-full lg:w-1/2 min-h-[400px]">
           <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-6" text="Garden to Cup." />
-          <div className="w-20 h-1 bg-vento-gold mb-8"></div>
+          
           
           <AnimatePresence mode="wait">
             {activeRegion ? (

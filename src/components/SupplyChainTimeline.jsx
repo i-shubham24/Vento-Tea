@@ -52,23 +52,9 @@ export default function SupplyChainTimeline() {
 
         <div className="flex flex-col md:flex-row items-center justify-between relative">
 
-          {/* Connector Line (Desktop) — draws left to right on scroll */}
-          <motion.div
-            className="hidden md:block absolute top-10 left-1/4 right-1/4 h-[2px] bg-vento-gold z-0 origin-left"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 1.2, ease: EASE_OUT_SINE, delay: 0.2 }}
-          ></motion.div>
+          
 
-          {/* Connector Line (Mobile) — draws top to bottom */}
-          <motion.div
-            className="md:hidden absolute top-0 bottom-0 left-1/2 w-[2px] bg-vento-gold -translate-x-1/2 z-0 origin-top"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{ duration: 1.2, ease: EASE_OUT_SINE, delay: 0.2 }}
-          ></motion.div>
+          
 
           <Stagger className="flex flex-col md:flex-row items-center justify-between w-full">
             {steps.map((step) => (

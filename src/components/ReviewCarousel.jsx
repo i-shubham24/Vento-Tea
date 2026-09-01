@@ -18,7 +18,7 @@ export default function ReviewCarousel() {
     <section className="bg-vento-cream-dark py-20 overflow-hidden border-t border-vento-gold/20">
       <div className="text-center mb-12 px-4">
         <SplitReveal as="h2" className="text-4xl font-serif text-vento-forest mb-4" text="What Our Tea Family Says" />
-        <div className="w-20 h-1 bg-vento-gold mx-auto mb-4"></div>
+        
         <div className="flex items-center justify-center gap-2 text-vento-forest font-semibold">
            <span className="text-xl">4.9/5</span> 
            <div className="flex text-vento-gold">

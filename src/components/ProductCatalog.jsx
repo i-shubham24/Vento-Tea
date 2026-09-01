@@ -12,7 +12,7 @@ export default function ProductCatalog({ limit, singleImage = false, eager = fal
     <section id="shop" className="py-20 px-4 md:px-8 max-w-7xl mx-auto">
       <div className="text-center mb-16">
         <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-4" text="Our Signature Blends" />
-        <div className="w-20 h-1 bg-vento-gold mx-auto mb-6"></div>
+        
         <p className="text-gray-600 max-w-2xl mx-auto text-lg">
           Discover the perfect cup for every mood, curated from the most esteemed gardens.
         </p>

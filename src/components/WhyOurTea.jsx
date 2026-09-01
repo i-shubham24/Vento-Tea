@@ -6,7 +6,7 @@ export default function WhyOurTea() {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-3xl md:text-4xl font-serif text-vento-forest">Why Our Tea?</h2>
-          <div className="w-16 h-1 bg-vento-gold mx-auto mt-4"></div>
+          
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="text-center bg-vento-cream rounded-xl p-8 border border-vento-cream-dark">

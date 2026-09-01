@@ -15,7 +15,7 @@ export default function ComparisonChart() {
     <section className="py-16 px-4 max-w-4xl mx-auto w-full">
       <div className="text-center mb-8">
         <SplitReveal as="h2" className="text-4xl md:text-5xl font-serif text-vento-forest mb-4" text="Vento vs Ordinary" />
-        <div className="w-12 h-0.5 bg-vento-gold mx-auto mb-3"></div>
+        
         <p className="text-sm text-gray-500">The difference is clear at a glance.</p>
       </div>
 
